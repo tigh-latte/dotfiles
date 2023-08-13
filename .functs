@@ -1,0 +1,117 @@
+#!/bin/bash
+
+nvm() {
+	source ~/.nvm/nvm.sh || echo "not installed" && return
+	source ~/.nvm/bash_completion
+	nvm $@
+}
+
+mkcd() {
+	[ -z "$1" ] && echo WAT && return
+	mkdir -p $1 && cd $1
+}
+
+vman() {
+	[ -z "$1" ] && echo "Ní thig liom leathanach treorach a thaispeáint ar faic." && return
+	man $1 | vim -
+}
+
+rmi() {
+	[ -z "$1" ] && echo "Iarr faic orm, faigh faic uaim." && return
+
+	local image_text=$1
+	docker rmi -f $(docker images | grep $image_text | awk '{print $1, $2}' | tr ' ' ':')
+}
+
+try() {
+	while ! $@; do
+		sleep 0.5
+	done
+}
+
+m() {
+	watch -n 1 "$@"
+}
+
+vrc() {
+	local vimrc=~/.vimrc
+	if ! [ -z "$1" ] && [ -f ~/.vim/ftplugin/${1}.vim ]; then
+		vimrc=~/.vim/ftplugin/${1}.vim
+	fi
+
+	vim $vimrc
+}
+
+make() {
+	local makefile=Makefile.mine
+
+	if ! /usr/bin/make -f $makefile -n $@ &>/dev/null; then
+		makefile=Makefile
+	fi
+
+	/usr/bin/make -f $makefile $@
+}
+
+goinit() {
+	local mod=$(basename $(pwd))
+
+	go mod init github.com/tigh-latte/$mod
+}
+
+gitp() {(
+	local git_folder=".git"
+
+	until [ -d $git_folder ] || [ "$PWD" = "/" ]; do
+		pushd .. &> /dev/null
+	done
+	[ -d $git_folder ] || exit 1
+
+	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
+
+	printf "git push origin ${branch_name}:${branch_name}" | xsel -ib && xsel -ob
+)}
+
+gitpr() {(
+	local git_folder=".git"
+	local target_branch="master"
+	[ -f "${git_folder}/refs/remotes/origin/main" ] && target_branch=main
+
+	until [ -d $git_folder ] || [ "$PWD" = "/" ]; do
+		pushd .. &> /dev/null
+	done
+	[ -d $git_folder ] || exit 1
+
+	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
+	local reponame=$(basename $PWD)
+	[ -f "${git_folder}/refs/remotes/origin/$1" ] && target_branch=$1
+
+	printf "https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}" | xsel -ib
+
+	xdg-open https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}
+)}
+
+stats() {
+	history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " "  CMD[a]/count*100 "% " a;}' | grep -v './' | column -c3 -s ' ' -t | sort -nr | nl |  head -n10
+}
+
+h2d() {
+	[ -z "$1" ] && echo "I can't dehex faic" && return
+	hex=$(tr '[:lower:]' '[:upper:]' <<< $1)
+	echo "obase=10; ibase=16; $hex" | bc
+}
+
+hex() {
+	printf "$1" | od -t x1 -An | tr -d '\n '
+}
+
+monitor() {
+	local _wh=$(tmux display -p '#{window_height}')
+	local _h=$(expr $_wh \* 45 / 100)
+
+	tmux split-window -h 'nvtop'
+	tmux split-window -v
+	tmux resize-pane -y $_h
+	tmux send -t 0 'btop -p 0' ENTER
+}
+
+#command_not_found_handle

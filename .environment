@@ -1,0 +1,19 @@
+#!/bin/bash
+
+lang=$(basename $SHELL)
+
+
+__src_files() {
+	local files=(
+		envars
+		functs
+		aliases
+		dfuncts
+	)
+
+	for f in "${files[@]}"; do
+		[ -f "${HOME}/.${f}" ] && source ${HOME}/.$f
+	done
+}
+
+__src_files

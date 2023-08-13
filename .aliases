@@ -1,0 +1,27 @@
+#!/bin/bash
+
+alias rc="vim ~/.${lang}rc"
+alias src="source ~/.${lang}rc"
+
+alias genv="vim ~/.environment"
+alias sgenv="source ~/.environment"
+
+alias envars="vim ~/.envars"
+alias senvars="source ~/.envars"
+
+alias envars="vim ~/.envars"
+alias senvars="source ~/.envars"
+
+alias als="vim ~/.aliases"
+alias sals="source ~/.aliases"
+
+alias functs="vim ~/.functs"
+alias sfuncts="source ~/.functs"
+
+alias open="xdg-open"
+alias cal="ncal -M -b"
+alias define="dict"
+
+alias trepo="cd ${GOPATH}/src/github.com/tigh-latte"
+
+alias vim=nvim
