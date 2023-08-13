@@ -28,10 +28,10 @@ cmp.setup({
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				-- if one entry is available, insert it.
-				if #cmp.get_entries() > 1 then
-					cmp.select_next_item()
-				else
+				if #cmp.get_entries() == 1 then
 					cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+				else
+					cmp.select_next_item()
 				end
 			else
 				fallback()
