@@ -23,7 +23,11 @@ require("lazy").setup({
 	},
 	{ "vim-airline/vim-airline" },
 	{ "tpope/vim-fugitive" },
-	{ "tpope/vim-surround" },
+	{
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+	},
 	{ "mbbill/undotree" },
 
 	-- Syntax tree stuff
