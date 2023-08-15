@@ -62,12 +62,13 @@ gitp() {(
 	local git_folder=".git"
 
 	until [ -d $git_folder ] || [ "$PWD" = "/" ]; do
-		pushd .. &> /dev/null
+		pushd $(pwd -P)/.. &> /dev/null
 	done
 	[ -d $git_folder ] || exit 1
 
 	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
 
+	## TODO: Make portable with MacOS and WSL2.
 	printf "git push origin ${branch_name}:${branch_name}" | xsel -ib && xsel -ob
 )}
 
@@ -77,7 +78,7 @@ gitpr() {(
 	[ -f "${git_folder}/refs/remotes/origin/main" ] && target_branch=main
 
 	until [ -d $git_folder ] || [ "$PWD" = "/" ]; do
-		pushd .. &> /dev/null
+		pushd $(pwd -P)/.. &> /dev/null
 	done
 	[ -d $git_folder ] || exit 1
 
@@ -85,6 +86,7 @@ gitpr() {(
 	local reponame=$(basename $PWD)
 	[ -f "${git_folder}/refs/remotes/origin/$1" ] && target_branch=$1
 
+	## TODO: Get this info from .git to make portable across git hosts.
 	printf "https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}" | xsel -ib
 
 	xdg-open https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}
