@@ -9,6 +9,7 @@ __src_files() {
 		functs
 		aliases
 		dfuncts
+		programs
 	)
 
 	for f in "${files[@]}"; do
