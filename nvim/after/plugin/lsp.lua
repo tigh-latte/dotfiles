@@ -74,15 +74,20 @@ cmp.setup({
 	},
 
 	formatting = {
-		fields = {'menu', 'abbr', 'kind'},
+		fields = {'abbr', 'kind', 'menu'},
 		format = function(entry, item)
-			local menu_icon = {
-				nvim_lsp = 'λ',
-				vnip = '>',
-				buffer = 'b',
-				path = 'p',
-			}
-			item.menu = menu_icon[entry.source.name]
+			s = ''
+			if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+				s = ' ' .. entry.completion_item.detail
+			end
+
+			item.menu = ({
+				nvim_lsp = 'λ' .. s,
+				vnip = '>' .. s,
+				buffer = 'b' .. s,
+				path = 'p' .. s,
+			})[entry.source.name]
+
 			return item
 		end,
 	},
