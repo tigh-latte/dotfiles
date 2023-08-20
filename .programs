@@ -1,3 +1,19 @@
 #!/bin/bash
 
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+__src_programs() {
+	local programs=(
+		/usr/share/z/z.sh
+	)
+
+	for p in "${programs[@]}"; do
+		[ -r "$p" ] || {
+			local base=$(basename $p)
+			[ ! -f "${HOME}/.${base}.suppress" ] && echo "$p not installed."
+			continue
+		}
+
+		[ -r "$p" ] && source $p
+	done
+}
+
+__src_programs
