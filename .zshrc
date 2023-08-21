@@ -19,4 +19,6 @@ source $ZSH/oh-my-zsh.sh
 setopt +o nomatch
 setopt INC_APPEND_HISTORY
 
-[ -f ${HOME}/.environment ] && source ${HOME}/.environment
+export TIGH_CONFIG=${HOME}/.config/tigh-latte
+
+[ -f ${TIGH_CONFIG}/environment ] && source ${TIGH_CONFIG}/environment

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+alias rc="vim ~/.${lang}rc"
+alias src="source ~/.${lang}rc"
+
+alias genv="vim ${TIGH_CONFIG}/environment"
+alias sgenv="source ${TIGH_CONFIG}/environment"
+
+alias envars="vim ${TIGH_CONFIG}/envars"
+alias senvars="source ${TIGH_CONFIG}/envars"
+
+alias als="vim ${TIGH_CONFIG}/aliases"
+alias sals="source ${TIGH_CONFIG}/aliases"
+
+alias functs="vim ${TIGH_CONFIG}/functs"
+alias sfuncts="source ${TIGH_CONFIG}/functs"
+
+alias open="xdg-open"
+alias cal="ncal -M -b"
+alias define="dict"
+
+alias trepo="cd ${HOME}/Dev/git.tigh.dev/tigh-latte"
+
+alias vim=nvim

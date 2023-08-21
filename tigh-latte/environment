@@ -1,0 +1,26 @@
+#!/bin/bash
+
+lang=$(basename $SHELL)
+
+
+__src_files() {
+	local files=(
+		envars
+		functs
+		aliases
+		dfuncts
+		programs
+	)
+
+	for f in "${files[@]}"; do
+		[ -f "${TIGH_CONFIG}/${f}" ] && source ${TIGH_CONFIG}/$f
+	done
+
+	[ ! -d ${TIGH_CONFIG}-secret ] && return
+
+	for f in ${TIGH_CONFIG}-secret/*; do
+		[ -f "$f" ] && source $f
+	done
+}
+
+__src_files
