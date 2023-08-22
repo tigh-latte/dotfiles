@@ -21,7 +21,7 @@ main() {
 	for file in *; do
 		[ ! -d "${file}" ] && continue
 
-		ln -s ${PWD}/${file} ${TIGH_CONFIG}/${file}
+		ln -s ${PWD}/${file} ${HOME}/.config/${file}
 	done
 }
 
