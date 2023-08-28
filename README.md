@@ -6,7 +6,7 @@ Time to join the not-so-special group of folks with their dotfiles on git (even 
 
 So, the root of the repo contains files that will be installed to `${HOME}`, obviously ignoring `.git`, `.gitignore`, etc etc. These will be installed via symlink to `${HOME}/<name>`.
 
-All directories at the root of this repo are assumed to live under `${XDG_CONFIG_HOME}`, and therefore will be installed via symlink to `${XDG_CONFIG_HOME}/.config/<name>`
+All directories at the root of this repo are assumed to live under `${XDG_CONFIG_HOME}`, and therefore will be installed via symlink to `${XDG_CONFIG_HOME}/<name>`
 
 ## Should I use this?
 
