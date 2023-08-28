@@ -4,6 +4,15 @@ util = require("lspconfig/util")
 vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert', 'preview' }
 
 local on_attach = function(client, bufnr)
+	require "lsp_signature".on_attach({
+		bind = true,
+		doc_lines = 0,
+		handler_opts = {
+			border = "none",
+		},
+		hint_enable = false,
+	}, bufnr)
+
 	local opts = {buffer = bufnr, remap = false}
 
 	vim.keymap.set("n", "gdd", function() vim.lsp.buf.definition() end, opts)
@@ -12,7 +21,6 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>ren", function() vim.lsp.buf.rename() end, opts)
 	vim.keymap.set("n", "<leader>pp", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<leader>nn", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end
 
 local cmp = require('cmp')
@@ -59,7 +67,6 @@ cmp.setup({
 	sources = {
 		{ name = 'path' },
 		{ name = 'nvim_lsp', keyword_length = 1 },
-		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lua', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 1 },
 		{ name = 'vsnip', keyword_length = 2 },

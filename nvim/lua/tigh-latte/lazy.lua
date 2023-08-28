@@ -38,6 +38,13 @@ require("lazy").setup({
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {},
+		config = function(_, opts) require'lsp_signature'.setup(opts) end,
+	},
+
 	-- Hrsh7th completion suite
 	{
 		"hrsh7th/nvim-cmp",
