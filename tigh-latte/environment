@@ -5,7 +5,6 @@ lang=$(basename $SHELL)
 
 __src_files() {
 	local files=(
-		envars
 		functs
 		aliases
 		dfuncts
