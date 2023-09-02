@@ -78,4 +78,9 @@ require("lazy").setup({
 
 	-- Formatters
 	{ "mhartington/formatter.nvim" },
+
+	-- Database interaction
+	{ "tpope/vim-dadbod" },
+	{ "kristijanhusak/vim-dadbod-ui" },
+	{ "kristijanhusak/vim-dadbod-completion" },
 }, {})
