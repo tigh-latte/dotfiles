@@ -111,6 +111,7 @@ lspconfig.gopls.setup {
 	single_file_support = true,
 	settings = {
 		gopls = {
+			buildFlags = { "-tags=integration" },
 			completeUnimported = true,
 			usePlaceholders = true,
 			gofumpt = true,
