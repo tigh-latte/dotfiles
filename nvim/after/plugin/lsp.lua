@@ -17,10 +17,10 @@ local on_attach = function(client, bufnr)
 
 	vim.keymap.set("n", "gdd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>gref", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<leader>ren", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("n", "<leader>pp", function() vim.diagnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<leader>nn", function() vim.diagnostic.goto_next() end, opts)
+	vim.keymap.set("n", "<Leader>gref", function() vim.lsp.buf.references() end, opts)
+	vim.keymap.set("n", "<Leader>ren", function() vim.lsp.buf.rename() end, opts)
+	vim.keymap.set("n", "<Leader>pp", function() vim.diagnostic.goto_prev() end, opts)
+	vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.goto_next() end, opts)
 end
 
 local cmp = require('cmp')
