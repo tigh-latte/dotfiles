@@ -15,6 +15,8 @@ vim.o.ts = 4
 vim.o.sw = 4
 vim.o.nu = true
 
+vim.o.pumheight = 20
+
 -- Vim Specific
 vim.o.list = true
 vim.o.listchars="tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
