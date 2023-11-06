@@ -15,7 +15,7 @@ local on_attach = function(client, bufnr)
 
 	local opts = {buffer = bufnr, remap = false}
 
-	vim.keymap.set("n", "gdd", function() vim.lsp.buf.definition() end, opts)
+	vim.keymap.set("n", "<Leader>gdd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<Leader>gref", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<Leader>ren", function() vim.lsp.buf.rename() end, opts)
@@ -121,7 +121,9 @@ lspconfig.gopls.setup {
 	},
 }
 lspconfig.jedi_language_server.setup{
+	on_attach = on_attach,
 	root_dir = util.root_pattern(".git"),
+	single_file_support = true,
 }
 
 local signs = { Error = "😱", Warn = "🤔", Hint = "", Info = "" }
