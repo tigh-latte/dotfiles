@@ -68,8 +68,7 @@ gitp() {(
 
 	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
 
-	## TODO: Make portable with MacOS and WSL2.
-	printf "git push origin ${branch_name}:${branch_name}" | xsel -ib && xsel -ob
+	printf "git push origin ${branch_name}:${branch_name}" | ${__clipboard_copy} && ${__clipboard_paste}
 )}
 
 gitpr() {(
@@ -87,9 +86,9 @@ gitpr() {(
 	[ -f "${git_folder}/refs/remotes/origin/$1" ] && target_branch=$1
 
 	## TODO: Get this info from .git to make portable across git hosts.
-	printf "https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}" | xsel -ib
+	printf "https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}" | ${__clipboard_copy}
 
-	xdg-open https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}
+	open https://github.com/tigh-latte/$reponame/compare/${target_branch}...${branch_name}
 )}
 
 stats() {

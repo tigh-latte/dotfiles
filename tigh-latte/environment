@@ -1,7 +1,17 @@
 #!/bin/bash
 
+__os=$(uname -s)
 lang=$(basename $SHELL)
 
+declare -A __clipboard_cmds=(
+	[Darwin_copy]=pbcopy
+	[Darwin_paste]=pbpaste
+	[Linux_copy]="xsel -ib"
+	[Linux_paste]="xsel -ob"
+)
+
+__clipboard_copy=${__clipboard_cmds[${__os}_copy]}
+__clipboard_paste=${__clipboard_cmds[${__os}_paste]}
 
 __src_files() {
 	local files=(

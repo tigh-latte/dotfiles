@@ -19,6 +19,6 @@ alias open="xdg-open"
 alias cal="ncal -M -b"
 alias define="dict"
 
-alias trepo="cd ${HOME}/Dev/git.tigh.dev/tigh-latte"
+alias trepo="cd ${HOME}/Dev/git.tigh.io/tigh-latte"
 
 alias vim=nvim
