@@ -3,6 +3,7 @@
 __src_programs() {
 	local programs=(
 		/usr/share/z/z.sh
+		/opt/homebrew/etc/profile.d/z.sh
 	)
 
 	for p in "${programs[@]}"; do
