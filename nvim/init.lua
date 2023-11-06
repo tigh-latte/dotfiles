@@ -1,6 +1,5 @@
 require("tigh-latte.lazy")
 
-vim.g.mapleader = "\\"
 
 -- Basic text editor
 vim.o.background="light"
