@@ -6,12 +6,22 @@ lang=$(basename $SHELL)
 declare -A __clipboard_cmds=(
 	[Darwin_copy]=pbcopy
 	[Darwin_paste]=pbpaste
-	[Linux_copy]="xsel -ib"
-	[Linux_paste]="xsel -ob"
+	[Linux_copy]="xsel"
+	[Linux_paste]="xsel"
+)
+
+declare -A __clipboard_args=(
+	[Darwin_copy]=
+	[Darwin_paste]=
+	[Linux_copy]="-ib"
+	[Linux_paste]="-ob"
 )
 
 __clipboard_copy=${__clipboard_cmds[${__os}_copy]}
 __clipboard_paste=${__clipboard_cmds[${__os}_paste]}
+
+__clipboard_copy_args=${__clipboard_args[${__os}_copy]}
+__clipboard_paste_args=${__clipboard_args[${__os}_paste]}
 
 __src_files() {
 	local files=(

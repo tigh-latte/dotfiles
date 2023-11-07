@@ -68,7 +68,8 @@ gitp() {(
 
 	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
 
-	printf "git push origin ${branch_name}:${branch_name}" | ${__clipboard_copy} && ${__clipboard_paste}
+	printf "git push origin ${branch_name}:${branch_name}" | \
+		${__clipboard_copy} ${__clipboard_copy_args} && ${__clipboard_paste} ${__clipboard_paste_args}
 )}
 
 gitpr() {(
