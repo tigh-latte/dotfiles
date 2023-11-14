@@ -14,7 +14,17 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- General utility
 	{"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
-	{"scrooloose/nerdtree"},
+
+	-- NERD Tree
+	{
+		"scrooloose/nerdtree",
+		dependencies = {
+			{"Xuyuanp/nerdtree-git-plugin"},
+			{"PhilRunninger/nerdtree-visual-selection"},
+		}
+	},
+
+
 	{"ctrlpvim/ctrlp.vim"},
 	{
 		"chrisgrieser/nvim-various-textobjs",
@@ -78,4 +88,5 @@ require("lazy").setup({
 
 	-- Formatters
 	{ "mhartington/formatter.nvim" },
+
 }, {})

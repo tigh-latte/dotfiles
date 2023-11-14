@@ -16,10 +16,12 @@ local on_attach = function(client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 
 	vim.keymap.set("n", "<Leader>gdd", function() vim.lsp.buf.definition() end, opts)
+	vim.keymap.set("n", "<Leader>cdd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<Leader>gref", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<Leader>ren", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("n", "<Leader>pp", function() vim.diagnostic.goto_prev() end, opts)
+	vim.keymap.set("n", "<Leader>cref", function() vim.lsp.buf.references() end, opts)
+	vim.keymap.set("n", "<Leader>cren", function() vim.lsp.buf.rename() end, opts)
+	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.goto_next() end, opts)
 end
 
