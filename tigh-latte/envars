@@ -2,3 +2,5 @@
 
 export EDITOR=nvim
 export PSQL_EDITOR=nvim
+
+export PATH="${HOME}/go/bin:$PATH"

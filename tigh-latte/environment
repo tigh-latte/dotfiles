@@ -23,9 +23,13 @@ __clipboard_paste=${__clipboard_cmds[${__os}_paste]}
 __clipboard_copy_args=${__clipboard_args[${__os}_copy]}
 __clipboard_paste_args=${__clipboard_args[${__os}_paste]}
 
+unset __clipboard_cmds
+unset __clipboard_args
+
 __src_files() {
 	local files=(
 		functs
+		envars
 		aliases
 		dfuncts
 		programs
