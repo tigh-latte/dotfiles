@@ -19,11 +19,9 @@ require("lazy").setup({
 	{
 		"scrooloose/nerdtree",
 		dependencies = {
-			{"Xuyuanp/nerdtree-git-plugin"},
 			{"PhilRunninger/nerdtree-visual-selection"},
 		}
 	},
-
 
 	{"ctrlpvim/ctrlp.vim"},
 	{
@@ -89,4 +87,8 @@ require("lazy").setup({
 	-- Formatters
 	{ "mhartington/formatter.nvim" },
 
+	-- Copilot
+	{
+		"github/copilot.vim",
+	},
 }, {})

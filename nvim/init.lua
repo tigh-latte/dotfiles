@@ -1,12 +1,12 @@
 require("tigh-latte.lazy")
 
-
 -- Basic text editor
 vim.o.background="light"
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.number = true
 vim.o.encoding = "utf-8"
+
 
 vim.o.ai = true
 vim.o.si = true
