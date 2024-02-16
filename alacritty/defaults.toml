@@ -1,0 +1,44 @@
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.bright]
+black = "#212121"
+blue = "#83afd8"
+cyan = "#37e5e7"
+green = "#98e342"
+magenta = "#bc93b6"
+red = "#f44135"
+white = "#f1f1f1"
+yellow = "#fcea60"
+
+[colors.normal]
+black = "#212121"
+blue = "#417ab3"
+cyan = "#00a7aa"
+green = "#5da602"
+magenta = "#88658d"
+red = "#d71e00"
+white = "#e0e0e0"
+yellow = "#cfad00"
+
+[colors.primary]
+background = "#d5d5d5"
+foreground = "#424242"
+
+[font]
+size = 9.0
+
+[font.normal]
+style = "Regular"
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[scrolling]
+history = 15000
+
+[window]
+decorations = "none"
+dynamic_title = false
+startup_mode = "Fullscreen"
+title = "Terminal"
