@@ -128,6 +128,12 @@ lspconfig.jedi_language_server.setup{
 	single_file_support = true,
 }
 
+lspconfig.tsserver.setup{
+	on_attach = on_attach,
+	root_dir = util.root_pattern(".git"),
+	single_file_support = true,
+}
+
 local signs = { Error = "😱", Warn = "🤔", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
