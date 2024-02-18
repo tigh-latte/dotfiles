@@ -4,5 +4,6 @@ require("mason-lspconfig").setup {
 		"gopls",
 		"jedi_language_server",
 		"tsserver",
+		"bashls",
 	}
 }
