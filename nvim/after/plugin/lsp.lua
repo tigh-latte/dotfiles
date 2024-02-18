@@ -19,8 +19,11 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<Leader>cref", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<Leader>cren", function() vim.lsp.buf.rename() end, opts)
+	vim.keymap.set("n", "<Leader>csq", function() vim.lsp.buf.workspace_symbol() end, opts)
 	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.goto_next() end, opts)
+	vim.keymap.set("n", "<Leader>cee", function() vim.diagnostic.open_float() end, opts)
+	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end
 
 local cmp = require('cmp')
