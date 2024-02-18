@@ -15,10 +15,8 @@ local on_attach = function(client, bufnr)
 
 	local opts = {buffer = bufnr, remap = false}
 
-	vim.keymap.set("n", "<Leader>gdd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "<Leader>cdd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<Leader>gref", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<Leader>cref", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<Leader>cren", function() vim.lsp.buf.rename() end, opts)
 	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.goto_prev() end, opts)
@@ -131,7 +129,14 @@ lspconfig.jedi_language_server.setup{
 
 lspconfig.tsserver.setup{
 	on_attach = on_attach,
-	filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+	},
 	root_dir = util.root_pattern(".git"),
 	single_file_support = true,
 }
