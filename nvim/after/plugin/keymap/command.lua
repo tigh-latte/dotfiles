@@ -1,0 +1,8 @@
+vim.keymap.set('c', '<C-a>', '<Home>')
+vim.keymap.set('c', '<C-e>', '<End>')
+vim.keymap.set('c', '<C-p>', '<Up>')
+vim.keymap.set('c', '<C-n>', '<Down>')
+vim.keymap.set('c', '<C-b>', '<Left>')
+vim.keymap.set('c', '<C-f>', '<Right>')
+vim.keymap.set('c', '<M-b>', '<S-Left>')
+vim.keymap.set('c', '<M-f>', '<S-Right>')
