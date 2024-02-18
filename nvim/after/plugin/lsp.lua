@@ -124,18 +124,21 @@ lspconfig.gopls.setup {
 }
 lspconfig.jedi_language_server.setup{
 	on_attach = on_attach,
+	filetypes = {"python"},
 	root_dir = util.root_pattern(".git"),
 	single_file_support = true,
 }
 
 lspconfig.tsserver.setup{
 	on_attach = on_attach,
+	filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
 	root_dir = util.root_pattern(".git"),
 	single_file_support = true,
 }
 
 lspconfig.bashls.setup{
 	on_attach = on_attach,
+	filetypes = {"sh", "bash"},
 	root_dir = util.root_pattern(".git"),
 	single_file_support = true,
 }
