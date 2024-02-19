@@ -16,17 +16,17 @@ require("lazy").setup({
 	{ "navarasu/onedark.nvim" },
 
 	-- General utility
-	{"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
+	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 
 	-- NERD Tree
 	{
 		"scrooloose/nerdtree",
 		dependencies = {
-			{"PhilRunninger/nerdtree-visual-selection"},
+			{ "PhilRunninger/nerdtree-visual-selection" },
 		}
 	},
 
-	{"ctrlpvim/ctrlp.vim"},
+	{ "ctrlpvim/ctrlp.vim" },
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		lazy = false,
@@ -47,6 +47,7 @@ require("lazy").setup({
 
 	-- LSP and Formatter management
 	{ "williamboman/mason.nvim" },
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 
 	{

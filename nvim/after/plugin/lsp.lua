@@ -90,14 +90,14 @@ cmp.setup({
 
 	snippet = {
 		expand = function(args)
-			vim.fn['vsnip#anonymous'](arg.body)
+			vim.fn['vsnip#anonymous'](args.body)
 		end,
 	},
 
 	formatting = {
 		fields = {'abbr', 'kind', 'menu'},
 		format = function(entry, item)
-			s = ''
+			local s = ''
 			if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
 				s = ' ' .. entry.completion_item.detail
 			end
@@ -130,7 +130,11 @@ lspconfig.gopls.setup {
 			usePlaceholders = true,
 			gofumpt = true,
 			staticcheck = true,
-			analyses = { unusedparams = true },
+			analyses = {
+				unusedparams = true,
+				fieldalignment = true,
+				shadow = true,
+			},
 		},
 	},
 }
