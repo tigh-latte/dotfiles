@@ -39,6 +39,7 @@ require("onedark").setup {
 		["@lsp.type.enumMemeber"] = { fg = '$green' },
 
 		-- declarations
+		["@attribute"] = { fg = '$fg' },
 		["@variable.member"] = { fg = '$fg' },
 		["@variable.builtin"] = { fg = '$fg' },
 		["@variable.parameter"] = { fg = '$fg' },
@@ -70,9 +71,11 @@ require("onedark").setup {
 
 		-- lsp
 		["@lsp.type.method"] = { fg = '$fg' },
+		["@lsp.type.property"] = { fg = '$fg' },
 		["@lsp.typemod.method.defaultLibrary"] = { fg = '$fg' },
-		["@lsp.typemod.function.defaultLibrary"] = { fg = '$fg' },
+		["@lsp.typemod.function.defaultLibrary"] = { fg = '$cyan' },
 		["@lsp.typemod.variable.defaultLibrary"] = { fg = '$fg' },
+		["@lsp.typemod.string.injected"] = { fg = '$red' },
 
 		-- cmp
 		CmpItemAbbrMatch = { fg = '$white', fmt = 'bold' },
