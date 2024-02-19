@@ -22,3 +22,5 @@ vim.o.listchars="tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
 vim.g.swapfile = true
 
 vim.opt["guicursor"] = ""
+
+pcall(require, "tigh-latte.override")

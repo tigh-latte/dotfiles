@@ -1,9 +1,9 @@
-lspconfig = require("lspconfig")
-util = require("lspconfig/util")
+local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 
 vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert', 'preview' }
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	require "lsp_signature".on_attach({
 		bind = true,
 		doc_lines = 0,
@@ -19,7 +19,18 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<Leader>cref", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<Leader>cren", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("n", "<Leader>csq", function() vim.lsp.buf.workspace_symbol() end, opts)
+	vim.keymap.set("n", "<Leader>csq", function() vim.lsp.buf.workspace_symbol(nil, {
+		on_list = function(options)
+			local filteredItems = {}
+			for _, item in ipairs(options.items) do
+				if not string.find(item.filename, "^vendor") then
+					table.insert(filteredItems, item)
+				end
+			end
+			vim.fn.setqflist(filteredItems, "r")
+			vim.api.nvim_command('copen')
+		end,
+	}) end, opts)
 	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.goto_next() end, opts)
 	vim.keymap.set("n", "<Leader>cee", function() vim.diagnostic.open_float() end, opts)
@@ -54,7 +65,6 @@ cmp.setup({
 
 
 		['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
-		['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
 
 		-- Confirm strats
 		['<CR>'] = cmp.mapping.confirm({
@@ -73,6 +83,7 @@ cmp.setup({
 		{ name = 'nvim_lua', keyword_length = 2 },
 		{ name = 'buffer', keyword_length = 1 },
 		{ name = 'vsnip', keyword_length = 2 },
+		{ name = 'calc' },
 	},
 
 	preselect = cmp.PreselectMode.None,
@@ -149,6 +160,30 @@ lspconfig.bashls.setup{
 	filetypes = {"sh", "bash"},
 	root_dir = util.root_pattern(".git"),
 	single_file_support = true,
+}
+
+lspconfig.lua_ls.setup{
+	on_attach = on_attach,
+	filetypes = {"lua"},
+	root_dir = util.root_pattern(".git"),
+	single_file_support = true,
+	settings = {
+		Lua = {
+			runtime = {
+				version = 'LuaJIT',
+				path = vim.split(package.path, ';'),
+			},
+			diagnostics = {
+				globals = {'vim'},
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand('$VIMRUNTIME/lua')] = true,
+					[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+				},
+			},
+		},
+	}
 }
 
 local signs = { Error = "😱", Warn = "🤔", Hint = "", Info = "" }

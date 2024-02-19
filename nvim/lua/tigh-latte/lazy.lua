@@ -12,6 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	-- Themes
+	{ "navarasu/onedark.nvim" },
+
 	-- General utility
 	{"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
 
@@ -65,6 +68,7 @@ require("lazy").setup({
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/vim-vsnip" },
+			{ "hrsh7th/cmp-calc" },
 		},
 	},
 

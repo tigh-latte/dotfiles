@@ -1,2 +1,3 @@
 nvim/lazy-lock.json
+nvim/lua/tigh-latte/override.lua
 alacritty/overrides.toml

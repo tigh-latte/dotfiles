@@ -1,5 +1,3 @@
-local util = require "formatter.util"
-
 require('formatter').setup {
 	logging = true,
 	log_leel = vim.log.levels.INFO,
