@@ -14,12 +14,14 @@ vim.o.sw = 4
 vim.o.nu = true
 vim.o.rnu = true
 
-vim.o.pumheight = 20
-
 -- Vim Specific
 vim.o.list = true
 vim.o.listchars="tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
 vim.g.swapfile = true
+
+vim.o.pumheight = 20
+vim.opt.scrolloff = 4
+vim.opt.updatetime = 100
 
 vim.opt["guicursor"] = ""
 

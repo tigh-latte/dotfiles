@@ -21,8 +21,11 @@ require("onedark").setup {
 		IncSearch = { fg = '$bg0', bg = '$light_grey' },
 		Search = { fg = '$bg0', bg = '$muted_white' },
 		Directory = { fg = '$cyan' },
+		Special = { fg = '$cyan' },
+		SpecialChar = { fg = '$cyan' },
 		Structure = { fg = '$fg' },
 		Typedef = { fg = '$fg' },
+		Function = { fg = '$fg' },
 
 		-- keywords
 		["@keyword"] = { fg = "$yellow" },
@@ -53,6 +56,8 @@ require("onedark").setup {
 
 		-- literals
 		["@string"] = { fg = '$red' },
+		["@string.regexp"] = { fg = '$red' },
+		["@string.special.symbol"] = { fg = '$fg' },
 		["@text.literal"] = { fg = '$red' },
 		["@number"] = { fg = '$red' },
 		["@float"] = { fg = '$red' },
@@ -72,6 +77,7 @@ require("onedark").setup {
 		-- lsp
 		["@lsp.type.method"] = { fg = '$fg' },
 		["@lsp.type.property"] = { fg = '$fg' },
+		["@lsp.type.parameter"] = { fg = '$fg' },
 		["@lsp.typemod.method.defaultLibrary"] = { fg = '$fg' },
 		["@lsp.typemod.function.defaultLibrary"] = { fg = '$cyan' },
 		["@lsp.typemod.variable.defaultLibrary"] = { fg = '$fg' },
