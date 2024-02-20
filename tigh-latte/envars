@@ -4,3 +4,8 @@ export EDITOR=nvim
 export PSQL_EDITOR=nvim
 
 export PATH="${HOME}/go/bin:$PATH"
+
+export HISTSIZE=999999999
+export SAVEHIST=999999999
+
+setopt INC_APPEND_HISTORY
