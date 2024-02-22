@@ -1,7 +1,7 @@
 require("tigh-latte.lazy")
 
 -- Basic text editor
-vim.o.background="light"
+vim.o.background = "light"
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.number = true
@@ -16,7 +16,7 @@ vim.o.rnu = true
 
 -- Vim Specific
 vim.o.list = true
-vim.o.listchars="tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
+vim.o.listchars = "tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
 vim.g.swapfile = true
 
 vim.o.pumheight = 20

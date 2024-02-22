@@ -23,7 +23,7 @@ require("lazy").setup({
 		"scrooloose/nerdtree",
 		dependencies = {
 			{ "PhilRunninger/nerdtree-visual-selection" },
-		}
+		},
 	},
 
 	{ "ctrlpvim/ctrlp.vim" },
@@ -42,7 +42,7 @@ require("lazy").setup({
 	{ "mbbill/undotree" },
 
 	-- Syntax tree stuff
-	{ "nvim-treesitter/nvim-treesitter", opts = { run = ':TSUpdate' } },
+	{ "nvim-treesitter/nvim-treesitter", opts = { run = ":TSUpdate" } },
 	{ "nvim-treesitter/playground" },
 
 	-- LSP and Formatter management
@@ -54,7 +54,9 @@ require("lazy").setup({
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 		opts = {},
-		config = function(_, opts) require'lsp_signature'.setup(opts) end,
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
 	},
 
 	-- Hrsh7th completion suite
@@ -84,9 +86,9 @@ require("lazy").setup({
 		config = function()
 			require("go").setup()
 		end,
-		event = {"CmdlineEnter"},
-		ft = {'go', 'gomod'},
-		build = ':lua require("go.install").update_all_sync()'
+		event = { "CmdlineEnter" },
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()',
 	},
 
 	-- Formatters
