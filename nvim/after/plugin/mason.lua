@@ -3,9 +3,12 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"jq",
 		"golangci-lint",
+		"prettier",
+		"prettierd",
+		"stylua",
 	},
 })
-require("mason-lspconfig").setup {
+require("mason-lspconfig").setup({
 	ensure_installed = {
 		"gopls",
 		"jedi_language_server",
@@ -13,5 +16,5 @@ require("mason-lspconfig").setup {
 		"bashls",
 		"lua_ls",
 		"jqls",
-	}
-}
+	},
+})
