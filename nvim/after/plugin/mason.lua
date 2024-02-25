@@ -6,6 +6,7 @@ require("mason-tool-installer").setup({
 		"prettier",
 		"prettierd",
 		"stylua",
+		"taplo",
 	},
 })
 require("mason-lspconfig").setup({

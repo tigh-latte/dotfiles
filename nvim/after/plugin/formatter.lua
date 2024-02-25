@@ -18,6 +18,9 @@ require("formatter").setup({
 		json = {
 			require("formatter.filetypes.json").jq,
 		},
+		toml = {
+			require("formatter.filetypes.toml").taplo,
+		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},
