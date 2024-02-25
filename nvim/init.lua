@@ -1,4 +1,5 @@
 require("tigh-latte.lazy")
+require("tigh-latte.bindings")
 
 -- Basic text editor
 vim.o.background = "light"
@@ -24,7 +25,5 @@ vim.opt.scrolloff = 4
 vim.opt.updatetime = 100
 
 vim.opt["guicursor"] = ""
-
-vim.keymap.set("n", "<Leader>gpt", ":ChatGPT<CR>")
 
 pcall(require, "tigh-latte.override")

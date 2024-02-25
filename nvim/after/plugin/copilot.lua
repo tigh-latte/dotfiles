@@ -4,13 +4,3 @@ vim.keymap.set("i", "<C-i>", 'colpilot#Accept("<CR>)', {
 	expr = true,
 	replace_keycodes = false,
 })
-
-require("chatgpt").setup({
-	yank_register = '"',
-	openai_params = {
-		model = "gpt-4-1106-preview",
-	},
-	openai_edit_params = {
-		model = "gpt-4-1106-preview",
-	},
-})

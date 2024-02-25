@@ -99,8 +99,9 @@ require("lazy").setup({
 	-- Formatters
 	{ "mhartington/formatter.nvim" },
 
-	-- Copilot
+	-- LLM & Copilot
 	{ "github/copilot.vim" },
+
 	{
 		"jackMort/ChatGPT.nvim",
 		event = "VeryLazy",
