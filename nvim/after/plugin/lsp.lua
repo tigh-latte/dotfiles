@@ -89,6 +89,10 @@ cmp.setup({
 		{ name = "calc" },
 	},
 
+	experimental = {
+		ghost_text = true,
+	},
+
 	preselect = cmp.PreselectMode.None,
 
 	snippet = {

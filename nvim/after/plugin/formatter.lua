@@ -1,6 +1,6 @@
 require("formatter").setup({
 	logging = true,
-	log_leel = vim.log.levels.INFO,
+	log_level = vim.log.levels.WARN,
 	filetype = {
 		go = {
 			require("formatter.filetypes.go").gofumpt,
@@ -14,6 +14,9 @@ require("formatter").setup({
 		},
 		typescriptreact = {
 			require("formatter.filetypes.typescriptreact").prettierd,
+		},
+		json = {
+			require("formatter.filetypes.json").jq,
 		},
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,

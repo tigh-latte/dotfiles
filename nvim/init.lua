@@ -25,4 +25,6 @@ vim.opt.updatetime = 100
 
 vim.opt["guicursor"] = ""
 
+vim.keymap.set("n", "<Leader>gpt", ":ChatGPT<CR>")
+
 pcall(require, "tigh-latte.override")

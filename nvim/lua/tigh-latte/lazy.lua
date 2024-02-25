@@ -84,7 +84,12 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
-			require("go").setup()
+			require("go").setup({
+				lsp_codelens = false,
+				lsp_inlay_hints = {
+					enable = false,
+				},
+			})
 		end,
 		event = { "CmdlineEnter" },
 		ft = { "go", "gomod" },
@@ -95,7 +100,16 @@ require("lazy").setup({
 	{ "mhartington/formatter.nvim" },
 
 	-- Copilot
+	{ "github/copilot.vim" },
 	{
-		"github/copilot.vim",
+		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"folke/trouble.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
 	},
+	{ "folke/neodev.nvim", opts = {} },
 }, {})
