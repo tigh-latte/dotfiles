@@ -6,7 +6,6 @@ vim.keymap.set("i", "<C-i>", 'colpilot#Accept("<CR>)', {
 })
 
 require("chatgpt").setup({
-	api_key_cmd = "echo $CHATGPT_API_KEY",
 	yank_register = '"',
 	openai_params = {
 		model = "gpt-4-1106-preview",
