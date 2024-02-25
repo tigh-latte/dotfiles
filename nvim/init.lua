@@ -1,5 +1,4 @@
-require("tigh-latte.lazy")
-require("tigh-latte.bindings")
+require("tigh-latte")
 
 -- Basic text editor
 vim.o.background = "light"
