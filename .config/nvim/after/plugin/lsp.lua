@@ -25,20 +25,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set("n", "<Leader>cee", vim.diagnostic.open_float, opts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
-	vim.keymap.set("n", "<Leader>csq", function()
-		vim.lsp.buf.workspace_symbol(nil, {
-			on_list = function(options)
-				local filteredItems = {}
-				for _, item in ipairs(options.items) do
-					if not string.find(item.filename, "/vendor/") then
-						table.insert(filteredItems, item)
-					end
-				end
-				vim.fn.setqflist(filteredItems, "r")
-				vim.api.nvim_command("copen")
-			end,
-		})
-	end, opts)
+	vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, opts)
 end
 
 local cmp = require("cmp")
@@ -136,6 +123,7 @@ lspconfig.gopls.setup({
 			usePlaceholders = true,
 			gofumpt = true,
 			staticcheck = true,
+			symbolScope = "workspace",
 			analyses = {
 				unusedparams = true,
 				fieldalignment = true,
