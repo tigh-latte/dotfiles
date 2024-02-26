@@ -30,7 +30,7 @@ local on_attach = function(_, bufnr)
 			on_list = function(options)
 				local filteredItems = {}
 				for _, item in ipairs(options.items) do
-					if not string.find(item.filename, "^vendor") then
+					if not string.find(item.filename, "/vendor/") then
 						table.insert(filteredItems, item)
 					end
 				end
