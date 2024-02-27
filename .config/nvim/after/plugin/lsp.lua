@@ -89,6 +89,7 @@ cmp.setup({
 	},
 
 	formatting = {
+		expandable_indicator = false,
 		fields = { "abbr", "kind", "menu" },
 		format = function(entry, item)
 			local s = ""
@@ -121,6 +122,7 @@ lspconfig.gopls.setup({
 			buildFlags = { "-tags=integration" },
 			completeUnimported = true,
 			usePlaceholders = true,
+			vulncheck = "imports",
 			gofumpt = true,
 			staticcheck = true,
 			symbolScope = "workspace",

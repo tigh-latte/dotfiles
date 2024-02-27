@@ -1,2 +1,2 @@
-require("tigh-latte.lazy")
+require("tigh-latte.plugins")
 require("tigh-latte.bindings")

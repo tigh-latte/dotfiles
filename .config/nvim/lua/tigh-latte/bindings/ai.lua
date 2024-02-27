@@ -1,1 +1,1 @@
-vim.keymap.set("n", "<Leader>ai", ":ChatGPT<CR>")
+vim.keymap.set("n", "<Leader>llm", ":ChatGPT<CR>")
