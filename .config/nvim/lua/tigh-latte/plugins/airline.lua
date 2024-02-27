@@ -1,4 +1,7 @@
-vim.cmd([[
+return {
+	"vim-airline/vim-airline",
+	config = function()
+		vim.cmd([[
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
     let g:airline_mode_map = {
@@ -15,3 +18,5 @@ vim.cmd([[
       \ 'S': 'S'
       \ }
 ]])
+	end,
+}
