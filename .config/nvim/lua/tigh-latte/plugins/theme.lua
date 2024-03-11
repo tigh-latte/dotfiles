@@ -1,5 +1,6 @@
 return {
-	"navalon/onedark.nvim",
+	"navarasu/onedark.nvim",
+	event = "VeryLazy",
 	config = function()
 		require("onedark").setup({
 			style = "light",
