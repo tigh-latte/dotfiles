@@ -16,3 +16,8 @@
     "any" "bool" "byte" "complex128" "complex64" "error" "float32" "float64" "int" "int16"
     "int32" "int64" "int8" "rune" "string" "uint" "uint16" "uint32" "uint64" "uint8" "uintptr"
   ))
+
+((identifier) @function.builtin
+  (#any-of? @function.builtin
+    "append" "cap" "clear" "close" "complex" "copy" "delete" "imag" "len" "make" "max" "min" "new"
+    "panic" "print" "println" "real" "recover"))
