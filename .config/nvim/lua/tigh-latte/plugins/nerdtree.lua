@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		{ "PhilRunninger/nerdtree-visual-selection" },
 	},
+	event = "VeryLazy",
 
 	config = function()
 		vim.g.NERDTreeIgnore = { "\\.pyc$", "\\~$", "\\.swp$" }
