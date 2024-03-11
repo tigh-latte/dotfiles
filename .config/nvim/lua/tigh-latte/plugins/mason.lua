@@ -25,6 +25,7 @@ return {
 				ensure_installed = {
 					"gopls",
 					"jedi_language_server",
+					"pyright",
 					"tsserver",
 					"bashls",
 					"lua_ls",

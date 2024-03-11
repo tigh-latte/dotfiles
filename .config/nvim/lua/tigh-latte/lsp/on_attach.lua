@@ -14,8 +14,11 @@ M.on_attach = function(_, bufnr)
 
 	vim.keymap.set("n", "<Leader>cdd", vim.lsp.buf.definition, opts)
 
+	local telescope = require("telescope.builtin")
+
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "<Leader>cref", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "<Leader>cref", telescope.lsp_references, opts)
+	vim.keymap.set("n", "<Leader>/", telescope.lsp_dynamic_workspace_symbols, opts)
 	vim.keymap.set("n", "<Leader>cren", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<Leader>cp", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "<Leader>cn", vim.diagnostic.goto_next, opts)
