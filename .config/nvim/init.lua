@@ -1,18 +1,17 @@
 require("tigh-latte")
 
 -- Basic text editor
-vim.o.background = "light"
+vim.o.background = ""
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.number = true
+vim.o.relativenumber = true
 vim.o.encoding = "utf-8"
 
-vim.o.ai = true
-vim.o.si = true
-vim.o.ts = 4
-vim.o.sw = 4
-vim.o.nu = true
-vim.o.rnu = true
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Vim Specific
 vim.o.list = true

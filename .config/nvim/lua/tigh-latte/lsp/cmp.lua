@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
 	local cmp = require("cmp")
+
 	cmp.setup({
 		mapping = {
 			-- Completion window config strats
@@ -26,7 +27,7 @@ M.setup = function()
 			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-e>"] = cmp.mapping.close(),
 
-			["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
+			["<C-f>"] = cmp.mapping.scroll_docs(4),
 
 			-- Confirm strats
 			["<CR>"] = cmp.mapping.confirm({
@@ -68,7 +69,6 @@ M.setup = function()
 				if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
 					s = " " .. entry.completion_item.detail
 				end
-
 				item.menu = ({
 					nvim_lsp = "λ" .. s,
 					vnip = ">" .. s,
