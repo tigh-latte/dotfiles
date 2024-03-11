@@ -17,7 +17,7 @@ return {
 				},
 				vimgrep_arguments = {
 					"rg",
-					"-uuu",
+					"--hidden",
 					"--color=never",
 					"--no-heading",
 					"--with-filename",
