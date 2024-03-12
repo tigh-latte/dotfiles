@@ -15,4 +15,7 @@ require("lazy").setup({
 	spec = {
 		{ import = "tigh-latte.plugins" },
 	},
+	change_detection = {
+		enabled = false,
+	},
 }, {})
