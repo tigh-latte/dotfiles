@@ -12,10 +12,12 @@ return {
 				enable = false,
 			},
 		})
-		vim.keymap.set("n", "<Leader>gcc", ":GoCoverage<CR>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<Leader>gaa", ":GoAltV<CR>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<Leader>gtt", ":GoTest<CR>", { noremap = true, silent = true })
-		vim.keymap.set("n", "<Leader>gtf", ":GoTestFunc<CR>", { noremap = true, silent = true })
+
+		local opts = { remap = false, buffer = true, silent = true }
+		vim.keymap.set("n", "<Leader>gcc", ":GoCoverage<CR>", opts)
+		vim.keymap.set("n", "<Leader>gaa", ":GoAltV<CR>", opts)
+		vim.keymap.set("n", "<Leader>gtt", ":GoTest<CR>", opts)
+		vim.keymap.set("n", "<Leader>gtf", ":GoTestFunc<CR>", opts)
 	end,
 	event = { "CmdlineEnter" },
 	ft = { "go", "gomod" },
