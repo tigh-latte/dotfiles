@@ -1,8 +1,7 @@
-local on_attach = require("tigh-latte.lsp.on_attach").on_attach
 local util = require("lspconfig/util")
 
 require("lspconfig").lua_ls.setup({
-	on_attach = on_attach,
+	on_attach = require("tigh-latte.lsp").on_attach,
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = { "lua" },
 	root_dir = util.root_pattern(".git"),
