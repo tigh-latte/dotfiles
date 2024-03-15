@@ -28,7 +28,6 @@ return {
 					"tsserver",
 					"bashls",
 					"lua_ls",
-					"jqls",
 				},
 			})
 		end,

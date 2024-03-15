@@ -1,4 +1,4 @@
 import = [
-  "/Users/tigh/.config/alacritty/defaults.toml",
-  "/Users/tigh/.config/alacritty/overrides.toml",
+  "~/.config/alacritty/defaults.toml",
+  "~/.config/alacritty/overrides.toml",
 ]
