@@ -17,6 +17,7 @@ vim.cmd([[
         autocmd!
         autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
         autocmd TermOpen * setlocal nonumber
+        autocmd TermOpen * setlocal norelativenumber
         autocmd TermClose * execute 'bdelete! ' . expand('<abuf>')
     augroup END
 ]])

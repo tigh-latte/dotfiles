@@ -33,8 +33,10 @@ return {
 
 				-- keywords
 				["@keyword"] = { fg = "$yellow" },
+				["@conditional"] = { fg = "$yellow" },
 				["@keyword.conditional"] = { fg = "$yellow" },
 				["@keyword.function"] = { fg = "$yellow" },
+				["@include"] = { fg = "$yellow" },
 				["@keyword.import"] = { fg = "$yellow" },
 				["@keyword.operator"] = { fg = "$yellow" },
 				["@keyword.exception"] = { fg = "$yellow" },
@@ -68,6 +70,10 @@ return {
 				["@number.float"] = { fg = "$red" },
 				["@boolean"] = { fg = "$red" },
 				["@null"] = { fg = "$red" },
+
+				-- punctuation
+				["@punctuation.bracket"] = { fg = "$fg" },
+				["@punctuation.delimiter"] = { fg = "$fg" },
 
 				-- functions
 				["@method"] = { fg = "$fg" },
