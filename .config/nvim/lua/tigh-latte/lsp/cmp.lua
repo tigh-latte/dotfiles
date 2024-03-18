@@ -64,7 +64,7 @@ cmp.setup({
 		format = function(entry, item)
 			local s = ""
 			if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
-				s = " " .. entry.completion_item.detail
+				s = " " .. entry.completion_item.detail:gsub("github.com/", "gh://")
 			end
 			item.menu = ({
 				nvim_lsp = "λ" .. s,
