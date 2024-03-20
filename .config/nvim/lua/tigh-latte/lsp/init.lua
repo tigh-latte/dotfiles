@@ -1,10 +1,15 @@
 local M = {}
 
+
 M.setup = function()
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
+	M.lsp_group = vim.api.nvim_create_augroup("tigh-latte-lsp", {})
+
 	require("tigh-latte.lsp.cmp")
-	require("tigh-latte.lsp.lang")
+	require("tigh-latte.lsp.lang").setup({
+		group = M.lsp_group,
+	})
 
 	local signs = { Error = "•", Warn = "•", Hint = "•", Info = "•" }
 	for type, icon in pairs(signs) do
@@ -45,6 +50,15 @@ M.on_attach = function(_, bufnr)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
 	vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, opts)
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = M.lsp_group,
+		pattern = "*",
+		callback = function()
+			if vim.bo.ft ~= "go" then
+				vim.lsp.buf.format()
+			end
+		end,
+	})
 end
 
 return M

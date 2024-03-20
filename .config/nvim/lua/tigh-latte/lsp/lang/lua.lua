@@ -12,6 +12,15 @@ require("lspconfig").lua_ls.setup({
 				version = "LuaJIT",
 				path = vim.split(package.path, ";"),
 			},
+			format = {
+				enable = true,
+				defaultConfig = {
+					table_seperator_style = "comma",
+					trailing_table_separator = "smart",
+					call_arg_parentheses = "keep",
+					quote_style = "double",
+				},
+			},
 			diagnostics = {
 				globals = { "vim" },
 			},

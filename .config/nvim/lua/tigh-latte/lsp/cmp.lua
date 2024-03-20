@@ -38,12 +38,12 @@ cmp.setup({
 	},
 
 	sources = {
-		{ name = "path" },
-		{ name = "nvim_lsp", keyword_length = 1 },
-		{ name = "nvim_lua", keyword_length = 2 },
-		{ name = "buffer", keyword_length = 1 },
-		{ name = "vsnip", keyword_length = 2 },
 		{ name = "calc" },
+		{ name = "path" },
+		{ name = "nvim_lua", keyword_length = 2 },
+		{ name = "nvim_lsp", keyword_length = 1 },
+		{ name = "buffer",   keyword_length = 1 },
+		{ name = "vsnip",    keyword_length = 2 },
 	},
 
 	experimental = {
@@ -68,6 +68,7 @@ cmp.setup({
 			end
 			item.menu = ({
 				nvim_lsp = "λ" .. s,
+				nvim_lua = "vi" .. s,
 				vnip = ">" .. s,
 				buffer = "b" .. s,
 				path = "p" .. s,
