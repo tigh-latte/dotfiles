@@ -18,6 +18,7 @@ return {
 				python = true,
 				typescript = true,
 				typescriptreact = true,
+				html = true,
 				["typescript.tsx"] = true,
 				javascript = true,
 				javascriptreact = true,

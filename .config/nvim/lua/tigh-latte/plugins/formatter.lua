@@ -5,18 +5,17 @@ return {
 			logging = true,
 			log_level = vim.log.levels.WARN,
 			filetype = {
-				go = {
-					require("formatter.filetypes.go").gofumpt,
-					require("formatter.filetypes.go").goimports,
-				},
-				lua = {
-					require("formatter.filetypes.lua").stylua,
-				},
 				typescript = {
 					require("formatter.filetypes.typescript").prettier,
 				},
 				typescriptreact = {
 					require("formatter.filetypes.typescriptreact").prettierd,
+				},
+				javascript = {
+					require("formatter.filetypes.javascript").prettier,
+				},
+				javascriptreact = {
+					require("formatter.filetypes.javascriptreact").prettierd,
 				},
 				json = {
 					require("formatter.filetypes.json").jq,
@@ -31,10 +30,10 @@ return {
 		})
 
 		vim.cmd([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
-]])
+			augroup FormatAutogroup
+			  autocmd!
+			  autocmd BufWritePost * FormatWrite
+			augroup END
+		]])
 	end,
 }
