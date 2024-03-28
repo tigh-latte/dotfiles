@@ -18,7 +18,6 @@ require("lspconfig").gopls.setup({
 			symbolScope = "workspace",
 			analyses = {
 				unusedparams = true,
-				fieldalignment = true,
 				shadow = true,
 			},
 		},

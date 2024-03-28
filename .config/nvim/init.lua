@@ -23,5 +23,5 @@ vim.opt.scrolloff = 4
 vim.opt.updatetime = 100
 
 vim.opt["guicursor"] = ""
-
+vim.api.nvim_create_user_command("Q", "q", { bang = true })
 pcall(require, "tigh-latte.override")

@@ -7,7 +7,7 @@ local fn = ({
 
 if not fn then
 	fn = function()
-		vim.g.mapleader = "\\"
+		vim.g.mapleader = " "
 	end
 end
 
