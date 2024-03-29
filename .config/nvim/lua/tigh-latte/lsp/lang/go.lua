@@ -1,35 +1,8 @@
 local util = require("lspconfig/util")
-local M = {}
 
-
-M.setup = function(opts)
-	require("lspconfig").gopls.setup({
-		on_attach = require("tigh-latte.lsp").on_attach,
-		capabilities = vim.lsp.protocol.make_client_capabilities(),
-		cmd = { "gopls" },
-		filetypes = { "go", "gomod", "gowork", "gotmpl" },
-		root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-		single_file_support = true,
-		settings = {
-			gopls = {
-				buildFlags = { "-tags=integration" },
-				completeUnimported = true,
-				usePlaceholders = true,
-				vulncheck = "imports",
-				gofumpt = true,
-				staticcheck = true,
-				symbolScope = "workspace",
-				analyses = {
-					unusedparams = true,
-					shadow = true,
-				},
-			},
-		},
-	})
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*.go",
-		group = opts.group,
-		callback = function()
+require("lspconfig").gopls.setup({
+	on_attach = require("tigh-latte.lsp").make_on_attach({
+		format_func = function()
 			local params = vim.lsp.util.make_range_params()
 			params.context = { only = { "source.organizeImports" } }
 			-- buf_request_sync defaults to a 1000ms timeout. Depending on your
@@ -48,7 +21,25 @@ M.setup = function(opts)
 			end
 			vim.lsp.buf.format({ async = false })
 		end,
-	})
-end
-
-return M
+	}),
+	capabilities = vim.lsp.protocol.make_client_capabilities(),
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	single_file_support = true,
+	settings = {
+		gopls = {
+			buildFlags = { "-tags=integration" },
+			completeUnimported = true,
+			usePlaceholders = true,
+			vulncheck = "imports",
+			gofumpt = true,
+			staticcheck = true,
+			symbolScope = "workspace",
+			analyses = {
+				unusedparams = true,
+				shadow = true,
+			},
+		},
+	},
+})

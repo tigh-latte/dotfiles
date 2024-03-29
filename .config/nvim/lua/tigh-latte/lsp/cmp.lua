@@ -20,12 +20,9 @@ cmp.setup({
 				fallback()
 			end
 		end),
-
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-
 		-- Confirm strats
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
@@ -36,7 +33,6 @@ cmp.setup({
 			select = true,
 		}),
 	},
-
 	sources = {
 		{ name = "calc" },
 		{ name = "path" },
@@ -45,19 +41,15 @@ cmp.setup({
 		{ name = "buffer",   keyword_length = 1 },
 		{ name = "vsnip",    keyword_length = 2 },
 	},
-
 	experimental = {
 		ghost_text = true,
 	},
-
 	preselect = cmp.PreselectMode.None,
-
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
-
 	formatting = {
 		expandable_indicator = false,
 		fields = { "abbr", "kind", "menu" },
