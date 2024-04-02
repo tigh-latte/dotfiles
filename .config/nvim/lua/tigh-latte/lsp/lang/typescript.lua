@@ -1,7 +1,7 @@
 local util = require("lspconfig/util")
 
 require("lspconfig").tsserver.setup({
-	on_attach = require("tigh-latte.lsp").on_attach,
+	on_attach = require("tigh-latte.lsp").make_on_attach(),
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = {
 		"javascript",
