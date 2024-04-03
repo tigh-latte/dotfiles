@@ -2,7 +2,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { run = ":TSUpdate" },
-
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
@@ -13,6 +12,7 @@ return {
 					"query",
 					"typescript",
 					"python",
+					"make",
 				},
 				ignore_install = {},
 				modules = {},
