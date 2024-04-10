@@ -1,5 +1,7 @@
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true })
+vim.keymap.set({ "n", "v" }, "N", "Nzz", { silent = true })
 
 local function visual_regrow(forward, backward)
 	vim.api.nvim_input("<Esc>")
