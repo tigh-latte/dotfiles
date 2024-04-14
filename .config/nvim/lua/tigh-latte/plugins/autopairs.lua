@@ -5,6 +5,7 @@ return {
 		"hrsh7th/nvim-cmp",
 	},
 	config = function()
+		-- Insert () after confirming a function from nvim-cmp.
 		require("nvim-autopairs").setup()
 		local cmp_ap = require("nvim-autopairs.completion.cmp")
 		local cmp = require("cmp")

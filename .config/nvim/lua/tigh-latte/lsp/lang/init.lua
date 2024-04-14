@@ -1,3 +1,4 @@
+-- Import all lua files from the current directory.
 local function import_dir(opts)
 	local scan = vim.fn.globpath(opts.dir, "*.lua")
 	for _, file in ipairs(vim.split(scan, "\n")) do

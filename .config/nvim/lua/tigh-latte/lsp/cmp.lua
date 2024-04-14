@@ -9,8 +9,9 @@ cmp.setup({
 		["<Up>"] = cmp.mapping.select_prev_item(),
 		["<S-Tab>"] = cmp.mapping.select_prev_item(),
 		["<Tab>"] = cmp.mapping(function(fallback)
+			-- If only one suggestion is available, tab will confirm it rather than
+			-- select it.
 			if cmp.visible() then
-				-- if one entry is available, insert it.
 				if #cmp.get_entries() == 1 then
 					cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
 				else
@@ -23,6 +24,7 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
+
 		-- Confirm strats
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
@@ -44,18 +46,24 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
+
 	preselect = cmp.PreselectMode.None,
+
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
+
 	formatting = {
 		expandable_indicator = false,
 		fields = { "abbr", "kind", "menu" },
 		format = function(entry, item)
 			local s = ""
-			if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+
+			-- Make go import paths for third party libs shorter.
+			if vim.bo.ft == "go" and entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+				-- TODO: Make this work for everything, not just github.
 				s = " " .. entry.completion_item.detail:gsub("github.com/", "gh://")
 			end
 			item.menu = ({

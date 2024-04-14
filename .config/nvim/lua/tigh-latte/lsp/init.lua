@@ -7,10 +7,6 @@ local default_opts = {
 M.setup = function()
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
-	M.lsp_group = vim.api.nvim_create_augroup("tigh-latte-lsp", {
-		clear = false,
-	})
-
 	require("tigh-latte.lsp.cmp")
 	require("tigh-latte.lsp.lang")
 
@@ -27,6 +23,8 @@ M.setup = function()
 	})
 end
 
+-- Create an on_attach function with the option to override, for now,
+-- just the default formatter.
 M.make_on_attach = function(opts)
 	if opts == nil then
 		opts = {}
@@ -52,6 +50,7 @@ M.make_on_attach = function(opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, kmopts)
 		vim.keymap.set("n", "<Leader>cref", telescope.lsp_references, kmopts)
 		vim.keymap.set("n", "<Leader>/", telescope.lsp_dynamic_workspace_symbols, kmopts)
+		vim.keymap.set("n", "<Leader>h", telescope.help_tags, kmopts)
 		vim.keymap.set("n", "<Leader>cren", vim.lsp.buf.rename, kmopts)
 		vim.keymap.set("n", "<Leader>cp", vim.diagnostic.goto_prev, kmopts)
 		vim.keymap.set("n", "<Leader>cn", vim.diagnostic.goto_next, kmopts)
@@ -59,6 +58,7 @@ M.make_on_attach = function(opts)
 		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 		vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
 
+		-- Autoformat on save.
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = vim.api.nvim_create_augroup("tigh-latte-lsp", {
 				clear = false,

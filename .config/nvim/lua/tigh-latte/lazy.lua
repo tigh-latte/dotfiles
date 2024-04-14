@@ -12,9 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	spec = {
-		{ import = "tigh-latte.plugins" },
-	},
+	spec = "tigh-latte.plugins",
 	change_detection = {
 		enabled = false,
 	},

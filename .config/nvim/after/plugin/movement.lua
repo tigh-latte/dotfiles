@@ -1,8 +1,14 @@
+-- Move visual selected lines up or down.
+-- Has the same effect as just deleting the text and pasting it where
+-- you'd like, but is visually nicer.
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true })
 vim.keymap.set({ "n", "v" }, "N", "Nzz", { silent = true })
 
+-- Expands the curreny visual selection etiher inward or outward
+--- @param forward string
+--- @param backward string
 local function visual_regrow(forward, backward)
 	vim.api.nvim_input("<Esc>")
 
@@ -20,6 +26,8 @@ local function visual_regrow(forward, backward)
 end
 
 
+-- Grow the top and bottom lines outward by one line each.
 vim.keymap.set("v", "<C-o>", function() visual_regrow("joko", "kojo") end, {})
 
+-- Shrink the top and bottom lines inward by one line each.
 vim.keymap.set("v", "<C-i>", function() visual_regrow("kojo", "joko") end, {})

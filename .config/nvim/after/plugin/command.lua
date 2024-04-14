@@ -1,3 +1,4 @@
+-- Sentence traversal in command mode.
 vim.keymap.set("c", "<C-a>", "<Home>")
 vim.keymap.set("c", "<C-e>", "<End>")
 vim.keymap.set("c", "<C-p>", "<Up>")

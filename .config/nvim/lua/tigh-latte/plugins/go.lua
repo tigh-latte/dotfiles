@@ -6,6 +6,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	config = function()
+		-- Disable all the lsp stuff as the LSP is already configured in this setup.
 		require("go").setup({
 			lsp_codelens = false,
 			lsp_inlay_hints = {

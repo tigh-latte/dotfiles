@@ -47,6 +47,6 @@ return {
 		local builtin = require("telescope.builtin")
 
 		vim.keymap.set("n", "<C-P>", builtin.find_files, { silent = true })
-		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true })
+		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true }) -- consider a handier binding.
 	end,
 }

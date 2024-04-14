@@ -29,6 +29,8 @@ return {
 			},
 		})
 
+		-- Format on save, on all buffers.
+		-- Will only actually run on buffers with filestypes specified above.
 		vim.cmd([[
 			augroup FormatAutogroup
 			  autocmd!

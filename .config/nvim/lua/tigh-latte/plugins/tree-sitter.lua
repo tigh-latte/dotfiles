@@ -26,6 +26,6 @@ return {
 		end,
 	},
 	{
-		"nvim-treesitter/playground",
+		"nvim-treesitter/playground", -- The lord's plugin.
 	},
 }

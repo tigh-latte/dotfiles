@@ -1,3 +1,5 @@
+-- Consider learning how to do this, so you don't need to use a theme's underlying
+-- engine to apply your own custom theme.
 return {
 	"navarasu/onedark.nvim",
 	event = "VeryLazy",
@@ -6,7 +8,7 @@ return {
 			style = "light",
 			term_colors = false,
 			transparent = true,
-			toggle_style_key = "<Leader>ts", -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+			toggle_style_key = "<Leader>ts",                                            -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
 			toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" }, -- List of styles to toggle between
 
 			colors = {
