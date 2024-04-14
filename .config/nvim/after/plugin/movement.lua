@@ -6,11 +6,12 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 vim.keymap.set({ "n", "v" }, "n", "nzz", { silent = true })
 vim.keymap.set({ "n", "v" }, "N", "Nzz", { silent = true })
 
--- Expands the curreny visual selection etiher inward or outward
+-- Grows or shrinks the current visual selection etiher.
 --- @param forward string
 --- @param backward string
 local function visual_regrow(forward, backward)
-	vim.api.nvim_input("<Esc>")
+	local mode = vim.api.nvim_get_mode().mode
+	vim.api.nvim_input((mode == "v" and "<S-v>" or "") .. "<Esc>")
 
 	vim.schedule(function()
 		local startl = vim.api.nvim_buf_get_mark(0, "<")[1]
