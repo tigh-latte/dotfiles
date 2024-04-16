@@ -28,4 +28,8 @@ return {
 	{
 		"nvim-treesitter/playground", -- The lord's plugin.
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		config = true,
+	},
 }
