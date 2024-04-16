@@ -57,6 +57,7 @@ M.make_on_attach = function(opts)
 		vim.keymap.set("n", "<Leader>cee", vim.diagnostic.open_float, kmopts)
 		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 		vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
+		vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
 
 		-- Autoformat on save.
 		vim.api.nvim_create_autocmd("BufWritePre", {
