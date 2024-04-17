@@ -1,3 +1,4 @@
 .config/nvim/lazy-lock.json
 .config/nvim/lua/tigh-latte/override.lua
 .config/alacritty/overrides.toml
+/tmux-client*.log

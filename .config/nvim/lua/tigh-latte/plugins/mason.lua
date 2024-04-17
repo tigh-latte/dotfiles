@@ -14,6 +14,7 @@ return {
 					"prettierd",
 					"stylua",
 					"taplo",
+					"tree-sitter-cli",
 				},
 			})
 		end,
