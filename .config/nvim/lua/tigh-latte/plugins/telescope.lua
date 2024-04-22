@@ -28,6 +28,7 @@ return {
 					"--glob=!/**/node_modules/*",
 					"--glob=!/**/.git/*",
 					"--glob=!/**/.gitmodules",
+					"--glob=!/**/.venv/*",
 				},
 			},
 			pickers = {
