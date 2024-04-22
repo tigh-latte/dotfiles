@@ -13,7 +13,7 @@ vim.o.smartindent = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
--- [[ Vim Specific stuff]]
+-- [[ Vim Specific stuff ]]
 -- Tab/space highlighting
 vim.o.list = true
 vim.o.listchars = "tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
