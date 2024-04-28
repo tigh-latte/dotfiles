@@ -37,6 +37,7 @@ return {
 				},
 				find_files = {
 					hidden = true,
+					no_ignore = true,
 					sorting_strategy = "descending",
 					layout_config = {
 						prompt_position = "bottom",
