@@ -17,9 +17,6 @@ return {
 				javascriptreact = {
 					require("formatter.filetypes.javascriptreact").prettierd,
 				},
-				json = {
-					require("formatter.filetypes.json").jq,
-				},
 				toml = {
 					require("formatter.filetypes.toml").taplo,
 				},
