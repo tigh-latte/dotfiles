@@ -1,0 +1,9 @@
+[user]
+	name = Tighearnán Carroll
+	email = tighearnan.carroll@gmail.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = ~/.config/tigh-latte/gitignore
