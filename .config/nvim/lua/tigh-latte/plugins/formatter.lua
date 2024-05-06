@@ -5,12 +5,6 @@ return {
 			logging = true,
 			log_level = vim.log.levels.WARN,
 			filetype = {
-				typescript = {
-					require("formatter.filetypes.typescript").prettier,
-				},
-				typescriptreact = {
-					require("formatter.filetypes.typescriptreact").prettierd,
-				},
 				javascript = {
 					require("formatter.filetypes.javascript").prettier,
 				},
@@ -28,11 +22,11 @@ return {
 
 		-- Format on save, on all buffers.
 		-- Will only actually run on buffers with filestypes specified above.
-		vim.cmd([[
-			augroup FormatAutogroup
-			  autocmd!
-			  autocmd BufWritePost * FormatWrite
-			augroup END
-		]])
+		local augroup = vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
+		vim.api.nvim_create_autocmd("BufWritePost", {
+			group = augroup,
+			pattern = "*",
+			callback = function() vim.cmd.FormatWrite() end,
+		})
 	end,
 }
