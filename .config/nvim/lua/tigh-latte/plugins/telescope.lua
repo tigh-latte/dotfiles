@@ -50,5 +50,6 @@ return {
 
 		vim.keymap.set("n", "<C-P>", builtin.find_files, { silent = true })
 		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true }) -- consider a handier binding.
+		vim.keymap.set("n", "<Leader>cb", builtin.git_branches, { silent = true })
 	end,
 }
