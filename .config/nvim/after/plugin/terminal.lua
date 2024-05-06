@@ -21,13 +21,39 @@ vim.api.nvim_set_keymap("t", "<C-J>", "<C-\\><C-N><C-W><C-J>", { noremap = true 
 vim.api.nvim_set_keymap("t", "<C-K>", "<C-\\><C-N><C-W><C-K>", { noremap = true })
 vim.api.nvim_set_keymap("t", "<C-L>", "<C-\\><C-L>", { noremap = true })
 
--- Enter insert mode upon entering terminal buffer
-vim.cmd([[
-    augroup TerminalHelpers
-        autocmd!
-        autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-        autocmd TermOpen * setlocal nonumber
-        autocmd TermOpen * setlocal norelativenumber
-        autocmd TermClose * execute 'bdelete! ' . expand('<abuf>')
-    augroup END
-]])
+local augroup = vim.api.nvim_create_augroup("TerminalHelpers", { clear = true })
+
+-- When entering a terminal buffer, by opening or moving window, enter insert
+-- mode.
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup,
+	pattern = "term://*",
+	callback = function() vim.cmd("startinsert") end,
+})
+
+-- We don't want any numbers in our terminal.
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = augroup,
+	pattern = "term://*",
+	callback = function()
+		vim.opt_local.number = false
+	end,
+})
+
+-- We don't want ANY numbers in our terminal.
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = augroup,
+	pattern = "term://*",
+	callback = function()
+		vim.opt_local.relativenumber = false
+	end,
+})
+
+-- Close the terminal buffer when the terminal closes, no point holding on.
+vim.api.nvim_create_autocmd("TermClose", {
+	group = augroup,
+	pattern = "term://*",
+	callback = function(opts)
+		vim.api.nvim_buf_delete(opts.buf, { force = true })
+	end,
+})
