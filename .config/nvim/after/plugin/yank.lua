@@ -4,6 +4,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>Y", "\"+Y", {})
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p", {})
 vim.keymap.set({ "n", "v" }, "<Leader>P", "\"+P", {})
 vim.keymap.set({ "n", "v" }, "<Leader>d", "\"_d", {})
+vim.keymap.set({ "n", "v" }, "<Leader>D", "\"_D", {})
 vim.keymap.set("i", "<C-r><C-r>", "<C-r>+", {})
 
 -- finally on this bandwagon too
