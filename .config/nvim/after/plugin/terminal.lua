@@ -9,9 +9,9 @@ local function build_term(fn)
 	end
 end
 
-vim.keymap.set("n", "<Leader>z", build_term(vim.cmd.vsplit), { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>v", build_term(vim.cmd.vsplit), { noremap = true, silent = true })
 
+vim.keymap.set("n", "<Leader>a", build_term(vim.cmd.split), { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader><Leader>", build_term(vim.cmd.split), { noremap = true, silent = true })
 
 -- Window navigation while in a terminal buffer made much, much easier.
