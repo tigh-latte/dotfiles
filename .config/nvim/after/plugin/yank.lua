@@ -1,10 +1,14 @@
--- Easier yank into and paste from system clipboard
-vim.keymap.set({ "n", "v" }, "<Leader>y", "\"+y", {})
-vim.keymap.set({ "n", "v" }, "<Leader>Y", "\"+Y", {})
-vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p", {})
-vim.keymap.set({ "n", "v" }, "<Leader>P", "\"+P", {})
-vim.keymap.set({ "n", "v" }, "<Leader>d", "\"_d", {})
-vim.keymap.set({ "n", "v" }, "<Leader>D", "\"_D", {})
+-- Easier yank into system clipboard
+vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', {})
+vim.keymap.set({ "n", "v" }, "<Leader>Y", '"+Y', {})
+
+-- Easy delete into void buffer
+for _, cmd in ipairs({ "p", "d", "c", "s" }) do
+	local CMD = string.upper(cmd)
+	vim.keymap.set({ "n", "v" }, "<Leader>" .. cmd, '"_' .. cmd, {})
+	vim.keymap.set({ "n", "v" }, "<Leader>" .. CMD, '"_' .. CMD, {})
+end
+
 vim.keymap.set("i", "<C-r><C-r>", "<C-r>+", {})
 
 -- finally on this bandwagon too
