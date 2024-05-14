@@ -17,7 +17,6 @@ return {
 			require("tigh-latte.lsp").setup()
 		end,
 	},
-
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
