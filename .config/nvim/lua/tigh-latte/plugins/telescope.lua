@@ -14,6 +14,7 @@ return {
 					"build/",
 					"*.min.*",
 					".git/",
+					".venv/",
 				},
 				vimgrep_arguments = {
 					"rg",
