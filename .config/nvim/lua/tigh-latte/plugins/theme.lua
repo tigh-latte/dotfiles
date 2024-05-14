@@ -5,7 +5,7 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("onedark").setup({
-			style = "light",
+			style = "dark",
 			term_colors = false,
 			transparent = true,
 			toggle_style_key = "<Leader>ts",
