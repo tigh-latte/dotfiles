@@ -38,6 +38,15 @@ require("lspconfig").gopls.setup({
 				unusedparams = true,
 				shadow = true,
 			},
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = false,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
 		},
 	},
 })
