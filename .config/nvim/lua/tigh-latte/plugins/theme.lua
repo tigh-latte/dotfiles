@@ -66,6 +66,7 @@ return {
 				["@string"] = { fg = "$red" },
 				["@string.regexp"] = { fg = "$red" },
 				["@string.special.symbol"] = { fg = "$fg" },
+				["@string.special.url"] = { fg = "$fg" },
 				["@text.literal"] = { fg = "$red" },
 				["@number"] = { fg = "$red" },
 				["@float"] = { fg = "$red" },
