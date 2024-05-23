@@ -1,5 +1,3 @@
-local util = require("lspconfig/util")
-
 require("lspconfig").gopls.setup({
 	on_attach = require("tigh-latte.lsp").make_on_attach({
 		format_func = function()
@@ -25,7 +23,7 @@ require("lspconfig").gopls.setup({
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	cmd = { "gopls" },
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
 	single_file_support = true,
 	settings = {
 		gopls = {
