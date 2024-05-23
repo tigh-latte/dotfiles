@@ -13,6 +13,7 @@ return {
 					"typescript",
 					"python",
 					"make",
+					"dockerfile",
 				},
 				ignore_install = {},
 				modules = {},
@@ -30,6 +31,11 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = true,
+		config = function()
+			require("treesitter-context").setup({
+				max_lines = 4,
+				multiline_threshold = 4,
+			})
+		end,
 	},
 }
