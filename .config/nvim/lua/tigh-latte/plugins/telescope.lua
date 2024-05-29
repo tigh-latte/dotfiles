@@ -16,6 +16,7 @@ return {
 					"*.min.*",
 					"__.*",
 					"tmp/*",
+					"^main$",
 					".git/",
 					".venv/",
 				},
