@@ -24,6 +24,8 @@ return {
 					additional_vim_regex_highlighting = true,
 				},
 			})
+
+			vim.treesitter.language.register("bash", "zsh")
 		end,
 	},
 	{
