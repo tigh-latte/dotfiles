@@ -14,7 +14,14 @@ return {
 				"x x x x x _ x x x _ x x x _ x x x x x",
 			},
 			comment_preview = {
+				symbols = {
+					tl = "╭",
+					tr = "╮",
+					bl = "╰",
+					br = "╯",
+				},
 				keymap_overrides = {
+					["&layer_td"] = "lowr",
 					["iso\\"] = "\\",
 					["LS%(N1%)"] = "!",
 					["LS%(N2%)"] = '"',
