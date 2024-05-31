@@ -3,23 +3,23 @@ draw_bold_text_with_bright_colors = false
 
 [colors.bright]
 black = "#212121"
-blue = "#83afd8"
-cyan = "#37e5e7"
-green = "#98e342"
+blue = "#61afef"
+cyan = "#56b6c2"
+green = "#53891c"
 magenta = "#bc93b6"
-red = "#f44135"
+red = "#be354c"
 white = "#f1f1f1"
-yellow = "#fcea60"
+yellow = "#ebd09c"
 
 [colors.normal]
 black = "#212121"
-blue = "#417ab3"
-cyan = "#00a7aa"
-green = "#5da602"
-magenta = "#88658d"
-red = "#d71e00"
+blue = "#61afef"
+cyan = "#56b6c2"
+green = "#53891c"
+magenta = "#523c79"
+red = "#be354c"
 white = "#e0e0e0"
-yellow = "#cfad00"
+yellow = "#ebd09c"
 
 [colors.primary]
 background = "#d5d5d5"
@@ -40,5 +40,5 @@ history = 15000
 [window]
 decorations = "none"
 dynamic_title = false
-startup_mode = "Fullscreen"
+startup_mode = "Windowed"
 title = "Terminal"
