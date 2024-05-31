@@ -1,7 +1,9 @@
 local M = {}
 
+---@class tigh-latte.lsp.opts
+---@field on_save_actions? string[]
 local default_opts = {
-	format_func = function() vim.lsp.buf.format() end,
+	on_save_actions = {},
 }
 
 M.setup = function()
@@ -25,6 +27,7 @@ end
 
 -- Create an on_attach function with the option to override, for now,
 -- just the default formatter.
+---@param opts? tigh-latte.lsp.opts
 M.make_on_attach = function(opts)
 	if opts == nil then
 		opts = {}
@@ -68,7 +71,24 @@ M.make_on_attach = function(opts)
 				clear = false,
 			}),
 			buffer = bufnr,
-			callback = opts.format_func,
+			callback = function()
+				for _, action in ipairs(opts.on_save_actions) do
+					local params = vim.lsp.util.make_range_params()
+					params.context = {
+						only = { action },
+					}
+					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+					for cid, res in pairs(result or {}) do
+						for _, r in pairs(res.result or {}) do
+							if r.edit then
+								local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+								vim.lsp.util.apply_workspace_edit(r.edit, enc)
+							end
+						end
+					end
+				end
+				vim.lsp.buf.format({ async = #opts.on_save_actions > 0 })
+			end,
 		})
 	end
 end

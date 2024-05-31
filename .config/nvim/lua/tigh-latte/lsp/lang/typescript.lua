@@ -1,5 +1,11 @@
 require("lspconfig").tsserver.setup({
-	on_attach = require("tigh-latte.lsp").make_on_attach(),
+	on_attach = require("tigh-latte.lsp").make_on_attach({
+		on_save_actions = {
+			"source.sortImports.ts",
+			"source.addMissingImports.ts",
+			"source.removeUnusedImports.ts",
+		},
+	}),
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = {
 		"javascript",
