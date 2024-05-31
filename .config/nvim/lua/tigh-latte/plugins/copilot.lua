@@ -5,7 +5,7 @@ return {
 	config = function()
 		require("copilot").setup({
 			suggestion = {
-				enabled = false,
+				enabled = true,
 				auto_trigger = true,
 				keymap = {
 					next = "<M-n>",
@@ -26,5 +26,6 @@ return {
 				["*"] = false,
 			},
 		})
+		vim.cmd.Copilot("disable")
 	end,
 }
