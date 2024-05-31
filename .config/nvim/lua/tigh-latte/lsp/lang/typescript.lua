@@ -11,4 +11,14 @@ require("lspconfig").tsserver.setup({
 	},
 	root_dir = require("lspconfig/util").root_pattern(".git"),
 	single_file_support = true,
+	settings = {
+		typescript = {
+			format = {
+				indentSize = 2,
+				tabSize = 2,
+				convertTabsToSpaces = true,
+				semicolons = "remove",
+			},
+		},
+	},
 })
