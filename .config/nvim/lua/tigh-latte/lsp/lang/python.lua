@@ -7,8 +7,6 @@ require("lspconfig").pyright.setup({
 	settings = {
 		python = {
 			useLibraryCodeForTypes = true,
-			venvPath = ".",
-			pythonPath = "./.venv/bin/python",
 			analysis = {
 				autoSearchPaths = true,
 				autoImportCompletions = true,
