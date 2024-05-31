@@ -12,3 +12,9 @@
 }))[vim.loop.os_uname().sysname]()
 
 require("tigh-latte.lazy")
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("tigh-latte", {}),
+	pattern = "*",
+	command = [[%s/[ \t]\+$//ge]],
+})

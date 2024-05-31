@@ -14,9 +14,6 @@ return {
 				toml = {
 					require("formatter.filetypes.toml").taplo,
 				},
-				["*"] = {
-					require("formatter.filetypes.any").remove_trailing_whitespace,
-				},
 			},
 		})
 
