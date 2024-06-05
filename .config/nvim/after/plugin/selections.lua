@@ -31,9 +31,22 @@ local function visual_regrow(action)
 	end)
 end
 
+-- Moves the selection window (not the text) either up or down
+--- @param direction string can be "up" or "down"
+local function visual_move(direction)
+	assert(direction == "up" or direction == "down")
+	vim.api.nvim_input(({ up = "koko", down = "jojo" })[direction])
+end
+
 
 -- Grow the top and bottom lines outward by one line each.
 vim.keymap.set("v", ")", function() visual_regrow("grow") end, {})
 
 -- Shrink the top and bottom lines inward by one line each.
 vim.keymap.set("v", "(", function() visual_regrow("shrink") end, {})
+
+-- Move the selection upwards.
+vim.keymap.set("v", "<M-k>", function() visual_move("up") end, {})
+
+-- Move the selection downwards.
+vim.keymap.set("v", "<M-j>", function() visual_move("down") end, {})
