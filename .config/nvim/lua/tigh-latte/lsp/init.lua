@@ -74,9 +74,7 @@ M.make_on_attach = function(opts)
 			callback = function()
 				for _, action in ipairs(opts.on_save_actions) do
 					local params = vim.lsp.util.make_range_params()
-					params.context = {
-						only = { action },
-					}
+					params.context = { only = { action } }
 					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
 					for cid, res in pairs(result or {}) do
 						for _, r in pairs(res.result or {}) do
@@ -87,7 +85,7 @@ M.make_on_attach = function(opts)
 						end
 					end
 				end
-				vim.lsp.buf.format({ async = #opts.on_save_actions > 0 })
+				vim.lsp.buf.format({ async = false })
 			end,
 		})
 	end
