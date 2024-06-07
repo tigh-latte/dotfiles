@@ -13,8 +13,8 @@ local function visual_regrow(action)
 	local cpos = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_input("o")
 
-	-- I donno the cursor position doesn't update right away or something, so
-	-- schedule this instead.
+	-- nvim_input fires input onto the event loop, so we have to schedule reading the
+	-- cursor position.
 	vim.schedule(function()
 		local npos = vim.api.nvim_win_get_cursor(0)[1]
 		vim.api.nvim_input("o")
