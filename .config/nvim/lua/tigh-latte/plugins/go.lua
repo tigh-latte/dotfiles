@@ -26,7 +26,16 @@ return {
 				vim.keymap.set("n", "<Leader>gtf", vim.cmd.GoTestFunc, opts)
 				vim.keymap.set("n", "<Leader>gti", vim.cmd.GoModTidy, opts)
 				vim.keymap.set("n", "<Leader>gve", vim.cmd.GoModVendor, opts)
-				vim.keymap.set("n", "<Leader>gg", '"zyi":GoGet <C-R>z<CR>', opts)
+
+				vim.keymap.set("n", "<Leader>gg", function()
+					vim.api.nvim_input('"zyi":GoGet <C-R>z<CR>')
+
+					vim.schedule(function()
+						if vim.fn.isdirectory("vendor") ~= 0 then
+							vim.cmd.GoModVendor()
+						end
+					end)
+				end, opts)
 			end,
 		})
 	end,
