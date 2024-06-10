@@ -1,0 +1,3 @@
+;; extends
+
+(word) @none
