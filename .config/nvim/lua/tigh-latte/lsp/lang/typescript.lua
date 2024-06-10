@@ -26,5 +26,13 @@ require("lspconfig").tsserver.setup({
 				semicolons = "remove",
 			},
 		},
+		javascript = {
+			format = {
+				indentSize = 2,
+				tabSize = 2,
+				convertTabsToSpaces = true,
+				semicolons = "remove",
+			},
+		},
 	},
 })
