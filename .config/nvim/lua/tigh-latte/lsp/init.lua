@@ -81,6 +81,9 @@ M.make_on_attach = function(opts)
 							if r.edit then
 								local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
 								vim.lsp.util.apply_workspace_edit(r.edit, enc)
+							elseif r.command then
+								local command = type(r.command) == "table" and r.command or r
+								vim.lsp.buf.execute_command(command)
 							end
 						end
 					end
