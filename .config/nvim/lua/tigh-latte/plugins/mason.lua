@@ -29,6 +29,10 @@ return {
 					"tsserver",
 					"bashls",
 					"lua_ls",
+					"htmx",
+					"html",
+					"yamlls",
+					"cucumber_language_server",
 				},
 			})
 		end,
