@@ -14,6 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = "tigh-latte.plugins",
 	change_detection = {
-		enabled = false,
+		notify = false,
 	},
 }, {})
