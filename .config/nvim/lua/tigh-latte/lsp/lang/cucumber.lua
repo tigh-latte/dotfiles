@@ -6,8 +6,13 @@ require("lspconfig").cucumber_language_server.setup({
 	capabilities = capabilities,
 	settings = {
 		cucumber = {
-			features = { "**/*.feature" },
-			glue = { "**/*_test.go" },
+			features = {
+				"**/*.feature",
+			},
+			glue = {
+				"testing/**/*_test.go",
+				"**/go-bdd/steps.go",
+			},
 		},
 	},
 })
