@@ -46,7 +46,7 @@ M.make_on_attach = function(opts)
 
 		local kmopts = { buffer = bufnr, remap = false }
 
-		vim.keymap.set("n", "<Leader>cdd", vim.lsp.buf.definition, kmopts)
+		vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)
 
 		local telescope = require("telescope.builtin")
 
@@ -56,7 +56,7 @@ M.make_on_attach = function(opts)
 		vim.keymap.set("n", "<Leader>cren", vim.lsp.buf.rename, kmopts)
 		vim.keymap.set("n", "<Leader>cp", vim.diagnostic.goto_prev, kmopts)
 		vim.keymap.set("n", "<Leader>cn", vim.diagnostic.goto_next, kmopts)
-		vim.keymap.set("n", "<Leader>cee", vim.diagnostic.open_float, kmopts)
+		vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
 		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 		vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
 		vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, kmopts)
