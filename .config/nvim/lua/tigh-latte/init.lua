@@ -3,7 +3,7 @@
 (setmetatable({
 	Darwin = function()
 		vim.keymap.set("n", "`", "<Nop>", { silent = true, remap = false })
-		vim.g.mapleader = "`"
+		vim.g.mapleader = " "
 	end,
 }, {
 	__index = function(_, _)
