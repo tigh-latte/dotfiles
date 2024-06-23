@@ -11,9 +11,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local localplugins = vim.fn.stdpath("config") .. "/lua/tigh-latte/plugins/local"
 require("lazy").setup({
-	spec = "tigh-latte.plugins",
+	{ import = "tigh-latte.plugins" },
+	(vim.uv or vim.loop).fs_stat(localplugins) and { import = "tigh-latte.plugins.local" } or {},
+}, {
 	change_detection = {
 		notify = false,
 	},
-}, {})
+})
