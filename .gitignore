@@ -1,6 +1,5 @@
 .config/nvim/lazy-lock.json
-.config/nvim/lua/tigh-latte/override.lua
-.config/nvim/lua/tigh-latte/plugins/local
-.config/nvim/lua/tigh-latte/override*
+local
+!local/init.lua
 .config/alacritty/overrides.toml
 /tmux-client*.log

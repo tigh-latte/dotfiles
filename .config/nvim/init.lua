@@ -34,4 +34,4 @@ vim.opt["guicursor"] = ""
 vim.api.nvim_create_user_command("Q", "q", { bang = true })
 
 vim.opt.nrformats:append("alpha")
-pcall(require, "tigh-latte.override")
+require("tigh-latte.local")
