@@ -1,4 +1,3 @@
-.config/nvim/lazy-lock.json
 local
 !local/init.lua
 .config/alacritty/overrides.toml
