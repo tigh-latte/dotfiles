@@ -50,3 +50,15 @@ vim.keymap.set("v", "<M-k>", function() visual_move("up") end, {})
 
 -- Move the selection downwards.
 vim.keymap.set("v", "<M-j>", function() visual_move("down") end, {})
+
+-- Execute lua selection.
+vim.keymap.set("v", "<Leader>l", ":'<,'>lua<CR>", { silent = true })
+
+-- Execute lua file.
+vim.keymap.set("n", "<Leader>x", function()
+	if vim.bo.ft ~= "lua" then
+		vim.notify("can only execute lua files", vim.log.levels.ERROR, {})
+		return
+	end
+	vim.api.nvim_feedkeys(":%lua" .. vim.keycode("<CR>"), "n", false)
+end, {})
