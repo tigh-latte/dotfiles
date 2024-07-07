@@ -10,8 +10,7 @@ require("lspconfig").cucumber_language_server.setup({
 				"**/*.feature",
 			},
 			glue = {
-				"testing/**/*_test.go",
-				"**/go-bdd/steps.go",
+				"**/steps.go",
 			},
 		},
 	},
