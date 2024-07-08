@@ -7,3 +7,5 @@
 	defaultBranch = main
 [core]
 	excludesfile = ~/.config/tigh-latte/gitignore
+[tag]
+	sort = v:refname
