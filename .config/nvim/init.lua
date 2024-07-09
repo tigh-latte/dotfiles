@@ -4,8 +4,6 @@ require("tigh-latte")
 vim.o.background = ""
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.number = true
-vim.o.relativenumber = true
 vim.o.encoding = "utf-8"
 
 vim.o.autoindent = true
