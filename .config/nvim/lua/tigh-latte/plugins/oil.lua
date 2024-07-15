@@ -40,11 +40,7 @@ return {
 			},
 		})
 
-		vim.keymap.set({ "n", "v" }, "<Leader>o", function()
-			oil.open_float()
-		end, {})
-		vim.keymap.set({ "n", "v" }, "<Leader>O", function()
-			oil.open_float(vim.loop.cwd())
-		end, {})
+		vim.keymap.set({ "n", "v" }, "<Leader>o", function() oil.toggle_float() end, {})
+		vim.keymap.set({ "n", "v" }, "<Leader>O", function() oil.toggle_float(vim.loop.cwd()) end, {})
 	end,
 }
