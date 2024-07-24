@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "TabLeave", "WinLeave" }, {
 		vim.opt_local.relativenumber = false
 	end,
 })
+
 vim.api.nvim_create_autocmd({ "BufEnter", "TabEnter", "WinEnter" }, {
 	group = augroup,
 	pattern = "*",

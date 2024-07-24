@@ -6,11 +6,32 @@ local default_opts = {
 	on_save_actions = {},
 }
 
-M.setup = function()
+---@param actions string|string[]
+---@param params? lsp.TextDocumentPositionParams
+function M.do_codeaction(actions, params)
+	actions = type(actions) == "table" and actions or { actions }
+	for _, action in ipairs(actions) do
+		params = params or vim.lsp.util.make_range_params()
+		params.context = { only = { action } }
+		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+		for cid, res in pairs(result or {}) do
+			for _, r in pairs(res.result or {}) do
+				if r.edit then
+					local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+					vim.lsp.util.apply_workspace_edit(r.edit, enc)
+				elseif r.command then
+					local command = type(r.command) == "table" and r.command or r
+					vim.lsp.buf.execute_command(command)
+				end
+			end
+		end
+	end
+end
+
+function M.setup()
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
 	require("tigh-latte.lsp.cmp")
-	require("tigh-latte.lsp.lang")
 
 	local signs = { Error = "•", Warn = "•", Hint = "•", Info = "•" }
 	for type, icon in pairs(signs) do
@@ -28,7 +49,7 @@ end
 -- Create an on_attach function with the option to override, for now,
 -- just the default formatter.
 ---@param opts? tigh-latte.lsp.opts
-M.make_on_attach = function(opts)
+function M.make_on_attach(opts)
 	if opts == nil then
 		opts = {}
 	end
@@ -65,29 +86,18 @@ M.make_on_attach = function(opts)
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 		end, kmopts)
 
-		-- Autoformat on save.
+		vim.api.nvim_create_user_command("LspCodeAction", function(args)
+			if args.args == "" then return end
+			M.do_codeaction(args.args)
+		end, { nargs = 1 })
+
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = vim.api.nvim_create_augroup("tigh-latte-lsp", {
 				clear = false,
 			}),
 			buffer = bufnr,
 			callback = function()
-				for _, action in ipairs(opts.on_save_actions) do
-					local params = vim.lsp.util.make_range_params()
-					params.context = { only = { action } }
-					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
-					for cid, res in pairs(result or {}) do
-						for _, r in pairs(res.result or {}) do
-							if r.edit then
-								local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-								vim.lsp.util.apply_workspace_edit(r.edit, enc)
-							elseif r.command then
-								local command = type(r.command) == "table" and r.command or r
-								vim.lsp.buf.execute_command(command)
-							end
-						end
-					end
-				end
+				M.do_codeaction(opts.on_save_actions)
 				vim.lsp.buf.format({ async = false })
 			end,
 		})
