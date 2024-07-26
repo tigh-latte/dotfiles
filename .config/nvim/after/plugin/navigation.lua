@@ -16,3 +16,18 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz")
 
 -- Make <Esc> easier to reach on a macbook.
 vim.keymap.set({ "i", "v" }, "§", "<Esc>", { noremap = true })
+
+vim.keymap.set({ "i", "s" }, "<C-n>", function()
+	if not vim.snippet.active({ direction = 1 }) then
+		return "<C-n>"
+	end
+	vim.snippet.jump(1)
+end, { expr = true })
+
+
+vim.keymap.set({ "i", "s" }, "<C-p>", function()
+	if not vim.snippet.active({ direction = -1 }) then
+		return "<C-p>"
+	end
+	vim.snippet.jump(-1)
+end, { expr = true })
