@@ -1,4 +1,5 @@
 import = [
   "~/.config/alacritty/defaults.toml",
+  "~/.config/alacritty/keyboard.toml",
   "~/.config/alacritty/overrides.toml",
 ]

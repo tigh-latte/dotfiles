@@ -1,0 +1,129 @@
+[[keyboard.bindings]]
+  key   = "A"
+  mods  = "Control | Shift"
+  chars = "\u001b[65;6u"
+
+[[keyboard.bindings]]
+  key   = "B"
+  mods  = "Control | Shift"
+  chars = "\u001b[66;6u"
+
+[[keyboard.bindings]]
+  key   = "C"
+  mods  = "Control | Shift"
+  chars = "\u001b[67;6u"
+
+[[keyboard.bindings]]
+  key   = "D"
+  mods  = "Control | Shift"
+  chars = "\u001b[68;6u"
+
+[[keyboard.bindings]]
+  key   = "E"
+  mods  = "Control | Shift"
+  chars = "\u001b[69;6u"
+
+[[keyboard.bindings]]
+  key   = "F"
+  mods  = "Control | Shift"
+  chars = "\u001b[70;6u"
+
+[[keyboard.bindings]]
+  key   = "G"
+  mods  = "Control | Shift"
+  chars = "\u001b[71;6u"
+
+[[keyboard.bindings]]
+  key   = "H"
+  mods  = "Control | Shift"
+  chars = "\u001b[72;6u"
+
+[[keyboard.bindings]]
+  key   = "I"
+  mods  = "Control | Shift"
+  chars = "\u001b[73;6u"
+
+[[keyboard.bindings]]
+  key   = "J"
+  mods  = "Control | Shift"
+  chars = "\u001b[74;6u"
+
+[[keyboard.bindings]]
+  key   = "K"
+  mods  = "Control | Shift"
+  chars = "\u001b[75;6u"
+
+[[keyboard.bindings]]
+  key   = "L"
+  mods  = "Control | Shift"
+  chars = "\u001b[76;6u"
+
+[[keyboard.bindings]]
+  key   = "M"
+  mods  = "Control | Shift"
+  chars = "\u001b[77;6u"
+
+[[keyboard.bindings]]
+  key   = "N"
+  mods  = "Control | Shift"
+  chars = "\u001b[78;6u"
+
+[[keyboard.bindings]]
+  key   = "O"
+  mods  = "Control | Shift"
+  chars = "\u001b[79;6u"
+
+[[keyboard.bindings]]
+  key   = "P"
+  mods  = "Control | Shift"
+  chars = "\u001b[80;6u"
+
+[[keyboard.bindings]]
+  key   = "Q"
+  mods  = "Control | Shift"
+  chars = "\u001b[81;6u"
+
+[[keyboard.bindings]]
+  key   = "R"
+  mods  = "Control | Shift"
+  chars = "\u001b[82;6u"
+
+[[keyboard.bindings]]
+  key   = "S"
+  mods  = "Control | Shift"
+  chars = "\u001b[83;6u"
+
+[[keyboard.bindings]]
+  key   = "T"
+  mods  = "Control | Shift"
+  chars = "\u001b[84;6u"
+
+[[keyboard.bindings]]
+  key   = "U"
+  mods  = "Control | Shift"
+  chars = "\u001b[85;6u"
+
+[[keyboard.bindings]]
+  key   = "V"
+  mods  = "Control | Shift"
+  chars = "\u001b[86;6u"
+
+[[keyboard.bindings]]
+  key   = "W"
+  mods  = "Control | Shift"
+  chars = "\u001b[87;6u"
+
+[[keyboard.bindings]]
+  key   = "X"
+  mods  = "Control | Shift"
+  chars = "\u001b[88;6u"
+
+[[keyboard.bindings]]
+  key   = "Y"
+  mods  = "Control | Shift"
+  chars = "\u001b[89;6u"
+
+[[keyboard.bindings]]
+  key   = "Z"
+  mods  = "Control | Shift"
+  chars = "\u001b[90;6u"
