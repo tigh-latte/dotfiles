@@ -9,9 +9,9 @@
   chars = "\u001b[66;6u"
 
 [[keyboard.bindings]]
-  key   = "C"
-  mods  = "Control | Shift"
-  chars = "\u001b[67;6u"
+  key    = "C"
+  mods   = "Control | Shift"
+  action = "Copy"
 
 [[keyboard.bindings]]
   key   = "D"
@@ -104,9 +104,9 @@
   chars = "\u001b[85;6u"
 
 [[keyboard.bindings]]
-  key   = "V"
-  mods  = "Control | Shift"
-  chars = "\u001b[86;6u"
+  key    = "V"
+  mods   = "Control | Shift"
+  action = "Paste"
 
 [[keyboard.bindings]]
   key   = "W"
