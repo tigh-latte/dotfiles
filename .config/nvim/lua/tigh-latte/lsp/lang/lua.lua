@@ -28,8 +28,8 @@ require("lspconfig").lua_ls.setup({
 			workspace = {
 				checkThirdParty = false,
 				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					vim.env.VIMRUNTIME,
+					"${3rd}/luv/library",
 				},
 			},
 		},
