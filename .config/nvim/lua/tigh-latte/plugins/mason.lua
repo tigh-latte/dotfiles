@@ -1,5 +1,5 @@
 local function i(lang)
-	return require("tigh-latte.lsp.lang." .. lang)
+	return function() require("tigh-latte.lsp.lang." .. lang) end
 end
 
 return {
