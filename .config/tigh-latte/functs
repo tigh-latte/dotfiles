@@ -113,3 +113,8 @@ monitor() {
 }
 
 #command_not_found_handle
+
+sprint() {
+	local name="${1:-Tighearnán Carroll}"
+	jira sprint list --current -q "Assignee in (\"$name\")"
+}
