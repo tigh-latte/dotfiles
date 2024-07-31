@@ -40,7 +40,17 @@ return {
 				lsp_references = {
 					theme = "ivy",
 				},
+				live_grep = {
+					disable_devicons = true,
+				},
+				git_files = {
+					disable_devicons = true,
+				},
+				grep_string = {
+					disable_devicons = true,
+				},
 				find_files = {
+					disable_devicons = true,
 					hidden = true,
 					no_ignore = true,
 					sorting_strategy = "descending",

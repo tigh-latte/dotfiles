@@ -3,7 +3,7 @@ return {
 	config = function()
 		local oil = require("oil")
 		oil.setup({
-			columns = { "icon" },
+			columns = {},
 			skip_confirm_for_simple_edits = true,
 			-- constrain_cursor = "name",
 			constrain_cursor = "editable",
