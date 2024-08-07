@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 
+
 cmp.setup({
 	mapping = {
 		-- Completion window config strats
@@ -24,7 +25,6 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-
 		-- Confirm strats
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
@@ -35,6 +35,7 @@ cmp.setup({
 			select = true,
 		}),
 	},
+
 	sources = {
 		{ name = "calc" },
 		{ name = "path" },
@@ -43,6 +44,7 @@ cmp.setup({
 		{ name = "buffer",   keyword_length = 1 },
 		{ name = "vsnip",    keyword_length = 2 },
 	},
+
 	experimental = {
 		ghost_text = true,
 	},
@@ -60,21 +62,21 @@ cmp.setup({
 		fields = { "abbr", "kind", "menu" },
 		format = function(entry, item)
 			local s = ""
-
 			-- Make go import paths for third party libs shorter.
 			if vim.bo.ft == "go" and entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
 				-- TODO: Make this work for everything, not just github.
-				s = " " .. entry.completion_item.detail:gsub("github.com/", "gh://")
+				s = entry.completion_item.detail:gsub("github.com/", "gh://")
 			end
-			item.menu = ({
-				nvim_lsp = "λ" .. s,
-				nvim_lua = "vi" .. s,
-				vnip = ">" .. s,
-				buffer = "b" .. s,
-				path = "p" .. s,
-			})[entry.source.name]
-
-			return item
+			return vim.tbl_extend("force", item, {
+				menu = ({
+					nvim_lsp = "λ " .. s,
+					nvim_lua = "vi " .. s,
+					vsnip = "> " .. s,
+					buffer = "b " .. s,
+					path = "p " .. s,
+				})[entry.source.name],
+			})
 		end,
 	},
+
 })
