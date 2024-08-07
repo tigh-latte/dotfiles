@@ -53,7 +53,7 @@ return {
 							capabilities = capabilities,
 						}
 					end,
-					gopls = i("go"),
+					gopls = i("gopls"),
 					tsserver = i("typescript"),
 					pyright = i("python"),
 					lua_ls = i("lua"),
