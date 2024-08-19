@@ -2,7 +2,6 @@
 -- now. Am keeping just incase OS specific stuff is needed in the future.
 (setmetatable({
 	Darwin = function()
-		vim.keymap.set("n", "`", "<Nop>", { silent = true, remap = false })
 		vim.g.mapleader = " "
 	end,
 }, {
