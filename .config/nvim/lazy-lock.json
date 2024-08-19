@@ -35,6 +35,7 @@
   "qmk.nvim": { "branch": "main", "commit": "cfa6cecae362d23778cd97317d33ab12671e157c" },
   "showoff.nvim": { "branch": "main", "commit": "4a9170dc4432a4ec66d21d3f9f5bbcf8d5d156e1" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
+  "trouble.nvim": { "branch": "main", "commit": "6efc446226679fda0547c0fd6a7892fd5f5b15d8" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
   "vim-airline": { "branch": "master", "commit": "d25c049e617775eb2eb26c580e5dec591c94d480" },
   "vim-fugitive": { "branch": "master", "commit": "0444df68cd1cdabc7453d6bd84099458327e5513" },
