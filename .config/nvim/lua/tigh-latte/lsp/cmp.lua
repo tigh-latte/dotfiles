@@ -43,6 +43,7 @@ cmp.setup({
 		{ name = "nvim_lsp", keyword_length = 1 },
 		{ name = "buffer",   keyword_length = 1 },
 		{ name = "vsnip",    keyword_length = 2 },
+		{ name = "lazydev",  group_index = 0,   keyword_length = 1 },
 	},
 
 	experimental = {
