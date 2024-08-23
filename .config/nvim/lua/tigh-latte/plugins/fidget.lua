@@ -5,6 +5,7 @@ return {
 			notification = {
 				window = {
 					winblend = 0,
+					y_padding = 3,
 				},
 			},
 		})
