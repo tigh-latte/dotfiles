@@ -20,9 +20,15 @@ return {
 					dark_purple = "#ba68c8",
 
 					white = "#f8f8f2",
-					muted_white = "#c1c1c1",
-				},
+					muted_white = "#b1b1b1",
+					light_grey = "#7d899f",
 
+					fg = "#abb2bf",
+					bg0 = "#282c34",
+					bg1 = "#31353f",
+					bg2 = "#393f4a",
+					bg3 = "#3b3f4c",
+				},
 				highlights = {
 					CurSearch = { fg = "$bg0", bg = "$light_grey" },
 					IncSearch = { fg = "$bg0", bg = "$light_grey" },
