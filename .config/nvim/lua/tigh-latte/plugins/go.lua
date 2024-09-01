@@ -8,6 +8,9 @@ return {
 	config = function()
 		-- Disable all the lsp stuff as the LSP is already configured in this setup.
 		require("go").setup({
+			lsp_cfg = false,
+			lsp_document_formatting = false,
+			lsp_keymaps = false,
 			lsp_codelens = false,
 			lsp_inlay_hints = {
 				enable = false,
