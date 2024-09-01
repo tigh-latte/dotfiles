@@ -28,8 +28,7 @@ vim.opt.updatetime = 100
 vim.o.pumheight = 20
 vim.opt.scrolloff = 4
 
-vim.opt["guicursor"] = ""
-vim.api.nvim_create_user_command("Q", "q", { bang = true })
+vim.opt.guicursor = ""
 
 vim.opt.nrformats:append("alpha")
 require("tigh-latte.local")
