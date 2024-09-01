@@ -104,17 +104,19 @@ hex() {
 
 monitor() {
 	local _wh=$(tmux display -p '#{window_height}')
+	local _ww=$(tmux display -p '#{window_width}')
 	local _h=$(expr $_wh \* 45 / 100)
 
-	tmux split-window -h 'nvtop'
+	[ "$_ww" -gt 200 ] && tmux split-window -h 'nvtop'
+
 	tmux split-window -v
 	tmux resize-pane -y $_h
 	tmux send -t 1 'btop -p 0' ENTER
 }
 
-#command_not_found_handle
-
 sprint() {
 	local name="${1:-Tighearnán Carroll}"
 	jira sprint list --current -q "Assignee in (\"$name\")"
 }
+
+#command_not_found_handle
