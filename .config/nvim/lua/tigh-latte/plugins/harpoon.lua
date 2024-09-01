@@ -11,13 +11,18 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<C-S-a>", function() harpoon:list():add() end, {})
+		local h = function(idx)
+			vim.cmd.stopinsert()
+			harpoon:list():select(idx)
+		end
+
 		vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {})
-		vim.keymap.set("n", "<C-S-t>", function() harpoon:list():select(1) end, {})
-		vim.keymap.set("n", "<C-S-y>", function() harpoon:list():select(2) end, {})
-		vim.keymap.set("n", "<C-S-g>", function() harpoon:list():select(3) end, {})
-		vim.keymap.set("n", "<C-S-h>", function() harpoon:list():select(4) end, {})
-		vim.keymap.set("n", "<C-S-b>", function() harpoon:list():select(5) end, {})
-		vim.keymap.set("n", "<C-S-n>", function() harpoon:list():select(6) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-a>", function() harpoon:list():add() end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-t>", function() h(1) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-y>", function() h(2) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-g>", function() h(3) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-h>", function() h(4) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-b>", function() h(5) end, {})
+		vim.keymap.set({ "n", "i" }, "<C-S-n>", function() h(6) end, {})
 	end,
 }
