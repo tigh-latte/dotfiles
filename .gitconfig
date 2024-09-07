@@ -9,3 +9,13 @@
 	excludesfile = ~/.config/tigh-latte/gitignore
 [tag]
 	sort = v:refname
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/tigh/.ssh/id_ed25519.pub
+[gpg "ssh"]
+	allowedSignersFile = /home/tigh/.ssh/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
