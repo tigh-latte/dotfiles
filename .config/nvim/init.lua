@@ -36,5 +36,7 @@ vim.opt.scrolloff = 4
 
 vim.opt.guicursor = ""
 
+vim.opt.timeoutlen = 300
+
 vim.opt.nrformats:append("alpha")
 require("tigh-latte.local")
