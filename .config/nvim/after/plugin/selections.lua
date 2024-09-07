@@ -52,7 +52,7 @@ vim.keymap.set("v", "<M-k>", function() visual_move("up") end, {})
 vim.keymap.set("v", "<M-j>", function() visual_move("down") end, {})
 
 -- Execute lua selection.
-vim.keymap.set("v", "<Leader>l", ":'<,'>lua<CR>", { silent = true })
+vim.keymap.set("v", "<Leader>x", ":'<,'>lua<CR>", { silent = true })
 
 -- Execute lua file.
 vim.keymap.set("n", "<Leader>x", function()
