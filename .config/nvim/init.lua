@@ -14,7 +14,13 @@ vim.o.shiftwidth = 4
 -- [[ Vim Specific stuff ]]
 -- Tab/space highlighting
 vim.o.list = true
-vim.o.listchars = "tab:· ,extends:›,precedes:‹,nbsp:·,trail:·"
+vim.opt.listchars = {
+	tab = "· ",
+	trail = "·",
+	nbsp = "·",
+	extends = "›",
+	precedes = "‹",
+}
 
 -- Search
 vim.opt.ignorecase = true
