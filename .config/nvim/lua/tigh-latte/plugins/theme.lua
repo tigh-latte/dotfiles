@@ -13,9 +13,11 @@ return {
 				toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" },
 
 				colors = {
-					red = "#be354c",
+					red = "#af5f5a",
 					green = "#53892c",
-					muted_pink = "#e4adc4",
+					muted_pink = "#af87af",
+					yellow = "#d7af87",
+					cyan = "#5fafaf",
 
 					dark_purple = "#ba68c8",
 
@@ -25,7 +27,7 @@ return {
 
 					fg = "#abb2bf",
 					bg0 = "#282c34",
-					bg1 = "#31353f",
+					bg1 = "#3a3a3a",
 					bg2 = "#393f4a",
 					bg3 = "#3b3f4c",
 				},
