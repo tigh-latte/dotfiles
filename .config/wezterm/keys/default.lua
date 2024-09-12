@@ -1,5 +1,4 @@
-local wez = require("wezterm") --[[@as Wezterm]]
-local act = wez.action
+local act = require("wezterm") --[[@as Wezterm]].action
 
 local keys = {}
 
