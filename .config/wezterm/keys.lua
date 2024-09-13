@@ -22,6 +22,12 @@ return {
 			table.remove(keys, pos)
 		end
 
+		table.insert(keys, {
+			key = "^",
+			mods = "CTRL | SHIFT",
+			action = act.DisableDefaultAssignment,
+		})
+
 		config.keys = keys
 	end,
 }
