@@ -4,11 +4,11 @@ return {
 		local act = require("wezterm") --[[@as Wezterm]].action
 
 		-- Allow vim to handle CTRL+^
-		local keys = {
+		local keys = { {
 			key = "^",
 			mods = "CTRL | SHIFT",
 			action = act.DisableDefaultAssignment,
-		}
+		} }
 
 		local first_char = string.byte("a")
 		local first_ansii = 65

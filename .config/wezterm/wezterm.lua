@@ -31,5 +31,4 @@ setmetatable({
 	end,
 })[wezterm.target_triple]()
 
-
 return config
