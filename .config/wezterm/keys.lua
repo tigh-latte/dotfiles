@@ -4,11 +4,7 @@ return {
 		local act = require("wezterm") --[[@as Wezterm]].action
 
 		-- Allow vim to handle CTRL+^
-		local keys = { {
-			key = "^",
-			mods = "CTRL | SHIFT",
-			action = act.DisableDefaultAssignment,
-		} }
+		local keys = {}
 
 		local first_char = string.byte("a")
 		local first_ansii = 65
@@ -28,6 +24,12 @@ return {
 			local pos = string.byte(char) - first_char + 1
 			table.remove(keys, pos)
 		end
+
+		table.insert(keys, {
+			key = "^",
+			mods = "CTRL | SHIFT",
+			action = act.DisableDefaultAssignment,
+		})
 
 		config.keys = keys
 	end,
