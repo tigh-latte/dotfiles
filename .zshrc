@@ -1,6 +1,6 @@
 # Fire into tmux by default
 if command -v tmux &> /dev/null && [ -z "$TMUX"  ]; then
-	tmux attach -t default || tmux new -s default && exit
+	[ "$(tmux attach -t default || tmux new -s default)" = "[exited]" ] && exit
 fi
 ########################## ZSH Shell Default Stuff #####################################
 
