@@ -2,6 +2,7 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 
 local config = wezterm.config_builder()
 
+
 ---@param prefix string?
 local function configure(prefix)
 	for _, setting in pairs({

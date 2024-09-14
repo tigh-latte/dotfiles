@@ -1,3 +1,5 @@
+---@module 'wezterm'
+
 return {
 	---@param config Config
 	setup = function(config)
