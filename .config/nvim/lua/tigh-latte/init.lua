@@ -10,10 +10,10 @@
 	end,
 }))[vim.loop.os_uname().sysname]()
 
--- -- Set cwd to the root of a project, if any qualifier is found.
--- local root = vim.fs.root(0, { ".git" })
--- if root then
--- 	vim.fn.chdir(root)
--- end
+-- Set cwd to the root of a project, if any qualifier is found.
+local root = vim.fs.root(0, { ".git" })
+if root then
+	vim.fn.chdir(root)
+end
 
 require("tigh-latte.lazy")
