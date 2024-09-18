@@ -2,3 +2,5 @@ local
 !local/init.lua
 .config/alacritty/overrides.toml
 /tmux-client*.log
+
+/.config/wezterm/sshtargets
