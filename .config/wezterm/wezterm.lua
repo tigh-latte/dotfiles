@@ -1,17 +1,17 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
-
 local config = wezterm.config_builder()
-
 
 ---@param prefix string?
 local function configure(prefix)
+	if prefix then prefix = prefix .. "." end
 	for _, setting in pairs({
 		"colours",
 		"ui",
 		"keys",
 		"font",
+		"events",
 	}) do
-		if prefix then setting = table.concat({ prefix, setting }, ".") end
+		if prefix then setting = prefix .. setting end
 		local ok, module = pcall(require, setting)
 		if ok then module.setup(config) end
 	end
