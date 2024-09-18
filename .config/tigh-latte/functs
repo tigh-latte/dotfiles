@@ -1,5 +1,14 @@
 #!/bin/bash
 
+ssh() {
+	[ ! -z "$TMUX" ] && tmux rename-window "ssh $*"
+	command ssh $@
+	local exitcode=$?
+	[ ! -z "$TMUX" ] && tmux set-window-option automatic-rename "on" &>/dev/null
+
+	return $exitcode
+}
+
 nvm() {
 	source ~/.nvm/nvm.sh || echo "not installed" && return
 	source ~/.nvm/bash_completion
