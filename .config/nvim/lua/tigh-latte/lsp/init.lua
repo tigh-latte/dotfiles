@@ -56,15 +56,6 @@ function M.make_on_attach(opts)
 	opts = vim.tbl_extend("force", default_opts, opts)
 
 	return function(_, bufnr)
-		require("lsp_signature").on_attach({
-			bind = true,
-			doc_lines = 0,
-			handler_opts = {
-				border = "none",
-			},
-			hint_enable = false,
-		}, bufnr)
-
 		local kmopts = { buffer = bufnr, remap = false }
 
 		vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)

@@ -1,4 +1,4 @@
-require("lspconfig").tsserver.setup({
+require("lspconfig").ts_ls.setup({
 	on_attach = require("tigh-latte.lsp").make_on_attach({
 		on_save_actions = {
 			"source.sortImports.ts",

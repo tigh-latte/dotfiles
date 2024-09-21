@@ -20,6 +20,15 @@ return {
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
-		opts = {},
+		config = function()
+			require("lsp_signature").setup({
+				bind = false,
+				doc_lines = 0,
+				handler_opts = {
+					border = "none",
+				},
+				hint_enable = "false",
+			})
+		end,
 	},
 }

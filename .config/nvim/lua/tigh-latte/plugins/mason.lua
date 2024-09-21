@@ -38,7 +38,7 @@ return {
 				ensure_installed = {
 					"gopls",
 					"pyright",
-					"tsserver",
+					"ts_ls",
 					"bashls",
 					"lua_ls",
 					"htmx",
@@ -54,7 +54,7 @@ return {
 						}
 					end,
 					gopls = i("gopls"),
-					tsserver = i("typescript"),
+					ts_ls = i("typescript"),
 					pyright = i("python"),
 					lua_ls = i("lua"),
 					taplo = i("toml"),
