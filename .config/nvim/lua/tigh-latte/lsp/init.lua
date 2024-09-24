@@ -1,5 +1,7 @@
 local M = {}
 
+local mthds = require("vim.lsp.protocol").Methods
+
 ---@class tigh-latte.lsp.opts
 ---@field on_save_actions? string[]
 local default_opts = {
@@ -13,7 +15,7 @@ function M.do_codeaction(actions, params)
 	for _, action in ipairs(actions) do
 		params = params or vim.lsp.util.make_range_params()
 		params.context = { only = { action } }
-		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+		local result = vim.lsp.buf_request_sync(0, mthds.textDocument_codeAction, params)
 		for cid, res in pairs(result or {}) do
 			for _, r in pairs(res.result or {}) do
 				if r.edit then
@@ -89,7 +91,14 @@ function M.make_on_attach(opts)
 			buffer = bufnr,
 			callback = function()
 				M.do_codeaction(opts.on_save_actions)
-				vim.lsp.buf.format({ async = false })
+
+				local clients = vim.lsp.get_clients({
+					bufnr = bufnr,
+					method = mthds.textDocument_formatting,
+				})
+				if #clients > 0 then
+					vim.lsp.buf.format({ async = false })
+				end
 			end,
 		})
 	end
