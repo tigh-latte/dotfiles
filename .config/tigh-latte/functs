@@ -1,10 +1,25 @@
 #!/bin/bash
 
+__wezterm_set() {
+	key="$1"
+	val="$2"
+
+	[ -z "$key" ] && return
+
+	val=$(printf $val | base64)
+
+	osc="\033]1337;SetUserVar=${key}=${val}\007"
+
+	[ -n "$TMUX" ] && osc="\033Ptmux;\033${osc}\033\\"
+
+	# Redirect to stderr because git over ssh is wile.
+	printf "$osc" 1>&2
+}
+
 ssh() {
-	[ ! -z "$TMUX" ] && tmux rename-window "ssh $*"
 	command ssh $@
 	local exitcode=$?
-	[ ! -z "$TMUX" ] && tmux set-window-option automatic-rename "on" &>/dev/null
+	__wezterm_set ssh end
 
 	return $exitcode
 }

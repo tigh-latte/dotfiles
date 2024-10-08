@@ -12,7 +12,12 @@ local function build_override(overrides, target)
 	local io = require("io")
 	local target_png = wezterm.config_dir .. "/sshtargets/" .. target .. ".png"
 	local f = io.open(target_png)
-	if f then f:close() else return end
+	if not f then
+		overrides.window_background_gradient = nil
+		overrides.background = nil
+		return
+	end
+	f:close()
 
 	overrides.window_background_gradient = {
 		colors = {
@@ -38,14 +43,13 @@ end
 
 return {
 	setup = function(config)
-		wezterm.on("update-status", function(window, pane)
+		wezterm.on("user-var-changed", function(window, _, name, value)
 			local overrides = window:get_config_overrides() or {}
 			overrides.colors = overrides.colors or config.colors
 
-			local title = pane:get_title()
-			local ssh_target = title:match("ssh.-@(%w+)")
+			if name ~= "ssh" then return end
 
-			build_override(overrides, ssh_target)
+			build_override(overrides, value)
 
 			window:set_config_overrides(overrides)
 		end)
