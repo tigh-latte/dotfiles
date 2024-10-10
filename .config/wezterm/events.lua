@@ -43,11 +43,11 @@ end
 
 return {
 	setup = function(config)
-		wezterm.on("user-var-changed", function(window, _, name, value)
+		wezterm.on("user-var-changed", function(window, _, key, value)
 			local overrides = window:get_config_overrides() or {}
 			overrides.colors = overrides.colors or config.colors
 
-			if name ~= "ssh" then return end
+			if key ~= "ssh" then return end
 
 			build_override(overrides, value)
 
