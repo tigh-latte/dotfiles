@@ -1,8 +1,8 @@
----@module 'wezterm'
-
 return {
 	---@param config Config
 	setup = function(config)
+		---@module 'wezterm'
+
 		config.term = "xterm-256color"
 		config.colors = {
 			ansi = {

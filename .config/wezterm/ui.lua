@@ -1,8 +1,8 @@
----@module 'wezterm'
-
 return {
 	---@param config Config
 	setup = function(config)
+		---@module 'wezterm'
+
 		config.enable_tab_bar = false
 		config.enable_scroll_bar = false
 		config.window_decorations = "NONE"
