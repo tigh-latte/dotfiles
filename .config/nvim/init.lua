@@ -38,5 +38,7 @@ vim.opt.guicursor = ""
 
 vim.opt.timeoutlen = 300
 
+vim.opt.signcolumn = "number"
+
 vim.opt.nrformats:append("alpha")
 require("tigh-latte.local")
