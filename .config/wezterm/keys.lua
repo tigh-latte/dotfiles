@@ -24,11 +24,26 @@ return {
 			local pos = string.byte(char) - first_char + 1
 			table.remove(keys, pos)
 		end
-
 		table.insert(keys, {
 			key = "^",
 			mods = "CTRL | SHIFT",
 			action = act.DisableDefaultAssignment,
+		})
+
+		table.insert(keys, {
+			key = ",",
+			mods = "CTRL",
+			action = act.SendString("\x1b[" .. tostring(string.byte(",")) .. ";6u"),
+		})
+		table.insert(keys, {
+			key = "(",
+			mods = "CTRL | SHIFT",
+			action = act.SendString("\x1b[" .. tostring(string.byte("(")) .. ";6u"),
+		})
+		table.insert(keys, {
+			key = ")",
+			mods = "CTRL | SHIFT",
+			action = act.SendString("\x1b[" .. tostring(string.byte(")")) .. ";6u"),
 		})
 
 		config.keys = keys
