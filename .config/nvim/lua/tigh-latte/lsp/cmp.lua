@@ -1,38 +1,40 @@
 local cmp = require("cmp")
-
+local mapping = cmp.mapping
 
 cmp.setup({
 	mapping = {
 		-- Completion window config strats
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<Down>"] = cmp.mapping.select_next_item(),
-		["<Up>"] = cmp.mapping.select_prev_item(),
-		["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<C-p>"] = mapping.select_prev_item(),
+		["<C-n>"] = mapping.select_next_item(),
+		["<Down>"] = mapping.select_next_item(),
+		["<Up>"] = mapping.select_prev_item(),
+		["<S-Tab>"] = mapping.select_prev_item(),
+		["<Tab>"] = mapping(function(fallback)
+			if not cmp.visible() then
+				fallback()
+				return
+			end
+			if #cmp.get_entries() ~= 1 then
+				cmp.select_next_item()
+				return
+			end
 			-- If only one suggestion is available, tab will confirm it rather than
 			-- select it.
+			cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+		end),
+		["<C-Space>"] = mapping(function()
 			if cmp.visible() then
-				if #cmp.get_entries() == 1 then
-					cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
-				else
-					cmp.select_next_item()
-				end
+				cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
 			else
-				fallback()
+				cmp.complete()
 			end
 		end),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-d>"] = mapping.scroll_docs(6),
+		["<C-u>"] = mapping.scroll_docs(-6),
 		-- Confirm strats
-		["<CR>"] = cmp.mapping.confirm({
+		["<CR>"] = mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = false,
-		}),
-		["<Right>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
-			select = true,
 		}),
 	},
 
