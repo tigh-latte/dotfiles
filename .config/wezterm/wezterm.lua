@@ -32,4 +32,11 @@ setmetatable({
 	end,
 })[wezterm.target_triple]()
 
+for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
+	if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
+		config.webgpu_preferred_adapter = gpu
+		break
+	end
+end
+
 return config

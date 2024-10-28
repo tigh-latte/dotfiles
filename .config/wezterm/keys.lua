@@ -46,6 +46,12 @@ return {
 			action = act.SendString("\x1b[" .. tostring(string.byte(")")) .. ";6u"),
 		})
 
+		table.insert(keys, {
+			key = "L",
+			mods = "ALT | SHIFT",
+			action = act.ShowDebugOverlay,
+		})
+
 		config.keys = keys
 	end,
 }
