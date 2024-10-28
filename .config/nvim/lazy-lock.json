@@ -41,5 +41,5 @@
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
   "vim-sleuth": { "branch": "master", "commit": "be69bff86754b1aa5adcbb527d7fcd1635a84080" },
   "vim-vsnip": { "branch": "master", "commit": "02a8e79295c9733434aab4e0e2b8c4b7cea9f3a9" },
-  "wezterm-types": { "branch": "main", "commit": "5d0c1dee60e7d7f808b2cbf4ff16a134c9686f94" }
+  "wezterm-types": { "branch": "main", "commit": "97414a34b859167de063ee6f66c38c4e9a23c6af" }
 }
