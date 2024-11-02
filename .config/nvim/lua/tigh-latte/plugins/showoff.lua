@@ -4,9 +4,7 @@ return {
 		require("showoff").setup({
 			input = {
 				modes = { "n", "no", "v", "V", "" },
-				exclude_keys = {
-					[":"] = true,
-				},
+				exclude_keys = { ":" },
 			},
 			window = {
 				enable = true,
