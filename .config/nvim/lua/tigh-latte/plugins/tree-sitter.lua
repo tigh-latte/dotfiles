@@ -1,5 +1,6 @@
 return {
 	{
+		dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
 		"nvim-treesitter/nvim-treesitter",
 		opts = { run = ":TSUpdate" },
 		config = function()
@@ -22,6 +23,12 @@ return {
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = true,
+				},
+				refactor = {
+					highlight_definitions = {
+						enable = true,
+						clear_on_cursor_move = false,
+					},
 				},
 			})
 

@@ -27,6 +27,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "dd329912c8d446240584a2dbcd3802af3a19105a" },
   "nvim-treesitter": { "branch": "master", "commit": "6511cd984ab4b21e28f83af488f38dc89c3b0586" },
   "nvim-treesitter-context": { "branch": "master", "commit": "3d5390c49e3f8fe457b376df2a49aa39d75b7911" },
+  "nvim-treesitter-refactor": { "branch": "master", "commit": "d8b74fa87afc6a1e97b18da23e762efb032dc270" },
   "oil.nvim": { "branch": "master", "commit": "1360be5fda9c67338331abfcd80de2afbb395bcd" },
   "onedark.nvim": { "branch": "master", "commit": "fae34f7c635797f4bf62fb00e7d0516efa8abe37" },
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
