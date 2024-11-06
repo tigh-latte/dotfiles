@@ -1,7 +1,7 @@
 return {
 	---@param config Config
 	setup = function(config)
-		---@module 'wezterm'
+		local wezterm = require("wezterm") --[[@as Wezterm]]
 
 		config.enable_tab_bar = false
 		config.enable_scroll_bar = false
@@ -30,5 +30,9 @@ return {
 		-- initial rows like Alacritty.
 		config.initial_rows = 34
 		config.initial_cols = 114
+
+		if wezterm:hostname() == "desktop" then
+			config.max_fps = 144
+		end
 	end,
 }
