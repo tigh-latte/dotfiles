@@ -5,7 +5,7 @@ require("lspconfig").gopls.setup({
 	capabilities = vim.tbl_extend("force",
 		{},
 		vim.lsp.protocol.make_client_capabilities(),
-		require("cmp_nvim_lsp").default_capabilities({ snippetSupport = false })
+		require("cmp_nvim_lsp").default_capabilities()
 	),
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 	root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
