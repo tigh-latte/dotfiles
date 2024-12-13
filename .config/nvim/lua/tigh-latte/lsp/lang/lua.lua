@@ -22,16 +22,6 @@ require("lspconfig").lua_ls.setup({
 					quote_style = "double",
 				},
 			},
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					"${3rd}/luv/library",
-				},
-			},
 		},
 	},
 })

@@ -32,7 +32,7 @@ return {
 		config.initial_cols = 114
 
 		if wezterm:hostname() == "desktop" then
-			config.max_fps = 144
+			config.max_fps = 160
 		end
 	end,
 }

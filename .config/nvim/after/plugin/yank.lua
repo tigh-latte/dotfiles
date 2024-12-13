@@ -9,6 +9,9 @@ for _, cmd in ipairs({ "p", "d", "c", "s" }) do
 	vim.keymap.set({ "n", "v" }, "<Leader>" .. CMD, '"_' .. CMD, {})
 end
 
+vim.keymap.set("n", "yp", "yyp", {})
+vim.keymap.set("n", "yc", "yygccp", { remap = true })
+
 vim.keymap.set("i", "<C-r><C-r>", "<C-r>+", {})
 
 -- finally on this bandwagon too

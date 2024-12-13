@@ -5,7 +5,6 @@ return {
 		oil.setup({
 			columns = {},
 			skip_confirm_for_simple_edits = true,
-			-- constrain_cursor = "name",
 			constrain_cursor = "editable",
 			use_default_keymaps = false,
 			view_options = {
@@ -41,6 +40,18 @@ return {
 		})
 
 		vim.keymap.set({ "n", "v" }, "<Leader>o", function() oil.toggle_float() end, {})
-		vim.keymap.set({ "n", "v" }, "<Leader>O", function() oil.toggle_float(vim.loop.cwd()) end, {})
+		vim.keymap.set({ "n", "v" }, "<Leader>O", function() oil.toggle_float((vim.uv or vim.loop).cwd()) end, {})
+
+		local augroup = vim.api.nvim_create_augroup("tigh-oil", { clear = true })
+		vim.api.nvim_create_autocmd("BufEnter", {
+			group = augroup,
+			callback = function(ev)
+				if vim.bo.ft ~= "oil" then return end
+				vim.keymap.set("n", "<C-p>", function()
+					require("oil").close()
+					require("telescope.builtin").find_files()
+				end, { buffer = ev.buf, remap = false })
+			end,
+		})
 	end,
 }

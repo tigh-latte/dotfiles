@@ -10,7 +10,6 @@ vim.keymap.set("n", "<Leader>he", require("telescope.builtin").help_tags, { sile
 
 vim.keymap.set("n", "gs", "<Nop>", { silent = true, remap = false })
 
-unpack = table.unpack or unpack
 
 ---@param target string
 ---@param direction "forward"|"backward"
@@ -19,6 +18,8 @@ local function split(target, direction)
 	assert(target:len() == 1)
 
 	return function()
+		unpack = table.unpack or unpack
+
 		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 		local pchar = vim.api.nvim_buf_get_text(0, row - 1, col, row - 1, col + 1, {})[1]
 

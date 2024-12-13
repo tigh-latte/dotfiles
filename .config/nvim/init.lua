@@ -1,4 +1,4 @@
-require("tigh-latte")
+require("tigh-latte").setup()
 
 -- Basic text editor
 vim.o.background = ""
@@ -23,15 +23,15 @@ vim.opt.listchars = {
 }
 
 -- Search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+vim.o.ic = true
+vim.o.scs = true
 
 -- Save file persistence
-vim.opt.undofile = true
+vim.o.udf = true
 vim.g.swapfile = true
-vim.opt.updatetime = 100
+vim.o.ut = 100
 
-vim.o.pumheight = 20
+vim.o.ph = 20
 vim.opt.scrolloff = 4
 
 vim.opt.guicursor = ""
