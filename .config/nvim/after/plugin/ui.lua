@@ -18,7 +18,7 @@ vim.ui.open = (function(fn) ---@param fn fun(string)
 		---@param ... string[]
 		---@return boolean
 		local function hierarchy(n, ...)
-			for _, parent in ipairs(...) do
+			for _, parent in ipairs({ ... }) do
 				local c = n:parent()
 				if c == nil or c:type() ~= parent then
 					return false
@@ -28,7 +28,7 @@ vim.ui.open = (function(fn) ---@param fn fun(string)
 			return true
 		end
 
-		if not hierarchy(node, { "string", "field", "table_constructor" }) then
+		if not hierarchy(node, "string", "field", "table_constructor") then
 			return fn(path)
 		end
 
