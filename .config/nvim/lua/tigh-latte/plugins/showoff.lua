@@ -1,6 +1,5 @@
 return {
-	-- "tigh-latte/showoff.nvim",
-	dir = "~/Dev/git.tigh.dev/tigh-latte/showoff.nvim",
+	"tigh-latte/showoff.nvim",
 	config = function()
 		require("showoff").setup({
 			input = {
