@@ -1,3 +1,6 @@
 ;; extends
 
-(word) @none
+(command
+  name: (command_name
+    (word) @none))
+
