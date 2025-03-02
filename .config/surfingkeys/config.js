@@ -1,11 +1,9 @@
-const { map, unmap, mapkey } = api
+const { map, unmap, mapkey, Normal } = api
 
-mapkey('H', 'Go Back', function() {
-  history.back()
-})
-mapkey('L', 'Go Forward', function() {
-  history.forward()
-})
+mapkey('H', 'Go Back', () => { history.back() })
+mapkey('L', 'Go Forward', () => { history.forward() })
+mapkey('<Ctrl-d>', "Scroll down", () => { Normal.scroll("pageDown") })
+mapkey('<Ctrl-u>', "Scroll up", () => { Normal.scroll("pageUp") })
 
 // an example to remove mapkey `Ctrl-i`
 map('J', 'R')
@@ -15,11 +13,12 @@ map('>', '>>')
 
 unmap('R')
 unmap('E')
+unmap('d')
+unmap('u')
 
 settings.scrollStepSize = 100
 settings.hintAlign = "left"
 settings.defaultSearchEngine = "d"
-
 // set theme
 settings.theme = `
 .sk_theme {
