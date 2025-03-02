@@ -30,6 +30,7 @@ return {
 			)
 
 			require("mason-lspconfig").setup({
+				automatic_installation = false,
 				ensure_installed = {
 					"gopls",
 					"pyright",
@@ -39,6 +40,7 @@ return {
 					"htmx",
 					"html",
 					"yamlls",
+					"rust_analyzer",
 					"cucumber_language_server",
 				},
 
@@ -199,7 +201,7 @@ return {
 							settings = {
 								cucumber = {
 									features = { "**/*.feature" },
-									glue = { "**/steps.go" },
+									glue = { "**/steps*.go" },
 								},
 							},
 						})
