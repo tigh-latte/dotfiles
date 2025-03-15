@@ -56,6 +56,12 @@ vim.keymap.set("v", ")", function() return visual_regrow("grow") end, { expr = t
 -- Shrink the top and bottom lines inward by one line each.
 vim.keymap.set("v", "(", function() return visual_regrow("shrink") end, { expr = true })
 
+-- Grow the top and bottom lines outward by one line each.
+vim.keymap.set("v", "+", function() return visual_regrow("grow") end, { expr = true })
+
+-- Shrink the top and bottom lines inward by one line each.
+vim.keymap.set("v", "-", function() return visual_regrow("shrink") end, { expr = true })
+
 -- Move the selection upwards.
 vim.keymap.set("v", "<M-k>", function() return visual_move("up") end, { expr = true })
 
