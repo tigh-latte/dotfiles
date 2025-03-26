@@ -8,6 +8,7 @@ mapkey('<Ctrl-u>', "Scroll up", () => { Normal.scroll("pageUp") })
 // an example to remove mapkey `Ctrl-i`
 map('J', 'R')
 map('K', 'E')
+map('F', 'gf')
 map('<', '<<')
 map('>', '>>')
 
