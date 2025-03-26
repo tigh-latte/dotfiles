@@ -62,6 +62,13 @@ function M.make_on_attach(opts)
 	end
 	opts = vim.tbl_extend("force", default_opts, opts)
 
+	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
+		M.extend_handler(mthd, function(handler)
+			handler()
+			vim.api.nvim_feedkeys("zz", "n", false)
+		end)
+	end
+
 	return function(_, bufnr)
 		local kmopts = { buffer = bufnr, remap = false }
 
@@ -107,6 +114,17 @@ function M.make_on_attach(opts)
 				end
 			end,
 		})
+	end
+end
+
+---@param method string
+---@param fn fun(handler: fun())
+function M.extend_handler(method, fn)
+	local handler = require("vim.lsp.handlers")[method]
+	require("vim.lsp.handlers")[method] = function(err, result, context, config)
+		fn(function()
+			handler(err, result, context, config)
+		end)
 	end
 end
 
