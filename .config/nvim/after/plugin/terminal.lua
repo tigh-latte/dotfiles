@@ -27,7 +27,9 @@ local augroup = vim.api.nvim_create_augroup("TerminalHelpers", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = augroup,
 	pattern = "term://*",
-	callback = function() vim.cmd("startinsert") end,
+	callback = function()
+		vim.cmd("startinsert")
+	end,
 })
 
 -- We don't want any numbers in our terminal.

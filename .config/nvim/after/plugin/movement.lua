@@ -10,7 +10,6 @@ vim.keymap.set("n", "<Leader>he", require("telescope.builtin").help_tags, { sile
 
 vim.keymap.set("n", "gs", "<Nop>", { silent = true, remap = false })
 
-
 ---@param target string
 ---@param direction "forward"|"backward"
 ---@return function

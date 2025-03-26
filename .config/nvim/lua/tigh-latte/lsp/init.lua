@@ -66,6 +66,7 @@ function M.make_on_attach(opts)
 		local kmopts = { buffer = bufnr, remap = false }
 
 		vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)
+		vim.keymap.set("n", "<Leader>ct", vim.lsp.buf.type_definition, kmopts)
 
 		local telescope = require("telescope.builtin")
 
