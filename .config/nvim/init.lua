@@ -1,7 +1,7 @@
 require("tigh-latte").setup()
 
 -- Basic text editor
-vim.o.background = ""
+vim.o.background = "dark"
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.encoding = "utf-8"
