@@ -8,22 +8,30 @@ local default_opts = {
 	on_save_actions = {},
 }
 
+---@param bufnr integer
 ---@param actions string|string[]
----@param params? lsp.TextDocumentPositionParams
-function M.do_codeaction(actions, params)
+function M.do_codeaction(bufnr, actions)
+	bufnr = bufnr or 0
 	actions = type(actions) == "table" and actions or { actions }
+
 	for _, action in ipairs(actions) do
-		params = params or vim.lsp.util.make_range_params()
-		params.context = { only = { action } }
-		local result = vim.lsp.buf_request_sync(0, mthds.textDocument_codeAction, params)
+		local params = function(client)
+			local p = vim.lsp.util.make_range_params(0, client.offset_encoding)
+			p.context = { only = { action } }
+			return p
+		end
+
+		---@diagnostic disable-next-line: param-type-mismatch
+		local result = vim.lsp.buf_request_sync(bufnr, mthds.textDocument_codeAction, params)
 		for cid, res in pairs(result or {}) do
 			for _, r in pairs(res.result or {}) do
+				local client = (vim.lsp.get_client_by_id(cid) or {})
 				if r.edit then
-					local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+					local enc = client.offset_encoding or "utf-16"
 					vim.lsp.util.apply_workspace_edit(r.edit, enc)
 				elseif r.command then
 					local command = type(r.command) == "table" and r.command or r
-					vim.lsp.buf.execute_command(command)
+					client:exec_cmd(command)
 				end
 			end
 		end
@@ -32,8 +40,6 @@ end
 
 function M.setup()
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
-
-	require("tigh-latte.lsp.cmp")
 
 	vim.diagnostic.config({
 		virtual_text = {
@@ -78,8 +84,8 @@ function M.make_on_attach(opts)
 		vim.keymap.set("n", "<Leader>cref", telescope.lsp_references, kmopts)
 		vim.keymap.set("n", "<Leader>/", telescope.lsp_dynamic_workspace_symbols, kmopts)
 		vim.keymap.set("n", "<Leader>cren", vim.lsp.buf.rename, kmopts)
-		vim.keymap.set("n", "<Leader>cp", vim.diagnostic.goto_prev, kmopts)
-		vim.keymap.set("n", "<Leader>cn", vim.diagnostic.goto_next, kmopts)
+		vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.jump({ count = -1, float = true }) end, kmopts)
+		vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.jump({ count = 1, float = true }) end, kmopts)
 		vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
 		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 		vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
@@ -91,7 +97,7 @@ function M.make_on_attach(opts)
 
 		vim.api.nvim_create_user_command("LspCodeAction", function(args)
 			if args.args == "" then return end
-			M.do_codeaction(args.args)
+			M.do_codeaction(0, args.args)
 		end, { nargs = 1 })
 
 		vim.api.nvim_create_autocmd("BufWritePre", {
@@ -99,8 +105,8 @@ function M.make_on_attach(opts)
 				clear = false,
 			}),
 			buffer = bufnr,
-			callback = function()
-				M.do_codeaction(opts.on_save_actions)
+			callback = function(ev)
+				M.do_codeaction(ev.buf, opts.on_save_actions)
 
 				local clients = vim.lsp.get_clients({
 					bufnr = bufnr,

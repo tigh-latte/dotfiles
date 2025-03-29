@@ -32,13 +32,13 @@ vim.g.swapfile = true
 vim.o.ut = 100
 
 vim.o.ph = 20
-vim.opt.scrolloff = 4
+vim.o.scrolloff = 4
 
-vim.opt.guicursor = ""
+vim.o.guicursor = ""
 
-vim.opt.timeoutlen = 300
+vim.o.timeoutlen = 300
 
-vim.opt.signcolumn = "number"
+vim.o.signcolumn = "number"
 
 vim.opt.nrformats:append("alpha")
 require("tigh-latte.local")
