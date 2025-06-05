@@ -74,10 +74,12 @@ return {
 		vim.keymap.set("n", "<C-P>", builtin.find_files, { silent = true })
 		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true }) -- consider a handier binding.
 		vim.keymap.set("n", "<Leader>cb", builtin.git_branches, { silent = true })
+		vim.keymap.set("n", "<Leader>he", require("telescope.builtin").help_tags, { silent = true })
 
 		local augroup = vim.api.nvim_create_augroup("tigh-telescope", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			group = augroup,
+			nested = true,
 			callback = vim.schedule_wrap(function(ev)
 				if vim.bo.ft ~= "TelescopePrompt" then return end
 

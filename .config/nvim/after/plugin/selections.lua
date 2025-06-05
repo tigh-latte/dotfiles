@@ -8,8 +8,8 @@ local function visual_regrow(action)
 	-- Change to Visual Line mode if in Visual. Consider going this for
 	-- Visual Block mode as well.
 	local mode = vim.api.nvim_get_mode().mode
-	-- vim.api.nvim_input((mode == "v" and "<S-v>" or ""))
-	vim.api.nvim_feedkeys((mode == "v" and "<S-v>" or ""), "n", false)
+	vim.api.nvim_input((mode == "v" and "<S-v>" or ""))
+	-- vim.api.nvim_feedkeys((mode == "v" and "<S-v>" or ""), "n", false)
 
 	local npos = vim.fn.getpos("v")[2]
 	local cpos = vim.api.nvim_win_get_cursor(0)[1]
@@ -49,12 +49,6 @@ local function visual_move(direction)
 	return ({ up = "koko", down = "jojo" })[direction]
 end
 
-
--- Grow the top and bottom lines outward by one line each.
-vim.keymap.set("v", ")", function() return visual_regrow("grow") end, { expr = true })
-
--- Shrink the top and bottom lines inward by one line each.
-vim.keymap.set("v", "(", function() return visual_regrow("shrink") end, { expr = true })
 
 -- Grow the top and bottom lines outward by one line each.
 vim.keymap.set("v", "+", function() return visual_regrow("grow") end, { expr = true })

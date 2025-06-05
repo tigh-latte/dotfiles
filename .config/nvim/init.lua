@@ -27,7 +27,7 @@ vim.o.ic = true
 vim.o.scs = true
 
 -- Save file persistence
-vim.o.udf = true
+vim.o.undofile = true
 vim.g.swapfile = true
 vim.o.ut = 100
 
@@ -41,4 +41,9 @@ vim.o.timeoutlen = 300
 vim.o.signcolumn = "number"
 
 vim.opt.nrformats:append("alpha")
+
+vim.o.showmode = false
+
 require("tigh-latte.local")
+
+vim.cmd.colorscheme("tigh")

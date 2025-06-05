@@ -44,6 +44,7 @@ return {
 
 		local augroup = vim.api.nvim_create_augroup("tigh-oil", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
+			nested = true,
 			group = augroup,
 			callback = function(ev)
 				if vim.bo.ft ~= "oil" then return end

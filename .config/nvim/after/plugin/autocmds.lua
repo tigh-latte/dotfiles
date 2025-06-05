@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "TabLeave", "WinLeave" }, {
 })
 vim.api.nvim_create_autocmd({ "BufEnter", "TabEnter", "WinEnter" }, {
 	group = augroup,
+	nested = true,
 	pattern = "*",
 	callback = function()
 		if ftnolines[vim.bo.buftype] then return end
