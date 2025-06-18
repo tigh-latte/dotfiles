@@ -27,6 +27,7 @@ return {
 		local augroup = vim.api.nvim_create_augroup("tigh-lazy", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			group = augroup,
+			nested = true,
 			callback = vim.schedule_wrap(function(ev)
 				if vim.bo.ft ~= "lazy" then return end
 				vim.keymap.set("n", "<C-p>", function()

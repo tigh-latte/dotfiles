@@ -17,11 +17,11 @@ function M.do_codeaction(bufnr, actions)
 	for _, action in ipairs(actions) do
 		local params = function(client)
 			local p = vim.lsp.util.make_range_params(0, client.offset_encoding)
+			---@diagnostic disable-next-line: inject-field
 			p.context = { only = { action } }
 			return p
 		end
 
-		---@diagnostic disable-next-line: param-type-mismatch
 		local result = vim.lsp.buf_request_sync(bufnr, mthds.textDocument_codeAction, params)
 		for cid, res in pairs(result or {}) do
 			for _, r in pairs(res.result or {}) do
@@ -40,6 +40,7 @@ end
 
 function M.setup()
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
+
 
 	vim.diagnostic.config({
 		virtual_text = {

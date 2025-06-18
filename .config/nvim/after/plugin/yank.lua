@@ -11,6 +11,8 @@ end
 
 vim.keymap.set("n", "yp", "yyp", {})
 vim.keymap.set("n", "yc", "yygccp", { remap = true })
+vim.keymap.set("v", "<Leader><Leader>y", "ygvgcgv<ESC>p", { remap = true })
+vim.keymap.set("v", "<Leader><Leader>Y", "ygvgcP", { remap = true })
 
 vim.keymap.set("i", "<C-r><C-r>", "<C-r>+", {})
 
