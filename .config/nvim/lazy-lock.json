@@ -6,7 +6,7 @@
   "cmp-nvim-lua": { "branch": "main", "commit": "f12408bdb54c39c23e67cab726264c10db33ada8" },
   "cmp-path": { "branch": "main", "commit": "c6635aae33a50d6010bf1aa756ac2398a2d54c32" },
   "cmp-vsnip": { "branch": "main", "commit": "989a8a73c44e926199bfd05fa7a516d51f2d2752" },
-  "coke.nvim": { "branch": "main", "commit": "26169a3c189b71576b2de3bedf19036c7af8e334" },
+  "coke.nvim": { "branch": "main", "commit": "eb442bfa7d803bfbbf948c7e5cc1ea3131cacade" },
   "fidget.nvim": { "branch": "main", "commit": "d9ba6b7bfe29b3119a610892af67602641da778e" },
   "go.nvim": { "branch": "master", "commit": "37ec4d9be3edef64b725bfe29684e1fe019873bc" },
   "gp.nvim": { "branch": "main", "commit": "b32327fe4ee65d24acbab0f645747c113eb935c0" },
