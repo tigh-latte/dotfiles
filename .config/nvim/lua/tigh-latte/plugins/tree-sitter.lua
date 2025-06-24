@@ -11,6 +11,7 @@ return {
 					"vim",
 					"vimdoc",
 					"query",
+					"printf",
 					"typescript",
 					"python",
 					"make",
