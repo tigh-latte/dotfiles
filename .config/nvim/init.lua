@@ -46,4 +46,4 @@ vim.o.showmode = false
 
 require("tigh-latte.local")
 
-vim.cmd.colorscheme("tigh")
+vim.cmd.colorscheme(os.getenv("NVIM_THEME") or "tigh")

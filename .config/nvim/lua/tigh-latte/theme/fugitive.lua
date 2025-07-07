@@ -9,7 +9,6 @@ return {
 	fugitiveStagedSection = { fg = palette.green },
 	fugitiveStagedHeading = { fg = palette.fg },
 
-
 	fugitiveUnstagedSection = { fg = palette.red },
 	fugitiveUnstagedHeading = { fg = palette.fg },
 

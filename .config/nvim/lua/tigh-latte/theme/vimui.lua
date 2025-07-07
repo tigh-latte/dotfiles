@@ -12,6 +12,7 @@ return {
 
 	Search = { fg = palette.bg0, bg = palette.muted_white },
 
+	Statement = { fg = palette.fg, bold = false },
 	Terminal = { fg = palette.fg, bg = "none" },
 	EndOfBuffer = { fg = palette.bg0, bg = "none" },
 	FoldColumn = { fg = palette.fg, bg = "none" },
@@ -54,6 +55,7 @@ return {
 	SpecialChar = { fg = palette.cyan },
 	SpecialKey = { fg = palette.grey },
 	Structure = { fg = palette.fg },
+	Type = { fg = palette.green },
 	Typedef = { fg = palette.fg },
 	Function = { fg = palette.fg },
 	ArielObject = { fg = palette.fg },
