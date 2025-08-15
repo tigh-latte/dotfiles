@@ -58,8 +58,8 @@ return {
 					[""] = { txt = "V-BLOCK", hl = { bg = "#d19a66" } },
 					s = { txt = "S", hl = { bg = "#d19a66" } },
 					S = { txt = "S", hl = { bg = "#d19a66" } },
-					nt = { txt = "t", hl = { bg = "#53892c" } },
-					t = { txt = "t", hl = { bg = "#53892c" } },
+					nt = { txt = "t", hl = { bg = "#d7af87" } },
+					t = { txt = "t", hl = { bg = "#73b8f1" } },
 				},
 			})
 		end,
