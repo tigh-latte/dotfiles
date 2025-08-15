@@ -159,9 +159,8 @@ return {
 							single_file_support = true,
 							settings = {
 								Lua = {
-									runtime = {
-										version = "LuaJIT",
-										path = vim.split(package.path, ";"),
+									workspace = {
+										library = vim.api.nvim_get_runtime_file("", true),
 									},
 									format = {
 										enable = true,
