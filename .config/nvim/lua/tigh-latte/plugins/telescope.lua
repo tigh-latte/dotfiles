@@ -40,6 +40,7 @@ return {
 					"^main$",
 					".git/",
 					".venv/",
+					"cdk.out/",
 				},
 				vimgrep_arguments = vimgrep_arguments,
 			},
