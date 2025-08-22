@@ -69,6 +69,8 @@ return {
 	SpellCap = { fg = palette.none, undercurl = true, sp = palette.yellow },
 	SpellLocal = { fg = palette.none, undercurl = true, sp = palette.blue },
 	SpellRare = { fg = palette.none, undercurl = true, sp = palette.purple },
+	StatusLine = { fg = palette.fg, bg = "none" },
+	StatusLineTerm = { fg = palette.fg, bg = "none" },
 	StatusLineNC = { fg = palette.grey, bg = palette.bg },
 	StatusLineTermNC = { fg = palette.grey, bg = palette.bg },
 	TabLine = { fg = palette.fg, bg = palette.bg1 },

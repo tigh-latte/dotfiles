@@ -5,6 +5,7 @@ local M = {
 		require("tigh-latte.theme.vimui"),
 		require("tigh-latte.theme.treesitter"),
 		require("tigh-latte.theme.telescope"),
+		require("tigh-latte.theme.fzf"),
 		require("tigh-latte.theme.lsp"),
 		require("tigh-latte.theme.cucumber"),
 		require("tigh-latte.theme.fugitive"),

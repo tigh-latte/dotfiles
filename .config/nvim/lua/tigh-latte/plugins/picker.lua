@@ -1,5 +1,7 @@
-return {
+local picker = os.getenv("NVIM_PICKER")
+return { {
 	"nvim-telescope/telescope.nvim",
+	lazy = picker ~= "telescope",
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -76,6 +78,8 @@ return {
 		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true }) -- consider a handier binding.
 		vim.keymap.set("n", "<Leader>cb", builtin.git_branches, { silent = true })
 		vim.keymap.set("n", "<Leader>he", require("telescope.builtin").help_tags, { silent = true })
+		vim.keymap.set("n", "<Leader>cref", builtin.lsp_references, { remap = false })
+		vim.keymap.set("n", "<Leader>/", builtin.lsp_dynamic_workspace_symbols, { remap = false })
 
 		local augroup = vim.api.nvim_create_augroup("tigh-telescope", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
@@ -96,4 +100,65 @@ return {
 			end),
 		})
 	end,
-}
+}, {
+	"ibhagwan/fzf-lua",
+	lazy = picker ~= nil and picker ~= "fzf",
+	config = function()
+		local fzf = require("fzf-lua")
+		fzf.setup({
+			winopts = {
+				on_create = function()
+					vim.keymap.set("t", "<C-n>", "<down>", { silent = true, buffer = true })
+					vim.keymap.set("t", "<C-p>", "<up>", { silent = true, buffer = true })
+					vim.keymap.set("t", "<C-x>", "<C-s>", { silent = true, buffer = true })
+				end,
+			},
+			fzf_colors = {
+				pointer = { "fg", "fzfLuaPointer" },
+				prompt = { "fg", "fzfLuaPrompt" },
+			},
+			keymap = {
+				builtin = {
+					["<C-d>"] = "preview-page-down",
+					["<C-u>"] = "preview-page-up",
+				},
+			},
+			files = {
+				fd_opts = [[
+					--color=never \
+					--hidden \
+					--type f \
+					--type l \
+					--exclude .git \
+					--exclude .gitmodules \
+					--exclude vendor \
+					--exclude cdk.out \
+					--exclude node_modules \
+					--exclude dist \
+					--exclude build \
+					--exclude __pycache__ \
+					--exclude .venv
+				]],
+			},
+			grep = {
+				hidden = true,
+			},
+		})
+		vim.keymap.set("n", "<C-p>", function()
+			fzf.files({ cwd_prompt = false })
+		end, { silent = true })
+
+		vim.keymap.set("n", "<Leader>gr", fzf.live_grep, { silent = true })
+		vim.keymap.set("n", "<Leader>he", fzf.help_tags, { silent = true })
+		vim.keymap.set("n", "<Leader>cre", function() fzf.lsp_references({ profile = "ivy" }) end, { silent = true })
+		vim.keymap.set("n", "<Leader>/", fzf.lsp_workspace_symbols, { silent = true })
+		vim.keymap.set("n", "<Leader>cb", fzf.git_branches, { silent = true })
+		vim.keymap.set("n", "<Leader>ca", function()
+			fzf.lsp_code_actions({
+				silent = true,
+				profile = "ivy",
+				winopts = { height = 0.1 },
+			})
+		end, { silent = true })
+	end,
+} }
