@@ -116,6 +116,9 @@ return { {
 			fzf_colors = {
 				pointer = { "fg", "fzfLuaPointer" },
 				prompt = { "fg", "fzfLuaPrompt" },
+				["hl"] = { "fg", "FzfLuaHL" },
+				["hl+"] = { "fg", "FzfLuaHLPlus" },
+				info = { "fg", "FzfLuaInfo" },
 			},
 			keymap = {
 				builtin = {
