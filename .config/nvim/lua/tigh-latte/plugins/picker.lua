@@ -118,6 +118,7 @@ return { {
 				prompt = { "fg", "fzfLuaPrompt" },
 				["hl"] = { "fg", "FzfLuaHL" },
 				["hl+"] = { "fg", "FzfLuaHLPlus" },
+				["fg+"] = { "fg", "FzfLuaFGPlus" },
 				info = { "fg", "FzfLuaInfo" },
 			},
 			keymap = {

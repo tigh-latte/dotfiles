@@ -3,8 +3,9 @@ return {
 	fzfLuaPointer = { fg = palette.red },
 	fzfLuaPrompt = { fg = palette.green },
 
-	FzfLuaHL = { fg = palette.yellow },
-	FzfLuaHLPlus = { fg = palette.yellow },
+	FzfLuaHL = { fg = palette.yellow, bold = false },
+	FzfLuaFGPlus = { fg = palette.fg, bold = false },
+	FzfLuaHLPlus = { fg = palette.yellow, bold = false },
 	FzfLuaInfo = { fg = palette.grey },
 	FzfLuaFzfPrompt = { fg = palette.red },
 	FzfLuaSearch = { fg = palette.red },
