@@ -49,6 +49,7 @@ return {
 					no = { txt = "no", hl = { bg = "#d7af87" } },
 					i = { txt = "I", hl = { bg = "#73b8f1" } },
 					ix = { txt = "I-O", hl = { bg = "#73b8f1" } },
+					["r?"] = { txt = "r", hl = { bg = "#af5f5a" } },
 					R = { txt = "R", hl = { bg = "#af5f5a" } },
 					Rv = { txt = "Rv", hl = { bg = "#af5f5a" } },
 					ic = { txt = "IC", hl = { bg = "#53892c" } },
