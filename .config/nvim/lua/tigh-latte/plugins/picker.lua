@@ -113,14 +113,6 @@ return { {
 					vim.keymap.set("t", "<C-x>", "<C-s>", { silent = true, buffer = true })
 				end,
 			},
-			fzf_colors = {
-				pointer = { "fg", "fzfLuaPointer" },
-				prompt = { "fg", "fzfLuaPrompt" },
-				["hl"] = { "fg", "FzfLuaHL" },
-				["hl+"] = { "fg", "FzfLuaHLPlus" },
-				["fg+"] = { "fg", "FzfLuaFGPlus" },
-				info = { "fg", "FzfLuaInfo" },
-			},
 			keymap = {
 				builtin = {
 					["<C-d>"] = "preview-page-down",

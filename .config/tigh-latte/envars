@@ -8,4 +8,12 @@ export PATH="${HOME}/go/bin:${HOME}/.cargo/bin:$PATH"
 export HISTSIZE=999999999
 export SAVEHIST=999999999
 
+export FZF_DEFAULT_OPTS='
+	--color=fg+:#abb2bf
+	--color=hl+:#d7af87
+	--color=hl:#d7af87
+	--color=info:#5c6370
+	--color=prompt:#af5f5a
+	--color=pointer:#af5f5a'
+
 setopt INC_APPEND_HISTORY
