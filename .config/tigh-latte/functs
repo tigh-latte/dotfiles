@@ -30,6 +30,43 @@ nvm() {
 	nvm $@
 }
 
+f() {
+	local root=$@
+
+	[ -z "$root" ] && {
+		local root=(
+			~/Dev/github.com
+			~/Dev/git.tigh.io
+		)
+	} || {
+		local root=()
+		for var in "$@"; do root+=$var done
+
+	}
+
+	printf "\033[1A\033[2K"
+
+	local result=$(fd \
+			--hidden \
+			--full-path \
+			--max-depth 2 \
+			--color=never \
+			--exclude vendor \
+			--exclude=.git \
+			--exclude=node_modules \
+			--exclude cdk.out \
+			--exclude node_modules \
+			--exclude dist \
+			--exclude build \
+			--exclude __pycache__ \
+			--exclude .venv \
+			--type d . ${root} | fzf)
+
+	printf "\033[1A\033[2K\033[1A\033[2K"
+
+	[ ! -z "$result" ] && cd $result
+}
+
 z() {
 	eval "$(zoxide init zsh)"
 	z $@

@@ -9,6 +9,8 @@ export HISTSIZE=999999999
 export SAVEHIST=999999999
 
 export FZF_DEFAULT_OPTS='
+	--reverse
+	--height=50%
 	--color=fg+:#abb2bf
 	--color=hl+:#d7af87
 	--color=hl:#d7af87
