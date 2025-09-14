@@ -16,14 +16,6 @@ __wezterm_set() {
 	printf "$osc" 1>&2
 }
 
-ssh() {
-	command ssh $@
-	local exitcode=$?
-	__wezterm_set ssh end
-
-	return $exitcode
-}
-
 nvm() {
 	source ~/.nvm/nvm.sh || echo "not installed" && return
 	source ~/.nvm/bash_completion
