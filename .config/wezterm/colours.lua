@@ -13,7 +13,7 @@ return {
 				"#5fafaf",
 				"#af87af",
 				"#5e8d87",
-				"#707880",
+				"#d7d7d7",
 			},
 			background = "#212121",
 			brights = {
@@ -24,7 +24,7 @@ return {
 				"#5fafaf",
 				"#af87af",
 				"#5e8d87",
-				"#707880",
+				"#d7d7d7",
 			},
 			foreground = "#d7d7d7",
 			indexed = {},
