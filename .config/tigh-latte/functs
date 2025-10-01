@@ -172,4 +172,33 @@ sprint() {
 	jira sprint list --current -q "Assignee in (\"$name\")"
 }
 
+éist() {
+	local station=$1
+	if [ -z "$station" ]; then
+		station="fáilte"
+	fi
+	local url=https://radio.canstream.co.uk:9072/live.mp3
+	case $station in
+		"failte"|"fáilte")
+			url=https://radio.canstream.co.uk:9072/live.mp3
+			;;
+		"life")
+			url=https://streams.radiomast.io/71dd35ef-0299-44b5-a2dd-c35ca277d388
+			;;
+		"rí-rá"|"ri-ra"|"rr")
+			url=https://uksoutha.streaming.broadcast.radio/ri-ra?1759322483879=
+			;;
+		"rnag")
+			url=https://25283.live.streamtheworld.com/RTE_RAIDIO_NA_GAELTACHTA.mp3?tdsdk=rte
+			;;
+	esac
+
+	 mpv $url
+}
+
+eist() {
+	éist $@
+}
+
+
 #command_not_found_handle
