@@ -108,14 +108,20 @@ goinit() {
 }
 
 gitp() {(
-	local git_folder=".git"
+	local git_repo=".git"
 
-	until [ -d $git_folder ] || [ "$PWD" = "/" ]; do
+	until [ -d $git_repo ] || [ -f $git_repo ] || [ "$PWD" = "/" ]; do
 		pushd $(pwd -P)/.. &> /dev/null
 	done
-	[ -d $git_folder ] || exit 1
+	[ "$PWD" = "/" ] && return 1
 
-	local branch_name=$(sed 's#^ref: refs/heads/##' $git_folder/HEAD)
+	if [ -d $git_repo ]; then
+		local git_head=$git_repo/HEAD
+	elif [ -f $git_repo ]; then
+		local git_head=$(cut -d\  -f2 $git_repo)/HEAD
+	fi
+
+	local branch_name=$(sed 's#^ref: refs/heads/##' $git_head)
 
 	printf "git push origin ${branch_name}:${branch_name}" | \
 		${__clipboard_copy} ${__clipboard_copy_args} && ${__clipboard_paste} ${__clipboard_paste_args}
