@@ -197,6 +197,9 @@ sprint() {
 		"rnag")
 			url=https://25283.live.streamtheworld.com/RTE_RAIDIO_NA_GAELTACHTA.mp3?tdsdk=rte
 			;;
+		*)
+			echo "Níl an stáisiún sin agam ar an drochuair."
+			return 1
 	esac
 
 	 mpv $url
