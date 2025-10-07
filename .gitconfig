@@ -8,7 +8,7 @@
 [core]
 	excludesfile = ~/.config/tigh-latte/gitignore
 [tag]
-	sort = v:refname
+	sort = -v:refname
 [gpg]
 	format = ssh
 [user]
