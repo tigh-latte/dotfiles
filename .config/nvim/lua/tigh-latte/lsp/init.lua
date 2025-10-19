@@ -1,12 +1,10 @@
-local M = {}
+local M = {
+	group = vim.api.nvim_create_augroup("tigh-latte-lsp", {
+		clear = false,
+	}),
+}
 
 local mthds = require("vim.lsp.protocol").Methods
-
----@class tigh-latte.lsp.opts
----@field on_save_actions? string[]
-local default_opts = {
-	on_save_actions = {},
-}
 
 ---@param bufnr integer
 ---@param actions string|string[]
@@ -39,8 +37,41 @@ function M.do_codeaction(bufnr, actions)
 end
 
 function M.setup()
-	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
+	vim.api.nvim_create_user_command("LspCodeAction", function(args)
+		if args.args == "" then return end
+		M.do_codeaction(0, args.args)
+	end, { nargs = 1 })
 
+	-- local capabilities = vim.tbl_extend("force",
+	-- 	{},
+	-- 	vim.lsp.protocol.make_client_capabilities(),
+	-- 	require("cmp_nvim_lsp").default_capabilities()
+	-- )
+
+	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
+		M.extend_handler(mthd, function(handler)
+			handler()
+			vim.api.nvim_feedkeys("zz", "n", false)
+		end)
+	end
+
+	vim.lsp.config("*", {
+		capabilities = vim.lsp.protocol.make_client_capabilities(),
+		root_dir = function(bufnr, on_dir)
+			local root = vim.fs.root(bufnr, { ".git" })
+			on_dir(root or vim.fn.getcwd())
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(ev)
+			local client = vim.lsp.get_client_by_id(ev.data.client_id)
+			if not client then return end
+			M.make_on_attach(client, ev.buf)
+		end,
+	})
+
+	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
 	vim.diagnostic.config({
 		virtual_text = {
@@ -59,62 +90,61 @@ end
 
 -- Create an on_attach function with the option to override, for now,
 -- just the default formatter.
----@param opts? tigh-latte.lsp.opts
-function M.make_on_attach(opts)
-	if opts == nil then
-		opts = {}
-	end
-	opts = vim.tbl_extend("force", default_opts, opts)
+---@param client vim.lsp.Client
+---@param bufnr integer
+function M.make_on_attach(client, bufnr)
+	local kmopts = { buffer = bufnr, remap = false }
 
-	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
-		M.extend_handler(mthd, function(handler)
-			handler()
-			vim.api.nvim_feedkeys("zz", "n", false)
-		end)
-	end
-
-	return function(_, bufnr)
-		local kmopts = { buffer = bufnr, remap = false }
-
-		vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)
-		vim.keymap.set("n", "<Leader>ct", vim.lsp.buf.type_definition, kmopts)
+	vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)
+	vim.keymap.set("n", "<Leader>ct", vim.lsp.buf.type_definition, kmopts)
 
 
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, kmopts)
-		vim.keymap.set("n", "<Leader>crn", vim.lsp.buf.rename, kmopts)
-		vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.jump({ count = -1, float = true }) end, kmopts)
-		vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.jump({ count = 1, float = true }) end, kmopts)
-		vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
-		vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
-		vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
-		vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
-		vim.keymap.set("n", "<Leader>hi", function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-		end, kmopts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, kmopts)
+	vim.keymap.set("n", "<Leader>crn", vim.lsp.buf.rename, kmopts)
+	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.jump({ count = -1, float = true }) end, kmopts)
+	vim.keymap.set("n", "<Leader>cn", function() vim.diagnostic.jump({ count = 1, float = true }) end, kmopts)
+	vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
+	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
+	vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
+	vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
+	vim.keymap.set("n", "<Leader>hi", function()
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+	end, kmopts)
 
-		vim.api.nvim_create_user_command("LspCodeAction", function(args)
-			if args.args == "" then return end
-			M.do_codeaction(0, args.args)
-		end, { nargs = 1 })
+	local on_save_actions = ({
+		gopls = { "source.organizeImports" },
+		ts_ls = {
+			"source.sortImports.ts",
+			"source.addMissingImports.ts",
+			"source.removeUnusedImports.ts",
+		},
+	})[client.name]
 
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = vim.api.nvim_create_augroup("tigh-latte-lsp", {
-				clear = false,
-			}),
-			buffer = bufnr,
-			callback = function(ev)
-				M.do_codeaction(ev.buf, opts.on_save_actions)
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = M.group,
+		buffer = bufnr,
+		callback = function(ev)
+			M.do_codeaction(ev.buf, on_save_actions)
 
-				local clients = vim.lsp.get_clients({
-					bufnr = bufnr,
-					method = mthds.textDocument_formatting,
-				})
-				if #clients > 0 then
-					vim.lsp.buf.format({ async = false })
-				end
-			end,
-		})
-	end
+			local clients = vim.lsp.get_clients({
+				bufnr = bufnr,
+				method = mthds.textDocument_formatting,
+			})
+			if #clients > 0 then
+				vim.lsp.buf.format({ async = false })
+			end
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("LspDetach", {
+		buffer = bufnr,
+		callback = function(ev)
+			vim.api.nvim_clear_autocmds({
+				buffer = ev.buf,
+				group = M.group,
+			})
+		end,
+	})
 end
 
 ---@param method string
