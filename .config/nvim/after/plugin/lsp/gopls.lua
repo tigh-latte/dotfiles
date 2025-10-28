@@ -20,6 +20,7 @@ vim.lsp.config("gopls", {
 				unusedwrite = true,
 				stdversion = true,
 				shadow = true,
+				ST1000 = false, -- disable package comment lint
 			},
 			hints = {
 				assignVariableTypes = true,
