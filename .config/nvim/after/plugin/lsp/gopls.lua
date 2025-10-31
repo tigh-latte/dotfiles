@@ -7,7 +7,6 @@ vim.lsp.config("gopls", {
 	single_file_support = true,
 	settings = {
 		gopls = {
-			buildFlags = { "-tags=integration" },
 			completeUnimported = true,
 			usePlaceholders = false,
 			vulncheck = "imports",

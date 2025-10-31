@@ -1,8 +1,8 @@
-local win_augroup = vim.api.nvim_create_augroup("tigh-latte-wingroup", { clear = true })
-vim.api.nvim_create_autocmd("WinResized", {
-	group = win_augroup,
-	command = "wincmd =",
-})
+-- local win_augroup = vim.api.nvim_create_augroup("tigh-latte-wingroup", { clear = true })
+-- vim.api.nvim_create_autocmd("WinResized", {
+-- 	group = win_augroup,
+-- 	command = "wincmd =",
+-- })
 
 local unit = 1
 

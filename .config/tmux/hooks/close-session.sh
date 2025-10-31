@@ -2,7 +2,6 @@
 
 __main() {
 	local num_sessions=$(tmux list-sessions | wc -l)
-
 	if [ "$num_sessions" -eq 1 ]; then
 		local session=$(tmux display-message -p '#S')
 		if [ "$session" = "_popup_music_player" ]; then
@@ -11,4 +10,4 @@ __main() {
 	fi
 }
 
-__main
+# __main

@@ -42,11 +42,11 @@ function M.setup()
 		M.do_codeaction(0, args.args)
 	end, { nargs = 1 })
 
-	-- local capabilities = vim.tbl_extend("force",
-	-- 	{},
-	-- 	vim.lsp.protocol.make_client_capabilities(),
-	-- 	require("cmp_nvim_lsp").default_capabilities()
-	-- )
+	local capabilities = vim.tbl_extend("force",
+		{},
+		vim.lsp.protocol.make_client_capabilities(),
+		require("cmp_nvim_lsp").default_capabilities()
+	)
 
 	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
 		M.extend_handler(mthd, function(handler)
@@ -55,8 +55,10 @@ function M.setup()
 		end)
 	end
 
+	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 	vim.lsp.config("*", {
-		capabilities = vim.lsp.protocol.make_client_capabilities(),
+		capabilities = capabilities,
 		root_dir = function(bufnr, on_dir)
 			local root = vim.fs.root(bufnr, { ".git" })
 			on_dir(root or vim.fn.getcwd())
@@ -110,6 +112,17 @@ function M.make_on_attach(client, bufnr)
 	vim.keymap.set("n", "<Leader>hi", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
+
+	-- vim.keymap.set("n", "<Leader>lre", function()
+	-- 	local clients = vim.lsp.get_clients({ bufnr = bufnr })
+	-- 	vim.lsp.stop_client(clients)
+	-- 	vim.defer_fn(function()
+	-- 		for _, cli in ipairs(clients) do
+	-- 			vim.lsp.start(cli.config)
+	-- 		end
+	-- 	end, 500)
+	-- end, kmopts)
+
 
 	local on_save_actions = ({
 		gopls = { "source.organizeImports" },
