@@ -56,6 +56,8 @@ vim.api.nvim_create_autocmd("TermClose", {
 	pattern = "term://*",
 	nested = true,
 	callback = function(opts)
-		vim.api.nvim_buf_delete(opts.buf, { force = true })
+		if vim.bo[opts.buf].ft ~= "fzf" then
+			vim.api.nvim_buf_delete(opts.buf, { force = true })
+		end
 	end,
 })
