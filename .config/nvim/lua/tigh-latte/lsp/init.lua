@@ -42,12 +42,6 @@ function M.setup()
 		M.do_codeaction(0, args.args)
 	end, { nargs = 1 })
 
-	local capabilities = vim.tbl_extend("force",
-		{},
-		vim.lsp.protocol.make_client_capabilities(),
-		require("cmp_nvim_lsp").default_capabilities()
-	)
-
 	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
 		M.extend_handler(mthd, function(handler)
 			handler()
@@ -58,7 +52,7 @@ function M.setup()
 	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 	-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 	vim.lsp.config("*", {
-		capabilities = capabilities,
+		capabilities = vim.lsp.protocol.make_client_capabilities(),
 		root_dir = function(bufnr, on_dir)
 			local root = vim.fs.root(bufnr, { ".git" })
 			on_dir(root or vim.fn.getcwd())
@@ -100,7 +94,6 @@ function M.make_on_attach(client, bufnr)
 	vim.keymap.set("n", "<Leader>cd", vim.lsp.buf.definition, kmopts)
 	vim.keymap.set("n", "<Leader>ct", vim.lsp.buf.type_definition, kmopts)
 
-
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, kmopts)
 	vim.keymap.set("n", "<Leader>crn", vim.lsp.buf.rename, kmopts)
 	vim.keymap.set("n", "<Leader>cp", function() vim.diagnostic.jump({ count = -1, float = true }) end, kmopts)
@@ -113,16 +106,15 @@ function M.make_on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
 
-	-- vim.keymap.set("n", "<Leader>lre", function()
-	-- 	local clients = vim.lsp.get_clients({ bufnr = bufnr })
-	-- 	vim.lsp.stop_client(clients)
-	-- 	vim.defer_fn(function()
-	-- 		for _, cli in ipairs(clients) do
-	-- 			vim.lsp.start(cli.config)
-	-- 		end
-	-- 	end, 500)
-	-- end, kmopts)
-
+	vim.keymap.set("n", "<Leader>lre", function()
+		local clients = vim.lsp.get_clients({ bufnr = bufnr })
+		vim.lsp.stop_client(clients)
+		vim.defer_fn(function()
+			for _, cli in ipairs(clients) do
+				vim.lsp.start(cli.config)
+			end
+		end, 500)
+	end, kmopts)
 
 	local on_save_actions = ({
 		gopls = { "source.organizeImports" },

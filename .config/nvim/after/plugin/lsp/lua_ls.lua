@@ -3,8 +3,9 @@ vim.lsp.config("lua_ls", {
 	single_file_support = true,
 	settings = {
 		Lua = {
+			checkThirdParty = true,
 			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
+				library = { vim.env.VIMRUNTIME },
 			},
 			format = {
 				enable = true,
