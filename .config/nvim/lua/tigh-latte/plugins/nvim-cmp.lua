@@ -16,7 +16,12 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local mapping = cmp.mapping
+
 			cmp.setup({
+				performance = {
+					debounce = 10,
+					throttle = 10,
+				},
 				mapping = {
 					-- Completion window config strats
 					["<C-p>"] = mapping.select_prev_item(),
@@ -81,7 +86,11 @@ return {
 					format = function(entry, item)
 						local s = ""
 						-- Make go import paths for third party libs shorter.
-						if vim.bo.ft == "go" and entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+						if
+							vim.bo.ft == "go"
+							and entry.completion_item.detail ~= nil
+							and entry.completion_item.detail ~= ""
+						then
 							-- TODO: Make this work for everything, not just github.
 							s = entry.completion_item.detail:gsub("github.com/", "gh://")
 						end
@@ -98,7 +107,6 @@ return {
 				},
 			})
 		end,
-
 	},
 	{
 		"ray-x/lsp_signature.nvim",
