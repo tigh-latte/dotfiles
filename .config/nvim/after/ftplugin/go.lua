@@ -1,8 +1,10 @@
 local cb = function(err)
-	if err then
-		vim.notify(vim.inspect(err), vim.log.levels.ERROR)
-		return
-	end
+	if err then vim.notify(tostring(err), vim.log.levels.ERROR) end
+end
+
+local cb_restart = function(err)
+	cb(err)
+	require("tigh-latte.lsp").restart_client({ name = "gopls" })
 end
 
 ---@return vim.lsp.Client
@@ -16,14 +18,14 @@ vim.api.nvim_buf_create_user_command(0, "GoModTidy", function()
 	get_client():request("workspace/executeCommand", {
 		command = "gopls.tidy",
 		arguments = { { URIs = { vim.uri_from_bufnr(0) } } },
-	}, cb)
+	}, cb_restart)
 end, { nargs = 0 })
 
 vim.api.nvim_buf_create_user_command(0, "GoModVendor", function()
 	get_client():request("workspace/executeCommand", {
 		command = "gopls.vendor",
 		arguments = { { URI = vim.uri_from_bufnr(0) } },
-	}, cb)
+	}, cb_restart)
 end, { nargs = 0 })
 
 vim.api.nvim_buf_create_user_command(0, "GoGenerate", function()
@@ -36,7 +38,7 @@ vim.api.nvim_buf_create_user_command(0, "GoGenerate", function()
 		arguments = {
 			{ dir = u, recursive = true },
 		},
-	}, cb)
+	}, cb_restart)
 end, { nargs = 0 })
 
 vim.api.nvim_buf_create_user_command(0, "GoTestFunc", function()
@@ -54,9 +56,7 @@ vim.api.nvim_buf_create_user_command(0, "GoTestFunc", function()
 
 	local _do = function(fn_name)
 		if not fn_name then return end
-		local arguments = {
-			URI = vim.uri_from_bufnr(0),
-		}
+		local arguments = { URI = vim.uri_from_bufnr(0) }
 		local prefix_test = "Test"
 		local prefix_bench = "Benchmark"
 
@@ -105,7 +105,7 @@ vim.api.nvim_buf_create_user_command(0, "GoTestFunc", function()
 
 		local fns = {}
 		for id, node in query:iter_captures(root, 0) do
-			if not vim.tbl_contains({'__test', '__bench'}, query.captures[id]) then goto continue end
+			if not vim.tbl_contains({ "__test", "__bench" }, query.captures[id]) then goto continue end
 
 			local line, char, eline, echar = node:range()
 			local name = vim.api.nvim_buf_get_text(0, line, char, eline, echar, {})[1]
@@ -115,7 +115,7 @@ vim.api.nvim_buf_create_user_command(0, "GoTestFunc", function()
 			::continue::
 		end
 
-		vim.ui.select(fns, { prompt = 'Test to run:' }, _do)
+		vim.ui.select(fns, { prompt = "Test to run:" }, _do)
 	end
 end, { nargs = 0 })
 
@@ -142,14 +142,10 @@ vim.api.nvim_buf_create_user_command(0, "GoTestFile", function()
 		])
 	]])
 
-
-	local tests = {
-		__test = {},
-		__bench = {},
-	}
+	local tests = { __test = {}, __bench = {} }
 
 	for id, node in query:iter_captures(root, 0) do
-		if not vim.tbl_contains({'__test', '__bench'}, query.captures[id]) then goto continue end
+		if not vim.tbl_contains({ "__test", "__bench" }, query.captures[id]) then goto continue end
 
 		local line, char, eline, echar = node:range()
 		local name = vim.api.nvim_buf_get_text(0, line, char, eline, echar, {})[1]
@@ -162,11 +158,11 @@ vim.api.nvim_buf_create_user_command(0, "GoTestFile", function()
 	local client = get_client()
 	client:request("workspace/executeCommand", {
 		command = "gopls.run_tests",
-		arguments = {{
+		arguments = { {
 			URI = vim.uri_from_bufnr(0),
 			tests = tests.__test,
 			benchmarks = tests.__bench,
-		}},
+		} },
 	}, cb)
 end, { nargs = 0 })
 
@@ -177,13 +173,11 @@ vim.api.nvim_buf_create_user_command(0, "GoGet", function(args)
 	local client = get_client()
 	client:request("workspace/executeCommand", {
 		command = "gopls.go_get_package",
-		arguments = {
-			{
-				URI = vim.uri_from_bufnr(0),
-				pkg = pkg,
-				addRequire = false,
-			},
-		},
+		arguments = { {
+			URI = vim.uri_from_bufnr(0),
+			pkg = pkg,
+			addRequire = false,
+		} },
 	}, cb)
 end, { nargs = 1 })
 

@@ -106,15 +106,11 @@ function M.make_on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
 
-	vim.keymap.set("n", "<Leader>lre", function()
-		local clients = vim.lsp.get_clients({ bufnr = bufnr })
-		vim.lsp.stop_client(clients)
-		vim.defer_fn(function()
-			for _, cli in ipairs(clients) do
-				vim.lsp.start(cli.config)
-			end
-		end, 500)
-	end, kmopts)
+	vim.api.nvim_buf_create_user_command(bufnr, "LspRestart", function()
+		M.restart_client({ bufnr = bufnr })
+	end, { nargs = 0 })
+
+	vim.keymap.set("n", "<Leader>lre", vim.cmd.LspRestart, kmopts)
 
 	local on_save_actions = ({
 		gopls = { "source.organizeImports" },
@@ -161,6 +157,17 @@ function M.extend_handler(method, fn)
 			handler(err, result, context, config)
 		end)
 	end
+end
+
+---@param filter vim.lsp.get_clients.Filter?
+function M.restart_client(filter)
+	local clients = vim.lsp.get_clients(filter)
+	vim.lsp.stop_client(clients)
+	vim.defer_fn(function()
+		for _, cli in ipairs(clients) do
+			vim.lsp.start(cli.config)
+		end
+	end, 500)
 end
 
 return M

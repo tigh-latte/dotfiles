@@ -1,4 +1,5 @@
 vim.lsp.config("lua_ls", {
+	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = { "lua" },
 	single_file_support = true,
 	settings = {
@@ -19,3 +20,5 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
+
+vim.lsp.enable("stylua", false)
