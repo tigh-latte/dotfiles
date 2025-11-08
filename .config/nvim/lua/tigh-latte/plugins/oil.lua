@@ -14,6 +14,9 @@ return {
 					return vim.startswith(name, ".")
 				end,
 			},
+			confirmation = {
+				border = "rounded",
+			},
 			keymaps = {
 				["g?"] = "actions.show_help",
 				["<Leader>i"] = "actions.toggle_hidden",
