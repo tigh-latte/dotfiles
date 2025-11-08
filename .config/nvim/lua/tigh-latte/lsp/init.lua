@@ -49,8 +49,6 @@ function M.setup()
 		end)
 	end
 
-	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-	-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 	vim.lsp.config("*", {
 		capabilities = vim.lsp.protocol.make_client_capabilities(),
 		root_dir = function(bufnr, on_dir)
