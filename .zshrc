@@ -11,6 +11,8 @@ export TIGH_CONFIG=${HOME}/.config/tigh-latte
 
 [ -f ${TIGH_CONFIG}/environment ] && source ${TIGH_CONFIG}/environment
 
+bindkey -e # disable vim input mode
+
 # Completion
 autoload -U compinit && compinit
 source <(docker completion zsh)
@@ -20,7 +22,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # Smart case matching
 zstyle ':completion:*'  menu select # present options as a menu
 zstyle ':completion:*'  completer _complete _approximate # allow a bit of tolerance
 
-bindkey -e # disable vim input mode
 
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
