@@ -10,12 +10,15 @@ $character
 """
 
 [username]
-  format      = "[# $user]($style) in "
+  format      = "[# $user]($style) in"
   show_always = true
   style_user  = "cyan"
 
 [directory]
+  format            = " [$path]($style)[$read_only]($read_only_style)"
   style             = "green"
+  read_only         = ":ro"
+  read_only_style   = "green"
   truncation_length = 15
   truncate_to_repo  = false
 
@@ -23,7 +26,7 @@ $character
     '/hdds/0/' = '~/'
 
 [git_branch]
-  format = "on git:[$branch(:remote_branch)]($style)"
+  format = " on git:[$branch(:remote_branch)]($style)"
   style  = "cyan"
 
 [git_status]
