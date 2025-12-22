@@ -5,6 +5,7 @@ export PSQL_EDITOR=nvim
 
 export PATH="${HOME}/go/bin:${HOME}/.cargo/bin:$PATH"
 
+export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=999999999
 export SAVEHIST=999999999
 
@@ -17,5 +18,7 @@ export FZF_DEFAULT_OPTS='
 	--color=info:#5c6370
 	--color=prompt:#af5f5a
 	--color=pointer:#af5f5a'
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 setopt INC_APPEND_HISTORY

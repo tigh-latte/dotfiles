@@ -22,3 +22,6 @@ alias define="dict"
 alias trepo="cd ${HOME}/Dev/git.tigh.io/tigh-latte"
 
 alias vim=nvim
+
+alias gst="git status"
+alias ls="ls --color"

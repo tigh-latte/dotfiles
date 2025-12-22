@@ -1,0 +1,43 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$directory\
+$git_branch\
+$git_status\
+$status
+$character
+"""
+
+[username]
+  format      = "[# $user]($style) in "
+  show_always = true
+  style_user  = "cyan"
+
+[directory]
+  style             = "green"
+  truncation_length = 15
+  truncate_to_repo  = false
+
+  [directory.substitutions]
+    '/hdds/0/' = '~/'
+
+[git_branch]
+  format = "on git:[$branch(:remote_branch)]($style)"
+  style  = "cyan"
+
+[git_status]
+  format    = " [$modified$untracked$ahead$behind]($style)"
+  style     = "red"
+  modified  = "m"
+  untracked = "?"
+
+[character]
+  success_symbol = "[>](red)"
+  error_symbol   = "[>](red)"
+
+[status]
+  format   = " $symbol[$status]($style)"
+  disabled = false
+  style    = "red"
+  symbol   = "C:"
