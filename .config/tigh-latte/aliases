@@ -24,4 +24,10 @@ alias trepo="cd ${HOME}/Dev/git.tigh.io/tigh-latte"
 alias vim=nvim
 
 alias gst="git status"
-alias ls="ls --color"
+alias ls="ls --color -h"
+alias ll="ls -l"
+alias l="ll -a"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
