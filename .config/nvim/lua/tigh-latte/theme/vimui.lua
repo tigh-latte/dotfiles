@@ -14,7 +14,7 @@ return {
 
 	Statement = { fg = palette.fg, bold = false },
 	Terminal = { fg = palette.fg, bg = "none" },
-	EndOfBuffer = { fg = palette.bg0, bg = "none" },
+	EndOfBuffer = { link = "NonText" },
 	FoldColumn = { fg = palette.fg, bg = "none" },
 	Folded = { fg = palette.fg, bg = "none" },
 	SignColumn = { fg = palette.fg, bg = "none" },
