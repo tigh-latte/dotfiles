@@ -99,7 +99,7 @@ function M.make_on_attach(client, bufnr)
 	vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 	vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
-	vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
+	-- vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
 	vim.keymap.set("n", "<Leader>hi", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
@@ -160,10 +160,17 @@ end
 ---@param filter vim.lsp.get_clients.Filter?
 function M.restart_client(filter)
 	local clients = vim.lsp.get_clients(filter)
-	vim.lsp.stop_client(clients)
+	local cbufs = {}
+	for _, client in ipairs(clients) do
+		cbufs[client.name] = vim.tbl_keys(client.attached_buffers)
+	end
+	vim.lsp.stop_client(clients, true)
 	vim.defer_fn(function()
 		for _, cli in ipairs(clients) do
-			vim.lsp.start(cli.config)
+			local id = vim.lsp.start(cli.config)
+			for _, buf in ipairs(cbufs[cli.name]) do
+				vim.lsp.buf_attach_client(buf, id or cli.id)
+			end
 		end
 	end, 500)
 end

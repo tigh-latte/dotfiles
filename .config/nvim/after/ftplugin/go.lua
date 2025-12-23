@@ -1,1 +1,1 @@
-require("tigh-latte.langs.go")
+require("tigh-latte.langs.go")()
