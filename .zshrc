@@ -13,11 +13,19 @@ export TIGH_CONFIG=${HOME}/.config/tigh-latte
 
 bindkey -e # disable vim input mode
 
-# Completion
+# cli programs completion
+autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 source <(docker completion zsh)
 source <(kubectl completion zsh)
 
+# lazy load aws completion
+__aws_completion() {
+	complete -C 'aws_completer' aws
+}
+compdef __aws_completion aws
+
+# Completion UI
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # Smart case matching
 zstyle ':completion:*' menu select # present options as a menu
 zstyle ':completion:*' completer _complete _approximate # allow a bit of tolerance
