@@ -16,14 +16,28 @@ bindkey -e # disable vim input mode
 # cli programs completion
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-source <(docker completion zsh)
-source <(kubectl completion zsh)
 
-# lazy load aws completion
-__aws_completion() {
-	complete -C 'aws_completer' aws
+which docker > /dev/null && source <(docker completion zsh)
+which kubectl > /dev/null && source <(kubectl completion zsh)
+
+{
+	# lazy load completion for a program
+	__lcomp() {
+		local prog=$1
+		local fn=$2
+		[ -z "$fn" ] && echo "ERROR comp function missing" && return 1
+		[ -z "$prog" ] && echo "ERROR comp program missing" && return 1
+
+		which $prog > /dev/null && {
+			eval "__${fn}() { complete -C $fn $prog; unset -f __${fn} }"
+			compdef "__$fn" $prog
+		}
+	}
+
+	__lcomp aws aws_completer
+
+	unset -f __lcomp
 }
-compdef __aws_completion aws
 
 # Completion UI
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # Smart case matching
