@@ -4,10 +4,12 @@ format = """
 $username\
 $directory\
 $git_branch\
-$git_status\
-$status
+$git_status
+$status\
 $character
 """
+
+command_timeout = 2000
 
 [username]
   format      = "[# $user]($style) in"
@@ -40,7 +42,7 @@ $character
   error_symbol   = "[>](red)"
 
 [status]
-  format   = " $symbol[$status]($style)"
+  format   = "[$status]($style)$symbol"
   disabled = false
   style    = "red"
-  symbol   = "C:"
+  symbol   = " "
