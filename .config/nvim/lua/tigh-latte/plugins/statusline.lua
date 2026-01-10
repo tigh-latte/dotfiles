@@ -40,7 +40,6 @@ return {
 		"tigh-latte/coke.nvim",
 		-- dir = "~/Dev/git.tigh.dev/tigh-latte/coke.nvim",
 		lazy = statusline ~= nil and statusline ~= "coke",
-		depedencies = { "tpope/vim-fugitive" },
 		config = function()
 			require("coke").setup({
 				modes = {
