@@ -3,3 +3,7 @@
 \.gitmodules
 ^/README.*
 ^/install.sh
+
+^.stowrc
+^.nvim.lua
+^/packages

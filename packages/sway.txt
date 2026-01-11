@@ -1,0 +1,9 @@
+dmenu
+rofi
+sway
+swaybg
+swayidle
+swaylock
+swaync
+swayosd
+wmenu

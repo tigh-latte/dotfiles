@@ -1,0 +1,6 @@
+output eDP-1 {
+    resolution 2880x1920@60Hz
+    bg /home/tigh/Pictures/Wallpapers/river.jpg fill
+    scale 1.6
+}
+
