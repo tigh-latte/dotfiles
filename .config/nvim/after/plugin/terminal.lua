@@ -32,28 +32,21 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
--- We don't want any numbers in our terminal.
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = augroup,
-	pattern = "term://*",
 	callback = function()
+		-- We don't want any numbers in our terminal.
 		vim.opt_local.number = false
-	end,
-})
-
--- We don't want ANY numbers in our terminal.
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = augroup,
-	pattern = "term://*",
-	callback = function()
+		-- We don't want ANY numbers in our terminal.
 		vim.opt_local.relativenumber = false
+
+		vim.cmd("startinsert")
 	end,
 })
 
 -- Close the terminal buffer when the terminal closes, no point holding on.
 vim.api.nvim_create_autocmd("TermClose", {
 	group = augroup,
-	pattern = "term://*",
 	nested = true,
 	callback = function(opts)
 		if vim.bo[opts.buf].ft ~= "fzf" then
