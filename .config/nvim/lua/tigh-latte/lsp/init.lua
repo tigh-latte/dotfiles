@@ -19,7 +19,6 @@ function M.do_codeaction(bufnr, actions)
 			p.context = { only = { action } }
 			return p
 		end
-
 		local result = vim.lsp.buf_request_sync(bufnr, mthds.textDocument_codeAction, params)
 		for cid, res in pairs(result or {}) do
 			for _, r in pairs(res.result or {}) do
@@ -39,8 +38,41 @@ end
 function M.setup()
 	vim.api.nvim_create_user_command("LspCodeAction", function(args)
 		if args.args == "" then return end
+		-- doesn't work with quickfix, not sure why.
 		M.do_codeaction(0, args.args)
-	end, { nargs = 1 })
+	end, {
+		nargs = 1,
+		complete = function(arg)
+			local range = vim.lsp.util.make_range_params(0, "utf-16")
+			local params = vim.tbl_extend("error", range, {
+				context = {
+					triggerKind = vim.lsp.protocol.CodeActionTriggerKind.Invoked,
+					diagnostics = vim.diagnostic.get(0, {
+						lnum = vim.api.nvim_win_get_cursor(0)[1],
+					}),
+				},
+			})
+
+
+			local results = vim.lsp.buf_request_sync(
+				0,
+				mthds.textDocument_codeAction,
+				params
+			)
+			if results == nil then
+				return nil
+			end
+			local result = results[1]
+			return vim.iter(result.result)
+				:map(function(r)
+					return r.kind
+				end)
+				:filter(function(r)
+					return r:sub(1, #arg) == arg
+				end)
+				:totable()
+		end,
+	})
 
 	for _, mthd in ipairs({ mthds.textDocument_typeDefinition, mthds.textDocument_definition }) do
 		M.extend_handler(mthd, function(handler)
@@ -99,14 +131,36 @@ function M.make_on_attach(client, bufnr)
 	vim.keymap.set("n", "<Leader>ce", vim.diagnostic.open_float, kmopts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, kmopts)
 	vim.keymap.set("n", "<Leader>csq", vim.lsp.buf.workspace_symbol, kmopts)
+	vim.keymap.set("n", "<Leader>crr", vim.lsp.buf.references, kmopts)
 	-- vim.keymap.set("n", "<Leader>cim", vim.lsp.buf.implementation, kmopts)
 	vim.keymap.set("n", "<Leader>hi", function()
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
 
-	vim.api.nvim_buf_create_user_command(bufnr, "LspRestart", function()
-		M.restart_client({ bufnr = bufnr })
-	end, { nargs = 0 })
+	vim.api.nvim_buf_create_user_command(bufnr, "LspRestart", function(cmd)
+		local clients = cmd.fargs
+		if #clients == 0 then
+			clients = vim.iter(vim.lsp.get_clients())
+				:map(function(c) return c.name end)
+				:totable()
+		end
+
+		vim.iter(clients):each(function(name)
+			local c = vim.lsp.get_clients({ name = name })
+			vim.lsp.stop_client(c, true)
+			vim.defer_fn(function()
+				vim.schedule_wrap(vim.lsp.enable)(name)
+			end, 500)
+		end)
+	end, {
+		nargs = "?",
+		complete = function(arg)
+			return vim.iter(vim.lsp.get_clients())
+				:map(function(c) return c.name end)
+				:filter(function(name) return name:sub(1, #arg) == arg end)
+				:totable()
+		end,
+	})
 
 	vim.keymap.set("n", "<Leader>lre", vim.cmd.LspRestart, kmopts)
 
@@ -155,24 +209,6 @@ function M.extend_handler(method, fn)
 			handler(err, result, context, config)
 		end)
 	end
-end
-
----@param filter vim.lsp.get_clients.Filter?
-function M.restart_client(filter)
-	local clients = vim.lsp.get_clients(filter)
-	local cbufs = {}
-	for _, client in ipairs(clients) do
-		cbufs[client.name] = vim.tbl_keys(client.attached_buffers)
-	end
-	vim.lsp.stop_client(clients, true)
-	vim.defer_fn(function()
-		for _, cli in ipairs(clients) do
-			local id = vim.lsp.start(cli.config)
-			for _, buf in ipairs(cbufs[cli.name]) do
-				vim.lsp.buf_attach_client(buf, id or cli.id)
-			end
-		end
-	end, 500)
 end
 
 return M
