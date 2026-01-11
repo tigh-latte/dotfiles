@@ -1,0 +1,29 @@
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+    workspace_buttons yes
+    strip_workspace_numbers no
+    mode hide
+
+    swaybar_command waybar
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while true; do \
+            d=$(date +'%Y-%m-%d %X'); \
+            b=$(cat /sys/class/power_supply/BAT*/capacity); \
+            echo "[${b}%] [$d]"; \
+            sleep 1; \
+        done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+bindsym $mod+Shift+b exec pkill waybar && exec waybar

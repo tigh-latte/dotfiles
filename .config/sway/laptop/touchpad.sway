@@ -1,0 +1,11 @@
+input type:touchpad {
+    tap enabled
+    dwt enabled
+    tap_button_map lrm
+    natural_scroll enabled
+}
+
+bindgesture {
+    swipe:right workspace prev
+    swipe:left workspace next
+}
