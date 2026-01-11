@@ -1,5 +1,6 @@
 \.git
 \.gitignore
 \.gitmodules
+\.stowrc
 ^/README.*
 ^/install.sh
