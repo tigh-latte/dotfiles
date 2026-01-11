@@ -33,6 +33,7 @@ return {
 					"htmx",
 					"html",
 					"yamlls",
+					"jsonls",
 					"rust_analyzer",
 					"cucumber_language_server",
 				},
