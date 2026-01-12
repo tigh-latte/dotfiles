@@ -6,7 +6,7 @@ return function()
 	local cb_restart = function(err)
 		cb(err)
 		vim.defer_fn(function()
-			require("tigh-latte.lsp").restart_client({ name = "gopls" })
+			vim.cmd.LspRestart("gopls")
 		end, 500)
 	end
 
