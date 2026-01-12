@@ -1,0 +1,5 @@
+output DP-2 {
+    resolution 2560x1440@144.006Hz
+    bg "/home/tigh/Pictures/Wallpapers/HRes - New Horizons.jpg" fill
+}
+

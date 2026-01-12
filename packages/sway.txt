@@ -7,3 +7,5 @@ swaylock
 swaync
 swayosd
 wmenu
+waybar
+wl-clipboard
