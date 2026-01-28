@@ -17,6 +17,7 @@ __wezterm_set() {
 }
 
 nvm() {
+	unset -f nvm
 	source ~/.nvm/nvm.sh || echo "not installed" && return
 	source ~/.nvm/bash_completion
 	nvm $@
@@ -60,6 +61,7 @@ f() {
 }
 
 z() {
+	unset -f z
 	eval "$(zoxide init zsh)"
 	z $@
 }
