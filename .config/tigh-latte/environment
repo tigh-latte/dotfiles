@@ -6,15 +6,15 @@ lang=$(basename $SHELL)
 declare -A __clipboard_cmds=(
 	[Darwin_copy]=pbcopy
 	[Darwin_paste]=pbpaste
-	[Linux_copy]="xsel"
-	[Linux_paste]="xsel"
+	[Linux_copy]="wl-copy"
+	[Linux_paste]="wl-paste"
 )
 
 declare -A __clipboard_args=(
 	[Darwin_copy]=
 	[Darwin_paste]=
-	[Linux_copy]="-ib"
-	[Linux_paste]="-ob"
+	[Linux_copy]=
+	[Linux_paste]=
 )
 
 __clipboard_copy=${__clipboard_cmds[${__os}_copy]}
