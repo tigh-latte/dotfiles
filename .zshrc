@@ -16,6 +16,7 @@ bindkey -e # disable vim input mode
 # cli programs completion
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+zmodload zsh/complist
 
 which docker > /dev/null && source <(docker completion zsh)
 which kubectl > /dev/null && source <(kubectl completion zsh)
@@ -43,6 +44,9 @@ which kubectl > /dev/null && source <(kubectl completion zsh)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # Smart case matching
 zstyle ':completion:*' menu select # present options as a menu
 zstyle ':completion:*' completer _complete _approximate # allow a bit of tolerance
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+bindkey -M menuselect '^B' backward-char
+bindkey -M menuselect '^W' forward-char
 
 eval "$(dircolors -b ${TIGH_CONFIG}/dircolours)"
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
