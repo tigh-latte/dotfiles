@@ -385,11 +385,24 @@ local function spawn_or_focus(program)
     end
 end
 
+---@param program tigh-latte.some.Program
+local function __focus(program)
+    return function()
+        for c in awful.client.iterate(function() return c and c.class and c.class:lower():find(program.class:lower()) end) do
+            c:jump_to(false)
+            return
+        end
+    end
+end
+
 awful.keyboard.append_global_keybindings {
     awful.key({ modkey }, "d", spawn_or_focus(programs.terminal), { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey }, "f", spawn_or_focus(programs.browser), { description = "open a browser", group = "launcher" }),
     awful.key({ modkey }, "c", spawn_or_focus(programs.signal), { description = "open chat", group = "launcher" }),
     awful.key({ modkey }, "w", spawn_or_focus(programs.slack), { description = "open work chat", group = "launcher" }),
+    awful.key({ modkey }, "g", spawn_or_focus(programs.steam), { description = "open steam", group = "launcher" }),
+    awful.key({ modkey }, "m", spawn_or_focus(programs.mail), { description = "open mail client", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "g", __focus(programs.current_game), { description = "focus on currently opened game", group = "launcher" }),
 }
 
 -- Tags related keybindings
