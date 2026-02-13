@@ -373,7 +373,7 @@ local function spawn_or_focus(program)
             if last_focused then return last_focused end
 
             -- find any running instance of the program
-            for _, c in awful.client.iterate(client_is_program) do
+            for c in awful.client.iterate(client_is_program) do
                 return c
             end
         end)()
