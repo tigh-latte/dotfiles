@@ -403,6 +403,7 @@ awful.keyboard.append_global_keybindings {
     awful.key({ modkey }, "g", spawn_or_focus(programs.steam), { description = "open steam", group = "launcher" }),
     awful.key({ modkey }, "m", spawn_or_focus(programs.mail), { description = "open mail client", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "g", __focus(programs.current_game), { description = "focus on currently opened game", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "z", io.flush, { description = "flush io for printing", group = "debug" })
 }
 
 -- Tags related keybindings
