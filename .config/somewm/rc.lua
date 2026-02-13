@@ -149,6 +149,45 @@ tag.connect_signal("request::default_layouts", function()
     })
 end)
 
+-- When moving to a tag, auto focus on window.
+tag.connect_signal("property::selected", function(t)
+	if not t.selected then return end
+	if #mouse.screen.selected_tag:clients() == 0 then return end
+
+	-- try to find a previously focused on window
+	local prev_in_tag = awful.client.focus.history.get(nil, 0, function(c)
+		if not c then return false end
+		for _, tag in pairs(c:tags()) do
+			if t == tag then return true end
+		end
+		return false
+	end)
+	if prev_in_tag then
+		prev_in_tag:jump_to(false)
+		return
+	end
+
+	-- If never had focus, then, select top client
+	for _, c in client.get(mouse.screen, true) do
+		local ctags = c:tags()
+		for _, ct in ipairs(ctags) do
+			if ct == t then
+				c:jump_to(false)
+				return
+			end
+		end
+	end
+
+	naughty.notify {
+		title = "Failed to find window to focus on",
+		text = "Checked focus history and stack order",
+		timeout = 2,
+		position = "top_right",
+		width = 40,
+		urgency = "critical",
+	}
+end)
+
 screen.connect_signal("request::wallpaper", function(s)
     gears.wallpaper.maximized(beautiful.wallpaper, s)
 end)
@@ -687,6 +726,7 @@ ruled.client.connect_signal("request::rules", function()
             end
         end,
         properties = {
+            tag = "1",
             height = mouse.screen.geometry.height - 2,
             width = mouse.screen.geometry.width / 3 * 2,
         },
@@ -694,18 +734,19 @@ ruled.client.connect_signal("request::rules", function()
 
     -- TODO: init via callback for ideal placement
     ruled.client.append_rule {
-        rule = { class = "signal" },
+        rule = { class = "signal", "slack" },
         placement = awful.placement.right,
         properties = {
+            tag = "1",
             height = mouse.screen.geometry.height - 2,
             width = mouse.screen.geometry.width / 3,
         },
     }
 
     ruled.client.append_rule {
-        rule = { class = "^steam$" },
+        rule_any = { class = { "^steam$", "^discord$" }, title = { "^discord$" } },
         properties = {
-            tag = "2",
+            tag = "3",
             x = 5,
             y = 5,
             height = mouse.screen.geometry.height - 10,
@@ -715,9 +756,12 @@ ruled.client.connect_signal("request::rules", function()
 
     ruled.client.append_rule {
         rule = { class = "^steam_app" },
-        properties = {
-            tag = "3",
-        },
+        properties = { tag = "4", },
+    }
+
+    ruled.client.append_rule {
+        rule = { class = "^tutanota" },
+        properties = { tag = "2" },
     }
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -766,8 +810,18 @@ client.connect_signal("request::titlebars", function(c)
     -- }
 end)
 
--- Custom action when close a client
-client.connect_signal("unmanage", function()
+-- Custom action when closing a client
+client.connect_signal("unmanage", function(c)
+    if c.class and c.class:match("^steam_app") then
+        if c.first_tag and c.first_tag.select then
+            for _, curr in ipairs(c.screen.all_clients) do
+                if curr.class == "steam" then
+                    curr:jump_to()
+                    return
+                end
+            end
+        end
+    end
     -- if only one client left, move it to the centre
     local centre = function()
         local clients = mouse.screen.selected_tag:clients()

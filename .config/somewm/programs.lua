@@ -25,7 +25,24 @@ M.librewolf = {
     class = "^librewolf$",
 }
 
+M.steam = {
+    cmd = { "steam" },
+    class = "^steam$",
+}
+
+M.steam_app = {
+    cmd = { "steam" },
+    class = "^steam_app",
+}
+
+M.tutanota = {
+    cmd = { "/opt/tutanota-desktop/tutanota-desktop" },
+    class = "^tutanota",
+}
+
 M.terminal = M.wezterm
 M.browser = M.librewolf
+M.current_game = M.steam_app
+M.mail = M.tutanota
 
 return M
