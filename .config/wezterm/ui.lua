@@ -31,8 +31,12 @@ return {
 		config.initial_rows = 34
 		config.initial_cols = 114
 
-		if wezterm:hostname() == "desktop" then
+
+		local device = wezterm:hostname()
+		if device == "desktop" then
 			config.max_fps = 160
+		elseif device == "laptop" then
+			config.max_fps = 120
 		end
 	end,
 }

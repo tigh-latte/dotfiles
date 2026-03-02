@@ -3,7 +3,7 @@ return {
 	setup = function(config)
 		config.font_size = 9.0
 		if require("wezterm") --[[@as Wezterm]]:hostname() == "laptop" then
-			config.font_size = config.font_size
+			config.font_size = 9.5
 		end
 
 		config.bold_brightens_ansi_colors = "No"
