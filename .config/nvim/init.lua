@@ -50,3 +50,5 @@ vim.o.secure = true
 require("tigh-latte.local")
 
 vim.cmd.colorscheme(os.getenv("NVIM_THEME") or "tigh")
+
+vim.o.guicursor = "a:blinkon0"

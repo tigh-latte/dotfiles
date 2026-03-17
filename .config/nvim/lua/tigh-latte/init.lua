@@ -21,7 +21,7 @@ function M.setup()
 		vim.fn.chdir(root)
 	end
 
-	require("tigh-latte.lazy").setup()
+	require("tigh-latte.plugins").setup()
 end
 
 return M

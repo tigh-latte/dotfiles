@@ -1,3 +1,1 @@
-return {
-	"tpope/vim-sleuth",
-}
+install(gh("tpope/vim-sleuth"))

@@ -1,5 +1,5 @@
-return {
-	{ "rose-pine/neovim" },
-	{ "navarasu/onedark.nvim" },
-	{ "catppuccin/nvim" },
-}
+install(
+	gh("rose-pine/neovim"),
+	gh("navarasu/onedark.nvim"),
+	gh("catppuccin/nvim")
+)

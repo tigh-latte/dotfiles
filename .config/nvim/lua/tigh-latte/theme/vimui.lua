@@ -9,6 +9,7 @@ return {
 	CurSearch = { fg = palette.bg0, bg = palette.light_grey },
 	IncSearch = { fg = palette.bg0, bg = palette.light_grey },
 	Comment = { fg = palette.grey },
+	String = { fg = palette.red },
 
 	Search = { fg = palette.bg0, bg = palette.muted_white },
 

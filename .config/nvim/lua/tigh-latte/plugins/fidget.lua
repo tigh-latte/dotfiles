@@ -1,6 +1,10 @@
-return {
-	"j-hui/fidget.nvim",
-	config = function()
+install(
+	gh("j-hui/fidget.nvim")
+)
+
+vim.api.nvim_create_autocmd("LspProgress", {
+	once = true,
+	callback = function()
 		require("fidget").setup({
 			notification = {
 				window = {
@@ -9,5 +13,5 @@ return {
 				},
 			},
 		})
-	end,
-}
+	end
+})

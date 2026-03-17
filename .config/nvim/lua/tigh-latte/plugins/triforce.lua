@@ -1,18 +1,12 @@
-return {
-	"gisketch/triforce.nvim",
-	dependencies = { "nvzone/volt" },
-	config = function()
-		require("triforce").setup({
-			notifications = {
-				enabled = false,
-			},
+vim.pack.add({
+	"https://github.com/nvzone/volt",
+	"https://github.com/gisketch/triforce.nvim",
+})
 
-			custom_languages = {
-				cucumber = {
-					icon = "",
-					name = "Gherkin",
-				},
-			},
-		})
-	end,
-}
+require("triforce").setup({
+	notifications = { enabled = false },
+
+	custom_languages = {
+		cucumber = { icon = "", name = "gherkin" },
+	},
+})

@@ -1,7 +1,10 @@
-return {
-	"codethread/qmk.nvim",
-	ft = "dts",
-	config = function()
+vim.pack.add({
+	"https://github.com/codethread/qmk.nvim",
+})
+
+vim.api.nvim_create_autocmd("BufReadPre", {
+	pattern = "*.keymap",
+	callback = function()
 		require("qmk").setup({
 			name = "glove80",
 			variant = "zmk",
@@ -44,4 +47,4 @@ return {
 			},
 		})
 	end,
-}
+})

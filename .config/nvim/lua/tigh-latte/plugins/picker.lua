@@ -1,129 +1,28 @@
-local picker = os.getenv("NVIM_PICKER")
-return { {
-	"nvim-telescope/telescope.nvim",
-	lazy = picker ~= "telescope",
-	branch = "0.1.x",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+install(
+	gh("ibhagwan/fzf-lua")
+)
+
+local fzf = require("fzf-lua")
+
+fzf.setup({
+	winopts = {
+		on_create = function()
+			vim.keymap.set("t", "<C-n>", "<down>", { silent = true, buffer = true })
+			vim.keymap.set("t", "<C-p>", "<up>", { silent = true, buffer = true })
+			vim.keymap.set("t", "<C-x>", "<C-s>", { silent = true, buffer = true })
+		end,
 	},
-	config = function()
-		local vimgrep_arguments = {
-			"rg",
-			"--hidden",
-			"--color=never",
-			"--no-heading",
-			"--with-filename",
-			"--line-number",
-			"--column",
-			"--smart-case",
-			"--glob=!/**/vendor/*",
-			"--glob=!/**/node_modules/*",
-			"--glob=!/**/.git/*",
-			"--glob=!/**/.gitmodules",
-			"--glob=!/**/.venv/*",
-		}
-
-		local telescope = require("telescope")
-		telescope.setup({
-			extensions = {
-				fzf = {},
-			},
-			defaults = {
-				file_ignore_patterns = {
-					"node_modules",
-					"vendor",
-					"target",
-					"dist",
-					"build/",
-					"*.min.*",
-					"__.*",
-					"^tmp/",
-					"^main$",
-					".git/",
-					".venv/",
-					"cdk.out/",
-				},
-				vimgrep_arguments = vimgrep_arguments,
-			},
-			pickers = {
-				lsp_references = {
-					theme = "ivy",
-				},
-				live_grep = {
-					disable_devicons = true,
-				},
-				git_files = {
-					disable_devicons = true,
-				},
-				grep_string = {
-					disable_devicons = true,
-				},
-				find_files = {
-					disable_devicons = true,
-					hidden = true,
-					no_ignore = true,
-					sorting_strategy = "descending",
-					layout_config = {
-						prompt_position = "bottom",
-					},
-				},
-			},
-		})
-		telescope.load_extension("fzf")
-
-		local builtin = require("telescope.builtin")
-
-		vim.keymap.set("n", "<C-P>", builtin.find_files, { silent = true })
-		vim.keymap.set("n", "<Leader>grep", builtin.live_grep, { silent = true }) -- consider a handier binding.
-		vim.keymap.set("n", "<Leader>cb", builtin.git_branches, { silent = true })
-		vim.keymap.set("n", "<Leader>he", require("telescope.builtin").help_tags, { silent = true })
-		vim.keymap.set("n", "<Leader>cref", builtin.lsp_references, { remap = false })
-		vim.keymap.set("n", "<Leader>/", builtin.lsp_dynamic_workspace_symbols, { remap = false })
-
-		local augroup = vim.api.nvim_create_augroup("tigh-telescope", { clear = true })
-		vim.api.nvim_create_autocmd("BufEnter", {
-			group = augroup,
-			nested = true,
-			callback = vim.schedule_wrap(function(ev)
-				if vim.bo.ft ~= "TelescopePrompt" then return end
-
-				local function toggle_oil(dir)
-					require("telescope.actions").close(ev.buf)
-					require("oil").toggle_float(dir)
-				end
-
-				vim.keymap.set("n", "<Leader>o", toggle_oil, { buffer = true, remap = false })
-				vim.keymap.set("n", "<Leader>O", function()
-					toggle_oil((vim.uv or vim.loop).cwd())
-				end, { buffer = ev.buf, remap = false })
-			end),
-		})
-	end,
-}, {
-	"ibhagwan/fzf-lua",
-	lazy = picker ~= nil and picker ~= "fzf",
-	config = function()
-		local fzf = require("fzf-lua")
-		fzf.setup({
-			winopts = {
-				on_create = function()
-					vim.keymap.set("t", "<C-n>", "<down>", { silent = true, buffer = true })
-					vim.keymap.set("t", "<C-p>", "<up>", { silent = true, buffer = true })
-					vim.keymap.set("t", "<C-x>", "<C-s>", { silent = true, buffer = true })
-				end,
-			},
-			keymap = {
-				builtin = {
-					["<C-d>"] = "preview-page-down",
-					["<C-u>"] = "preview-page-up",
-				},
-				fzf = {
-					["ctrl-q"] = "select-all+accept",
-				},
-			},
-			files = {
-				fd_opts = [[
+	keymap = {
+		builtin = {
+			["<C-d>"] = "preview-page-down",
+			["<C-u>"] = "preview-page-up",
+		},
+		fzf = {
+			["ctrl-q"] = "select-all+accept",
+		},
+	},
+	files = {
+		fd_opts = [[
 					--color=never \
 					--hidden \
 					--type f \
@@ -138,80 +37,79 @@ return { {
 					--exclude __pycache__ \
 					--exclude .venv
 				]],
-			},
-			grep = {
-				hidden = true,
-			},
-		})
-		vim.keymap.set("n", "<C-p>", function()
-			fzf.files({ cwd_prompt = false })
-		end, { silent = true })
+	},
+	grep = {
+		hidden = true,
+	},
+})
+vim.keymap.set("n", "<C-p>", function()
+	fzf.files({ cwd_prompt = false })
+end, { silent = true })
 
-		vim.keymap.set("n", "<Leader>gr", fzf.live_grep, { silent = true })
-		vim.keymap.set("n", "<Leader>he", fzf.help_tags, { silent = true })
-		local winopts = {
-			height = 0.4,
-			title_pos = "left",
-			border = { "", "─", "", "", "", "", "", "" },
-			preview = {
-				border = function(_, m)
-					if m.type == "fzf" then
-						return "single"
-					else
-						assert(m.type == "nvim" and m.name == "prev" and type(m.layout) == "string")
-						local b = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
-						if m.layout == "down" then
-							b[1] = "├" --top right
-							b[3] = "┤" -- top left
-						elseif m.layout == "up" then
-							b[7] = "├" -- bottom left
-							b[6] = "" -- remove bottom
-							b[5] = "┤" -- bottom right
-						elseif m.layout == "left" then
-							b[3] = "┬" -- top right
-							b[5] = "┴" -- bottom right
-							b[6] = "" -- remove bottom
-						else -- right
-							b[1] = "┬" -- top left
-							b[7] = "┴" -- bottom left
-							b[6] = "" -- remove bottom
-						end
-						return b
-					end
-				end,
-				layout = "horizontal",
-				horizontal = "right:50%",
-			},
-		}
-		vim.keymap.set("n", "<Leader>cim", function()
-			fzf.lsp_implementations({
-				silent = true,
-				profile = "ivy",
-				winopts = winopts,
-			})
-		end, { silent = true })
-		vim.keymap.set("n", "<Leader>cre", function()
-			fzf.lsp_references({
-				silent = true,
-				profile = "ivy",
-				winopts = winopts,
-			})
-		end, { silent = true })
+vim.keymap.set("n", "<Leader>qf", fzf.quickfix, { silent = true })
+vim.keymap.set("n", "<Leader>gr", fzf.live_grep, { silent = true })
+vim.keymap.set("n", "<Leader>he", fzf.help_tags, { silent = true })
+local winopts = {
+	height = 0.4,
+	title_pos = "left",
+	border = { "", "─", "", "", "", "", "", "" },
+	preview = {
+		border = function(_, m)
+			if m.type == "fzf" then
+				return "single"
+			else
+				assert(m.type == "nvim" and m.name == "prev" and type(m.layout) == "string")
+				local b = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+				if m.layout == "down" then
+					b[1] = "├" --top right
+					b[3] = "┤" -- top left
+				elseif m.layout == "up" then
+					b[7] = "├" -- bottom left
+					b[6] = "" -- remove bottom
+					b[5] = "┤" -- bottom right
+				elseif m.layout == "left" then
+					b[3] = "┬" -- top right
+					b[5] = "┴" -- bottom right
+					b[6] = "" -- remove bottom
+				else -- right
+					b[1] = "┬" -- top left
+					b[7] = "┴" -- bottom left
+					b[6] = "" -- remove bottom
+				end
+				return b
+			end
+		end,
+		layout = "horizontal",
+		horizontal = "right:50%",
+	},
+}
+vim.keymap.set("n", "<Leader>cim", function()
+	fzf.lsp_implementations({
+		silent = true,
+		profile = "ivy",
+		winopts = winopts,
+	})
+end, { silent = true })
+vim.keymap.set("n", "<Leader>cre", function()
+	fzf.lsp_references({
+		silent = true,
+		profile = "ivy",
+		winopts = winopts,
+	})
+end, { silent = true })
 
-		local ttwinopts = vim.tbl_deep_extend("force", winopts, { preview = { horizontal = "right:70%" } })
-		vim.keymap.set("n", "<Leader>tt", function()
-			fzf.lsp_workspace_diagnostics({ silent = true, profile = "ivy", winopts = ttwinopts })
-		end)
-		vim.keymap.set("n", "<Leader>/", fzf.lsp_workspace_symbols, { silent = true })
-		vim.keymap.set("n", "<Leader>cb", fzf.git_branches, { silent = true })
+local ttwinopts = vim.tbl_deep_extend("force", winopts, { preview = { horizontal = "right:70%" } })
+vim.keymap.set("n", "<Leader>tt", function()
+	fzf.lsp_workspace_diagnostics({ silent = true, profile = "ivy", winopts = ttwinopts })
+end)
+vim.keymap.set("n", "<Leader>/", fzf.lsp_workspace_symbols, { silent = true })
+vim.keymap.set("n", "<Leader>cb", fzf.git_branches, { silent = true })
 
-		local cawinopts = vim.tbl_deep_extend("force", winopts, { height = 0.2 })
-		vim.keymap.set("n", "<Leader>ca", function()
-			fzf.lsp_code_actions({
-				silent = true,
-				profile = "ivy",
-				winopts = cawinopts,
-			})
-		end, { silent = true })
-	end,
-} }
+local cawinopts = vim.tbl_deep_extend("force", winopts, { height = 0.2 })
+vim.keymap.set("n", "<Leader>ca", function()
+	fzf.lsp_code_actions({
+		silent = true,
+		profile = "ivy",
+		winopts = cawinopts,
+	})
+end, { silent = true })
