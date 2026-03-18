@@ -9,7 +9,8 @@ local M = {
 		require("tigh-latte.theme.lsp"),
 		require("tigh-latte.theme.cucumber"),
 		require("tigh-latte.theme.fugitive"),
-		require("tigh-latte.theme.langs")
+		require("tigh-latte.theme.langs"),
+		require("tigh-latte.theme.nerdtree")
 	),
 }
 
