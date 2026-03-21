@@ -783,7 +783,13 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule {
 		rule = { class = "^tutanota" },
-		properties = { tag = "2" },
+		properties = {
+			tag = "2",
+			x = 5,
+			y = 5,
+			height = mouse.screen.geometry.height - 10,
+			width = mouse.screen.geometry.width - 10,
+		},
 	}
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
