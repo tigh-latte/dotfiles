@@ -327,7 +327,16 @@ awful.keyboard.append_global_keybindings({
 			}
 		end,
 		{ description = "lua execute prompt", group = "awesome" }),
-	awful.key({ altkey }, "space", function() awful.spawn({ "rofi", "-show", "drun", "-show-icons" }) end,
+	awful.key({ altkey }, "space", function()
+			awful.spawn({
+				"rofi", "-show-icons",
+				"-show", "combi",
+				"-modes", "combi",
+				"-combi-modes", "drun,run",
+				"-display-drun", "",
+				"-display-run", "$",
+			})
+		end,
 		{ description = "spotlight", group = "launcher" }),
 	awful.key({ modkey }, "r", function() awful.screen.focused().mypromptbox:run() end,
 		{ description = "run prompt", group = "launcher" }),
