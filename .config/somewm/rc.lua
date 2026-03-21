@@ -756,7 +756,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	-- TODO: init via callback for ideal placement
 	ruled.client.append_rule {
-		rule = { class = "signal", "slack" },
+		rule_any = { class = { "signal", "slack" } },
 		placement = awful.placement.right,
 		properties = {
 			tag = "1",
