@@ -778,7 +778,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule {
 		rule = { class = "^steam_app" },
-		properties = { tag = "4", },
+		properties = { tag = "4" },
 	}
 
 	ruled.client.append_rule {
