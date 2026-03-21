@@ -738,7 +738,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	-- TODO: init via callback for ideal placement
 	ruled.client.append_rule {
-		rule_any = { class = { "wezterm", "librewolf" } },
+		rule_any = { class = { programs.terminal.class, programs.browser.class } },
 		placement = function(d, arg)
 			if #mouse.screen.selected_tag:clients() == 0 then
 				awful.placement.centered(d, arg)
@@ -782,7 +782,7 @@ ruled.client.connect_signal("request::rules", function()
 	}
 
 	ruled.client.append_rule {
-		rule = { class = "^tutanota" },
+		rule = { class = programs.mail.class },
 		properties = {
 			tag = "2",
 			x = 5,
