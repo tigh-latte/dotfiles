@@ -792,6 +792,11 @@ ruled.client.connect_signal("request::rules", function()
 		},
 	}
 
+
+	-- call machine specific rules that aren't commited.
+	-- usually used for machine specific software placement.
+	pcall(require, "thismachine.signals.request::rules")
+
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- ruled.client.append_rule {
 	--     rule       = { class = "Firefox"     },
