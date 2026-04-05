@@ -97,6 +97,20 @@ function M.setup()
 		end,
 	})
 
+	vim.api.nvim_create_autocmd("LspProgress", {
+		callback = function(ev)
+			local value = ev.data.params.value
+			vim.api.nvim_echo({ { value.message or 'done' } }, false, {
+				id = ev.data.id,
+				kind = 'progress',
+				source = 'vim.lsp',
+				title = value.title,
+				status = value.kind ~= 'end' and 'running' or 'success',
+				percent = value.percentage
+			})
+		end,
+	})
+
 	vim.opt.completeopt = { "menuone", "noselect", "noinsert", "preview" }
 
 	vim.diagnostic.config({
@@ -146,8 +160,10 @@ function M.make_on_attach(client, bufnr)
 		end
 
 		vim.iter(clients):each(function(name)
-			local c = vim.lsp.get_clients({ name = name })
-			vim.lsp.stop_client(c, true)
+			local cc = vim.lsp.get_clients({ name = name })
+			for _, c in pairs(cc) do
+				c:stop(true)
+			end
 			vim.defer_fn(function()
 				vim.schedule_wrap(vim.lsp.enable)(name)
 			end, 500)

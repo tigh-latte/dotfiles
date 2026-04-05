@@ -1,17 +1,28 @@
-install(
-	gh("j-hui/fidget.nvim")
-)
+-- install(
+-- 	gh("j-hui/fidget.nvim")
+-- )
 
-vim.api.nvim_create_autocmd("LspProgress", {
-	once = true,
-	callback = function()
-		require("fidget").setup({
-			notification = {
-				window = {
-					winblend = 0,
-					y_padding = 3,
-				},
-			},
-		})
-	end
-})
+
+-- vim.api.nvim_create_autocmd("LspProgress", {
+-- 	callback = function(ev)
+-- 		local value = ev.data.params.value
+-- 		vim.api.nvim_echo({ { value.message or 'done' } }, false, {
+-- 			id = ev.data.id,
+-- 			kind = 'progress',
+-- 			source = 'vim.lsp',
+-- 			title = value.title,
+-- 			status = value.kind ~= 'end' and 'running' or 'success',
+-- 			percent = value.percentage
+-- 		})
+-- 	end,
+-- 	-- callback = function()
+-- 	-- 	require("fidget").setup({
+-- 	-- 		notification = {
+-- 	-- 			window = {
+-- 	-- 				winblend = 0,
+-- 	-- 				y_padding = 3,
+-- 	-- 			},
+-- 	-- 		},
+-- 	-- 	})
+-- 	-- end
+-- })
