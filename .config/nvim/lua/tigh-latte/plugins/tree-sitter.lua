@@ -1,7 +1,7 @@
-install(
-	"nvim-treesitter/nvim-treesitter",
-	"nvim-treesitter/nvim-treesitter-context"
-)
+vim.pack.add {
+	gh "nvim-treesitter/nvim-treesitter",
+	gh "nvim-treesitter/nvim-treesitter-context",
+}
 
 require("nvim-treesitter").install({
 	"printf",

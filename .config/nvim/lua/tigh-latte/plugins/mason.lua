@@ -1,8 +1,8 @@
-install(
-	gh("williamboman/mason.nvim"),
-	gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
-	gh("williamboman/mason-lspconfig.nvim")
-)
+vim.pack.add {
+	gh "williamboman/mason.nvim",
+	gh "WhoIsSethDaniel/mason-tool-installer.nvim",
+	gh "williamboman/mason-lspconfig.nvim",
+}
 
 require("mason").setup()
 require("mason-tool-installer").setup {
@@ -30,6 +30,7 @@ require("mason-lspconfig").setup {
 		"yamlls",
 		"jsonls",
 		"rust_analyzer",
+		"openscad_lsp",
 		"cucumber_language_server",
 	},
 }

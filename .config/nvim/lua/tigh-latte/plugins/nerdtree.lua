@@ -1,7 +1,7 @@
-install(
-	gh("PhilRunninger/nerdtree-visual-selection"),
-	gh("scrooloose/nerdtree")
-)
+vim.pack.add {
+	gh "PhilRunninger/nerdtree-visual-selection",
+	gh "scrooloose/nerdtree",
+}
 
 vim.g.NERDTreeIgnore = { "\\.pyc$", "\\~$", "\\.swp$" }
 vim.keymap.set("n", "<Leader>n", vim.cmd.NERDTreeToggle, { noremap = true, silent = true })

@@ -1,6 +1,6 @@
-install(
-	gh("tigh-latte/showoff.nvim")
-)
+vim.pack.add {
+	gh "tigh-latte/showoff.nvim",
+}
 require("showoff").setup({
 	input = {
 		modes = { "n", "no", "v", "V", "" },

@@ -1,7 +1,7 @@
-vim.pack.add({
-	"https://github.com/nvzone/volt",
-	"https://github.com/gisketch/triforce.nvim",
-})
+vim.pack.add {
+	gh "nvzone/volt",
+	gh "gisketch/triforce.nvim",
+}
 
 require("triforce").setup({
 	notifications = { enabled = false },

@@ -1,6 +1,6 @@
-install(
-	gh("catgoose/nvim-colorizer.lua")
-)
+vim.pack.add {
+	gh "catgoose/nvim-colorizer.lua",
+}
 
 vim.api.nvim_create_autocmd("BufReadPre", {
 	once = true,

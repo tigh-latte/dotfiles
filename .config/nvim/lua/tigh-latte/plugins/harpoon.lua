@@ -1,7 +1,7 @@
-install(
-	gh("nvim-lua/plenary.nvim"),
-	{ src = gh("ThePrimeagen/harpoon"), version = "harpoon2" }
-)
+vim.pack.add {
+	gh "nvim-lua/plenary.nvim",
+	{ src = gh("ThePrimeagen/harpoon"), version = "harpoon2" },
+}
 local harpoon = require("harpoon")
 harpoon:setup({
 	settings = {

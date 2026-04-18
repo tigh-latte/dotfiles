@@ -1,6 +1,6 @@
-vim.pack.add({
-	"https://github.com/codethread/qmk.nvim",
-})
+vim.pack.add {
+	gh "codethread/qmk.nvim",
+}
 
 vim.api.nvim_create_autocmd("BufReadPre", {
 	pattern = "*.keymap",

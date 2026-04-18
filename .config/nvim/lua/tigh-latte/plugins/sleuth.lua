@@ -1,1 +1,1 @@
-install(gh("tpope/vim-sleuth"))
+vim.pack.add { gh "tpope/vim-sleuth" }

@@ -1,9 +1,9 @@
 local statusline = os.getenv("NVIM_STATUSLINE") or "coke"
 
 if statusline == "lualine" then
-	install(
-		gh("nvim-lualine/lualine.nvim")
-	)
+	vim.pack.add {
+		gh "nvim-lualine/lualine.nvim",
+	}
 	require("lualine").setup {
 		options = {
 			refresh = {
@@ -12,9 +12,9 @@ if statusline == "lualine" then
 		}
 	}
 elseif statusline == "airline" then
-	install(
-		gh("vim-airline/vim-airline")
-	)
+	vim.pack.add {
+		gh "vim-airline/vim-airline",
+	}
 	vim.cmd([[
 		let g:airline#extensions#undotree#enabled = 1
 		"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -33,9 +33,9 @@ elseif statusline == "airline" then
 			\ }
 			]])
 elseif statusline == "coke" then
-	install(
-		gh("tigh-latte/coke.nvim")
-	)
+	vim.pack.add {
+		gh "tigh-latte/coke.nvim",
+	}
 	require("coke").setup({
 		modes = {
 			n = { txt = "N", hl = { bg = "#d7af87" } },

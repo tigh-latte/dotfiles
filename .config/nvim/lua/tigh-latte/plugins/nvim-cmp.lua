@@ -1,16 +1,16 @@
-install(
-	gh("neovim/nvim-lspconfig"),
-	gh("hrsh7th/cmp-nvim-lsp"),
-	gh("hrsh7th/cmp-nvim-lua"),
-	gh("hrsh7th/cmp-nvim-lsp-signature-help"),
-	gh("hrsh7th/cmp-vsnip"),
-	gh("hrsh7th/cmp-path"),
-	gh("hrsh7th/cmp-buffer"),
-	gh("hrsh7th/vim-vsnip"),
-	gh("hrsh7th/cmp-calc"),
-	gh("hrsh7th/nvim-cmp"),
-	gh("ray-x/lsp_signature.nvim")
-)
+vim.pack.add {
+	gh "neovim/nvim-lspconfig",
+	gh "hrsh7th/cmp-nvim-lsp",
+	gh "hrsh7th/cmp-nvim-lua",
+	gh "hrsh7th/cmp-nvim-lsp-signature-help",
+	gh "hrsh7th/cmp-vsnip",
+	gh "hrsh7th/cmp-path",
+	gh "hrsh7th/cmp-buffer",
+	gh "hrsh7th/vim-vsnip",
+	gh "hrsh7th/cmp-calc",
+	gh "hrsh7th/nvim-cmp",
+	gh "ray-x/lsp_signature.nvim",
+}
 
 vim.api.nvim_create_autocmd("InsertEnter", {
 	once = true,

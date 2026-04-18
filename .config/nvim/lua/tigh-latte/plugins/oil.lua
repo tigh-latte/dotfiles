@@ -1,6 +1,6 @@
-install(
-	gh("stevearc/oil.nvim")
-)
+vim.pack.add {
+	gh "stevearc/oil.nvim"
+}
 
 local oil = require("oil")
 oil.setup({

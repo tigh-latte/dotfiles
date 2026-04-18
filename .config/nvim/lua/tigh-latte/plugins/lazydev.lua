@@ -1,8 +1,8 @@
-install(
-	gh("Bilal2453/luvit-meta"),
-	gh("tigh-latte/wezterm-types"),
-	gh("folke/lazydev.nvim")
-)
+vim.pack.add {
+	gh "Bilal2453/luvit-meta",
+	gh "tigh-latte/wezterm-types",
+	gh "folke/lazydev.nvim",
+}
 
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = "*.lua",

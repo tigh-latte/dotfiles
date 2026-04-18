@@ -1,6 +1,6 @@
-install(
-	gh("ibhagwan/fzf-lua")
-)
+vim.pack.add {
+	gh "ibhagwan/fzf-lua"
+}
 
 local fzf = require("fzf-lua")
 
