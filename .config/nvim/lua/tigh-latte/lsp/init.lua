@@ -99,13 +99,20 @@ function M.setup()
 
 	vim.api.nvim_create_autocmd("LspProgress", {
 		callback = function(ev)
+			local width = vim.api.nvim_win_get_width(0)
 			local value = ev.data.params.value
-			vim.api.nvim_echo({ { value.message or 'done' } }, false, {
+			local msg = value.message or 'done'
+			local n = width - #value.title - 14
+			n = n > 0 and n or 0
+			n = n < #msg and n or #msg
+			msg = msg:sub(0, n)
+
+			vim.api.nvim_echo({ { msg } }, false, {
 				id = ev.data.id,
 				kind = 'progress',
 				source = 'vim.lsp',
 				title = value.title,
-				status = value.kind ~= 'end' and 'running' or 'success',
+				status = 'running',
 				percent = value.percentage
 			})
 		end,
