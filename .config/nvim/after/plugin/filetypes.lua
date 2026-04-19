@@ -7,5 +7,6 @@ vim.filetype.add({
 	extension = {
 		yml = cfyaml,
 		yaml = cfyaml,
+		scad = "openscad",
 	},
 })
