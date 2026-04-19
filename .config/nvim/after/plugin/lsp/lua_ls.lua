@@ -5,6 +5,9 @@ vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			checkThirdParty = true,
+			diagnostics = {
+				globals = { 'vim' },
+			},
 			workspace = {
 				library = { vim.env.VIMRUNTIME },
 			},
