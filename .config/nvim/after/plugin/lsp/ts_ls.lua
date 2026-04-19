@@ -1,4 +1,7 @@
 vim.lsp.config("ts_ls", {
+	handlers = {
+		["textDocument/publishDiagnostics"] = function() end,
+	},
 	filetypes = {
 		"javascript", "javascriptreact", "javascript.jsx",
 		"typescript", "typescriptreact", "typescript.tsx",
@@ -27,3 +30,5 @@ vim.lsp.config("ts_ls", {
 		},
 	},
 })
+
+vim.lsp.enable('ts_ls', true)
