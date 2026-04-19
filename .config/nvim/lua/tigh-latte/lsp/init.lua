@@ -151,34 +151,7 @@ function M.make_on_attach(client, bufnr)
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 	end, kmopts)
 
-	vim.api.nvim_buf_create_user_command(bufnr, "LspRestart", function(cmd)
-		local clients = cmd.fargs
-		if #clients == 0 then
-			clients = vim.iter(vim.lsp.get_clients())
-				:map(function(c) return c.name end)
-				:totable()
-		end
-
-		vim.iter(clients):each(function(name)
-			local cc = vim.lsp.get_clients({ name = name })
-			for _, c in pairs(cc) do
-				c:stop(true)
-			end
-			vim.defer_fn(function()
-				vim.schedule_wrap(vim.lsp.enable)(name)
-			end, 500)
-		end)
-	end, {
-		nargs = "?",
-		complete = function(arg)
-			return vim.iter(vim.lsp.get_clients())
-				:map(function(c) return c.name end)
-				:filter(function(name) return name:sub(1, #arg) == arg end)
-				:totable()
-		end,
-	})
-
-	vim.keymap.set("n", "<Leader>lre", vim.cmd.LspRestart, kmopts)
+	vim.keymap.set("n", "<Leader>lre", wrap(vim.cmd.lsp, "restart"), kmopts)
 
 	local on_save_actions = ({
 		gopls = { "source.organizeImports" },
