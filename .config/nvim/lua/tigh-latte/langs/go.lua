@@ -1,6 +1,8 @@
 return function()
 	local cb = function(err)
-		if err then vim.notify(tostring(err), vim.log.levels.ERROR) end
+		if err == nil then return end
+		vim.notify(tostring(err), vim.log.levels.ERROR)
+		error(err)
 	end
 
 	local cb_restart = function(err)
