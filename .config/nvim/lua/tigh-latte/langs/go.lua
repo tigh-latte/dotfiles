@@ -6,7 +6,7 @@ return function()
 	local cb_restart = function(err)
 		cb(err)
 		vim.defer_fn(function()
-			vim.cmd.LspRestart("gopls")
+			vim.cmd.lsp("restart gopls")
 		end, 500)
 	end
 
