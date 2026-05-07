@@ -1,3 +1,10 @@
+vim.o.guicursor = "a:blinkon0"
+
+_G.wrap = function(fn, ...)
+	local args = ...
+	return function() fn(args) end
+end
+
 require("tigh-latte").setup()
 
 -- Basic text editor
