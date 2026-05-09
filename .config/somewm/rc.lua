@@ -350,7 +350,11 @@ awful.keyboard.append_global_keybindings({
 
 -- The Main Characters
 ---@param program tigh-latte.some.Program
-local function spawn_or_focus(program)
+---@param opts? tigh-latte.some.ProgramOpts
+local function spawn_or_focus(program, opts)
+	opts = opts or {}
+	opts.should_focus = opts.should_focus or function() return true end
+	opts.should_spawn = opts.should_spawn or function() return true end
 	return function()
 		local client_is_program = function(c) return c and c.class and c.class:lower():find(program.class:lower()) end
 
@@ -386,9 +390,13 @@ local function spawn_or_focus(program)
 			end
 		end)()
 		if target then -- if target found
-			target:jump_to(false)
-		else     -- otherwise, spawn
-			awful.spawn(program.cmd)
+			if opts.should_focus() then
+				target:jump_to(false)
+			end
+		else -- otherwise, spawn
+			if opts.should_spawn() then
+				awful.spawn(program.cmd)
+			end
 		end
 	end
 end
@@ -407,7 +415,13 @@ awful.keyboard.append_global_keybindings {
 	awful.key({ modkey }, "d", spawn_or_focus(programs.terminal), { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey }, "f", spawn_or_focus(programs.browser), { description = "open a browser", group = "launcher" }),
 	awful.key({ modkey }, "c", spawn_or_focus(programs.signal), { description = "open chat", group = "launcher" }),
-	awful.key({ modkey }, "w", spawn_or_focus(programs.slack), { description = "open work chat", group = "launcher" }),
+	awful.key({ modkey }, "w", spawn_or_focus(programs.slack, {
+		should_spawn = function()
+			local day = tonumber(os.date("%w"))
+			local hour = tonumber(os.date("%H"))
+			return 5 < day and (hour <= 7 or 17 <= hour)
+		end,
+	}), { description = "open work chat", group = "launcher" }),
 	awful.key({ modkey }, "g", spawn_or_focus(programs.steam), { description = "open steam", group = "launcher" }),
 	awful.key({ modkey }, "m", spawn_or_focus(programs.mail), { description = "open mail client", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "g", __focus(programs.current_game), { description = "focus on currently opened game", group = "launcher" }),
@@ -756,7 +770,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	-- TODO: init via callback for ideal placement
 	ruled.client.append_rule {
-		rule_any = { class = { "signal", "slack" } },
+		rule_any = { class = { "signal", programs.slack.class } },
 		placement = awful.placement.right,
 		properties = {
 			tag = "1",
@@ -792,6 +806,27 @@ ruled.client.connect_signal("request::rules", function()
 		},
 	}
 
+	ruled.client.append_rule {
+		rule = { class = programs.emulator_3ds.class },
+		properties = {
+			tag = "5",
+			x = 5,
+			y = 5,
+			height = mouse.screen.geometry.height - 10,
+			width = mouse.screen.geometry.width - 10,
+		},
+	}
+
+	ruled.client.append_rule {
+		rule_any = { class = { "com-eteks-sweethome3d-SweetHome3D" } },
+		properties = {
+			tag = "5",
+			x = 0,
+			y = 0,
+			height = mouse.screen.geometry.height,
+			width = mouse.screen.geometry.width,
+		},
+	}
 
 	-- call machine specific rules that aren't commited.
 	-- usually used for machine specific software placement.
