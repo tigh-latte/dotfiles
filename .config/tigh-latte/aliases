@@ -31,3 +31,7 @@ alias l="ll -a"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
+alias grep="grep --color=auto --exclude-dir=vendor --exclude-dir=node_modules"
+
+alias k=kubectl
