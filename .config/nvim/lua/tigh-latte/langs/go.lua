@@ -235,4 +235,6 @@ return function()
 	vim.keymap.set("n", "<Leader>gmv", vim.cmd.GoModVendor, opts)
 	vim.keymap.set("n", "<Leader>gen", vim.cmd.GoGenerate, opts)
 	vim.keymap.set("n", "<Leader>gg", vim.cmd.GoGet, opts)
+
+	vim.cmd.compiler "go"
 end
