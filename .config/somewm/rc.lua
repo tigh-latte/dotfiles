@@ -419,7 +419,7 @@ awful.keyboard.append_global_keybindings {
 		should_spawn = function()
 			local day = tonumber(os.date("%w"))
 			local hour = tonumber(os.date("%H"))
-			return 5 < day and (hour <= 7 or 17 <= hour)
+			return day <= 5 and (7 <= hour and hour < 17)
 		end,
 	}), { description = "open work chat", group = "launcher" }),
 	awful.key({ modkey }, "g", spawn_or_focus(programs.steam), { description = "open steam", group = "launcher" }),
