@@ -1,5 +1,11 @@
 vim.o.guicursor = "a:blinkon0"
 
+if os.getenv("NVIM_EXPERIMENTAL") then
+	require("vim._core.ui2").enable({
+		msg = { cmd = { hl = false } }
+	})
+end
+
 _G.wrap = function(fn, ...)
 	local args = ...
 	return function() fn(args) end
@@ -57,5 +63,3 @@ vim.o.secure = true
 require("tigh-latte.local")
 
 vim.cmd.colorscheme(os.getenv("NVIM_THEME") or "tigh")
-
-vim.o.guicursor = "a:blinkon0"
