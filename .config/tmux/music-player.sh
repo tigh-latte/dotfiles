@@ -15,7 +15,7 @@ __main() {
 		session_id=$(tmux new-session -dP -s "$session" -F '#{session_id}')
 		tmux set-option -s -t "$session_id" key-table popup
 		tmux set-option -s -t "$session_id" status off
-		tmux send-keys -t "$session" 'hifi-rs open' C-m
+		tmux send-keys -t "$session" 'ceol' C-m
 	fi
 
 	tmux attach -t "$session" > /dev/null
