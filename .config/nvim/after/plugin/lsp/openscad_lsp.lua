@@ -8,4 +8,10 @@ vim.lsp.config("openscad_lsp", {
 	end,
 })
 
+vim.filetype.add({
+	extension = {
+		scad = "openscad",
+	},
+})
+
 vim.lsp.enable("openscad_lsp")

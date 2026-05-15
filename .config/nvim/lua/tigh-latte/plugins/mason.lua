@@ -21,6 +21,7 @@ require("mason-lspconfig").setup {
 	automatic_installation = false,
 	ensure_installed = {
 		"gopls",
+		"gh_actions_ls",
 		"pyright",
 		"ts_ls",
 		"bashls",
