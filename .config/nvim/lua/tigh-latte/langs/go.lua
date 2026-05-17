@@ -1,10 +1,12 @@
 return function()
+	---@param err lsp.ResponseError?
 	local cb = function(err)
 		if err == nil then return end
-		vim.notify(tostring(err), vim.log.levels.ERROR)
+		vim.notify(err.message, vim.log.levels.ERROR)
 		error(err)
 	end
 
+	---@param err lsp.ResponseError?
 	local cb_restart = function(err)
 		cb(err)
 		vim.defer_fn(function()
@@ -61,7 +63,7 @@ return function()
 			vim.notify("not in test file", vim.log.levels.ERROR)
 		end
 
-		local parsed = vim.treesitter.get_parser():parse()
+		local parsed = assert(vim.treesitter.get_parser():parse())
 		local cur_name = vim.treesitter.get_node()
 
 		while cur_name and cur_name:type() ~= "function_declaration" do
