@@ -227,6 +227,44 @@ return function()
 		vim.cmd.e(alt_name())
 	end, { nargs = 0 })
 
+	vim.api.nvim_create_user_command("GoImpl", function(args)
+		local cur_name = vim.treesitter.get_node()
+		while cur_name and cur_name:type() ~= "type_spec" do
+			cur_name = cur_name:parent()
+		end
+		if not cur_name then
+			vim.notify("no type under cursor", vim.log.levels.ERROR)
+			return
+		end
+		local line, char, eline, echar = cur_name:field("name")[1]:range()
+
+		local _do = function(iface)
+			local type_name = vim.api.nvim_buf_get_text(0, line, char, eline, echar, {})[1]
+			vim.system({ "impl", type_name, iface, }, {}, function(out)
+				vim.schedule(function()
+					if out.code ~= 0 then
+						vim.notify(out.stderr)
+						return
+					end
+
+					local lines = vim.split(vim.trim(out.stdout), "\n", {})
+					if #lines <= 1 then return end
+
+					table.insert(lines, "")
+					vim.fn.append(line, lines)
+				end)
+			end)
+		end
+		if args.args == "" then
+			vim.ui.input({ prompt = "iface > " }, function(input)
+				if not input then return end
+				_do(input)
+			end)
+		else
+			_do(args.args)
+		end
+	end, { nargs = '*' })
+
 	local opts = { remap = false, buffer = true, silent = true }
 	vim.keymap.set("n", "<Leader>gav", vim.cmd.GoAltV, opts)
 	vim.keymap.set("n", "<Leader>gaa", vim.cmd.GoAltH, opts)
@@ -237,6 +275,7 @@ return function()
 	vim.keymap.set("n", "<Leader>gmv", vim.cmd.GoModVendor, opts)
 	vim.keymap.set("n", "<Leader>gen", vim.cmd.GoGenerate, opts)
 	vim.keymap.set("n", "<Leader>gg", vim.cmd.GoGet, opts)
+	vim.keymap.set("n", "<Leader>gim", vim.cmd.GoImpl, opts)
 
 	vim.cmd.compiler "go"
 end
