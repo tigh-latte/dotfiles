@@ -7,7 +7,16 @@ local pairings = {
 	["false"] = "true",
 	["True"] = "False",
 	["False"] = "True",
+	["yes"] = "no",
+	["no"] = "yes",
+	["ta"] = "níl",
+	["tá"] = "níl",
+	["nil"] = "tá",
+	["níl"] = "tá",
+	["oui"] = "non",
+	["non"] = "oui",
 }
+
 local function toggle()
 	local word = vim.fn.expand("<cword>")
 	local flip = pairings[word]
