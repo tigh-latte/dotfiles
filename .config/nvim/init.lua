@@ -60,6 +60,6 @@ vim.o.showmode = false
 vim.o.exrc = true
 vim.o.secure = true
 
-require("tigh-latte.local")
+pcall(require, "tigh-latte.local")
 
 vim.cmd.colorscheme(os.getenv("NVIM_THEME") or "tigh")
