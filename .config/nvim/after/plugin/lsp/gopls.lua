@@ -12,7 +12,8 @@ vim.lsp.config("gopls", {
 			vulncheck = "imports",
 			gofumpt = true,
 			staticcheck = true,
-			symbolScope = "workspace",
+			symbolScope = "all",
+			symbolMatcher = "FastFuzzy",
 			analyses = {
 				unusedparams = true,
 				nilness = true,
