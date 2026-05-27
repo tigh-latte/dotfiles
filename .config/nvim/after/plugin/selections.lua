@@ -5,11 +5,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 local function visual_regrow(action)
 	assert(action == "grow" or action == "shrink")
 
-	-- Change to Visual Line mode if in Visual. Consider going this for
+	-- Change to Visual Line mode if in Visual. Consider doing this for
 	-- Visual Block mode as well.
 	local mode = vim.api.nvim_get_mode().mode
 	vim.api.nvim_input((mode == "v" and "<S-v>" or ""))
-	-- vim.api.nvim_feedkeys((mode == "v" and "<S-v>" or ""), "n", false)
 
 	local npos = vim.fn.getpos("v")[2]
 	local cpos = vim.api.nvim_win_get_cursor(0)[1]
@@ -18,7 +17,6 @@ local function visual_regrow(action)
 		if cpos == npos then return "" end -- nothing left to shrink
 		return ({ "kojo", "joko" })[cpos < npos and 2 or 1]
 	end
-
 
 	local max_lines = vim.api.nvim_buf_line_count(0)
 	if action == "grow" then
