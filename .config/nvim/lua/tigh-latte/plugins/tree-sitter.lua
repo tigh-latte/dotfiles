@@ -7,7 +7,8 @@ require("nvim-treesitter").install({
 	"printf",
 })
 
-vim.treesitter.language.register("bash", "zsh")
+vim.treesitter.language.register("bash", { "zsh" })
+vim.treesitter.language.register("ini", { "env" })
 
 -- auto init treesitter parsers if they exist.
 -- otherwise, try to install.
