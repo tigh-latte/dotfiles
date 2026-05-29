@@ -1,7 +1,7 @@
-vim.lsp.config("jsonls", {
+return {
 	settings = {
 		json = {
 			schemaDownload = { enable = true },
 		},
 	},
-})
+}

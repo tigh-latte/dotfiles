@@ -1,8 +1,8 @@
-vim.lsp.config("cucumber_language_server", {
+return {
 	settings = {
 		cucumber = {
 			features = { "**/*.feature" },
 			glue = { "**/steps*.go" },
 		},
 	},
-})
+}

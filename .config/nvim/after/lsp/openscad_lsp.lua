@@ -1,4 +1,10 @@
-vim.lsp.config("openscad_lsp", {
+vim.filetype.add({
+	extension = {
+		scad = "openscad",
+	},
+})
+
+return {
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = { "openscad" },
 	single_file_support = true,
@@ -6,12 +12,4 @@ vim.lsp.config("openscad_lsp", {
 		local root = vim.fs.root(bufnr, { ".git" })
 		on_dir(root and root or vim.fn.getcwd())
 	end,
-})
-
-vim.filetype.add({
-	extension = {
-		scad = "openscad",
-	},
-})
-
-vim.lsp.enable("openscad_lsp")
+}

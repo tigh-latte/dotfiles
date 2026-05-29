@@ -1,4 +1,4 @@
-vim.lsp.config("ts_ls", {
+return {
 	handlers = {
 		["textDocument/publishDiagnostics"] = function() end,
 	},
@@ -29,6 +29,4 @@ vim.lsp.config("ts_ls", {
 			},
 		},
 	},
-})
-
-vim.lsp.enable('ts_ls', true)
+}

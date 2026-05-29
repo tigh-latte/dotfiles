@@ -1,4 +1,4 @@
-vim.lsp.config("pyright", {
+return {
 	filetypes = { "python" },
 	root_dir = function(bufnr, on_dir)
 		local root = vim.fs.root(bufnr, { ".git" })
@@ -17,4 +17,4 @@ vim.lsp.config("pyright", {
 			},
 		},
 	},
-})
+}

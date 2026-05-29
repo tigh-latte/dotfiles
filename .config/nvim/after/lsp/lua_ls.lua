@@ -1,16 +1,11 @@
-vim.lsp.config("lua_ls", {
+vim.lsp.enable("stylua", false)
+return {
 	capabilities = vim.lsp.protocol.make_client_capabilities(),
 	filetypes = { "lua" },
 	single_file_support = true,
 	settings = {
 		Lua = {
-			checkThirdParty = true,
-			diagnostics = {
-				globals = { 'vim' },
-			},
-			workspace = {
-				library = { vim.env.VIMRUNTIME },
-			},
+			telemetry = { enable = false },
 			format = {
 				enable = true,
 				defaultConfig = {
@@ -22,6 +17,4 @@ vim.lsp.config("lua_ls", {
 			},
 		},
 	},
-})
-
-vim.lsp.enable("stylua", false)
+}

@@ -27,5 +27,4 @@ vim.filetype.add({
 	},
 })
 
-
-vim.lsp.enable('cfn_lsp', true)
+vim.lsp.enable("cfn_lsp", true)

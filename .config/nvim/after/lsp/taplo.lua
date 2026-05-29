@@ -1,4 +1,4 @@
-vim.lsp.config("taplo", {
+return {
 	settings = {
 		evenBetterToml = {
 			formatter = {
@@ -9,4 +9,4 @@ vim.lsp.config("taplo", {
 			},
 		},
 	},
-})
+}

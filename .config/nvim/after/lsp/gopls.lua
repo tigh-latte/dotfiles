@@ -1,4 +1,4 @@
-vim.lsp.config("gopls", {
+return {
 	root_dir = function(bufnr, on_dir)
 		local root = vim.fs.root(bufnr, { "go.work", "go.mod", ".git" })
 		on_dir(root and root or vim.fn.getcwd())
@@ -33,4 +33,4 @@ vim.lsp.config("gopls", {
 			},
 		},
 	},
-})
+}
