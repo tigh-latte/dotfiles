@@ -49,6 +49,11 @@ M.emulator_3ds = {
 	class = "Azahar",
 }
 
+M.orca = {
+	cmd = "/opt/orca-slicer/AppRun",
+	class = "OrcaSlicer",
+}
+
 M.terminal = M.wezterm
 M.browser = M.librewolf
 M.current_game = M.steam_app
