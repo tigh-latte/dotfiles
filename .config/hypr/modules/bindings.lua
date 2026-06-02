@@ -73,19 +73,15 @@ local function spawn_or_focus(program, opts)
 	end
 end
 
----@param pos "left"|"middle"|"right"
+---@param pos number
 ---@param ratio number
 ---@return fun()
 local function rectanges(pos, ratio)
 	return function()
 		local window = hl.get_active_window()
-		if not window then
-			return
-		end
+		if not window then return end
 		local screen = hl.get_active_monitor()
-		if not screen then
-			return
-		end
+		if not screen then return end
 
 		local delta = 5
 
@@ -93,14 +89,8 @@ local function rectanges(pos, ratio)
 		local height = screen.height - 6
 
 		local available = screen.width - width
-		local x = 0
-		if pos == "left" then
-			x = 0 + delta
-		elseif pos == "middle" then
-			x = available * 0.5
-		else
-			x = available - delta
-		end
+		local offset = delta * 2 * (0.5 - pos)
+		local x = (available * pos) + offset
 
 		hl.dispatch(hl.dsp.window.resize({ x = width, y = height, window = window }))
 		hl.dispatch(hl.dsp.window.move({ x = x, y = 3, window = window }))
@@ -125,34 +115,34 @@ hl.bind("SUPER + SHIFT + f", function()
 	hl.dispatch(hl.dsp.window.move({ x = 3, y = 3 }))
 end)
 
+
 local open = {
 	slack = {
 		can = false,
-		just_changed = false,
+		---@type HL.Notification
+		notif = nil,
 	}
 }
 
-hl.bind("SUPER + w", function()
+hl.bind("SUPER + SHIFT + w", function()
 	open.slack.can = not open.slack.can
-	open.slack.just_changed = true
-	hl.notification.create({ text = "can open: " .. tostring(open.slack.can), timeout = 500 })
-end, { long_press = true })
+	local text = "can open: " .. tostring(open.slack.can)
+	if open.slack.notif and open.slack.notif:is_alive() then
+		open.slack.notif:dismiss()
+	end
+	open.slack.notif = hl.notification.create({ text = text, timeout = 1000 })
+end)
 
 hl.bind(
 	"SUPER + w",
 	spawn_or_focus(programs.slack, {
 		should_spawn = function()
-			if open.slack.just_changed then
-				open.slack.just_changed = false
-				return false
-			end
 			if not open.slack.can then return false end
 			local day = tonumber(os.date("%w"))
 			local hour = tonumber(os.date("%H"))
 			return day <= 5 and (7 <= hour and hour < 17)
 		end,
-	}),
-	{ release = true }
+	})
 )
 
 hl.bind("SUPER + o", spawn_or_focus(programs.orca))
@@ -183,12 +173,12 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 
 -- positioning
-hl.bind("SUPER + CTRL + w", rectanges("left", 2 / 3))
-hl.bind("SUPER + CTRL + e", rectanges("middle", 2 / 3))
-hl.bind("SUPER + CTRL + r", rectanges("right", 2 / 3))
-hl.bind("SUPER + CTRL + s", rectanges("left", 1 / 3))
-hl.bind("SUPER + CTRL + d", rectanges("middle", 1 / 3))
-hl.bind("SUPER + CTRL + f", rectanges("right", 1 / 3))
+hl.bind("SUPER + CTRL + w", rectanges(0, 2 / 3))
+hl.bind("SUPER + CTRL + e", rectanges(0.5, 2 / 3))
+hl.bind("SUPER + CTRL + r", rectanges(1, 2 / 3))
+hl.bind("SUPER + CTRL + s", rectanges(0, 1 / 3))
+hl.bind("SUPER + CTRL + d", rectanges(0.5, 1 / 3))
+hl.bind("SUPER + CTRL + f", rectanges(1, 1 / 3))
 
 -- notifications
 hl.bind("SUPER + SHIFT + n", hl.dsp.exec_cmd("swaync-client -t -sw"))
@@ -204,3 +194,13 @@ hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 hl.bind("SUPER + b", hl.dsp.exec_cmd("/home/tigh/.cargo/bin/lush toggle bar"))
+
+local function jump_workspace(delta)
+	local workspace = hl.get_active_workspace()
+	if not workspace then return end
+	local next = tonumber(workspace.name) % 9 + delta
+	hl.dispatch(hl.dsp.focus({ workspace = tostring(next) }))
+end
+
+hl.bind("SUPER + mouse_down", function() jump_workspace(1) end)
+hl.bind("SUPER + mouse_up", function() jump_workspace(-1) end)
