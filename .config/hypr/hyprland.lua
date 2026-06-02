@@ -19,9 +19,7 @@ hl.config({
 
 local hostname = (function()
 	local f = io.open("/etc/hostname")
-	if not f then
-		return ""
-	end
+	if not f then return "" end
 	local hname = f:read("*l")
 	f:close()
 	return hname
@@ -33,7 +31,6 @@ pcall(require, hostname .. ".before")
 -- animations are bad
 hl.animation({ leaf = "global", enabled = false })
 hl.on("hyprland.start", function()
-	hl.exec_cmd("swaybg --image " .. os.getenv("HOME") .. "/Pictures/Wallpapers/forest.png")
 	hl.exec_cmd("swayosd-server")
 end)
 
