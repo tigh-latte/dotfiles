@@ -32,10 +32,6 @@
       "rev": "c3c15ace1b57e4bb7955e40b306d056c48034e66",
       "src": "https://github.com/tigh-latte/coke.nvim"
     },
-    "fidget.nvim": {
-      "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
-      "src": "https://github.com/j-hui/fidget.nvim"
-    },
     "fzf-lua": {
       "rev": "b809639ed4dd63951c107543861ce17ab8bab3f9",
       "src": "https://github.com/ibhagwan/fzf-lua"
