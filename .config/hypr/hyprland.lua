@@ -17,22 +17,11 @@ hl.config({
 	},
 })
 
-local hostname = (function()
-	local f = io.open("/etc/hostname")
-	if not f then return "" end
-	local hname = f:read("*l")
-	f:close()
-	return hname
-end)()
-
--- before hook.
-pcall(require, hostname .. ".before")
 
 -- animations are bad
 hl.animation({ leaf = "global", enabled = false })
-hl.on("hyprland.start", function()
-	hl.exec_cmd("swayosd-server")
-end)
+hl.on("hyprland.start", function() hl.exec_cmd("swayosd-server") end)
 
+require("modules.device")
 require("modules.bindings")
 require("modules.rules")
