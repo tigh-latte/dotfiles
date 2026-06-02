@@ -7,14 +7,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = [[%s/\s\+$//ge]],
 })
 
-local ftnolines = setmetatable({
+local ftnolines = {
 	terminal = true,
 	nofile = true,
-}, {
-	__index = function(_, _)
-		return false
-	end,
-})
+}
 
 -- Only have relativenumber display in the buffer with focus.
 vim.api.nvim_create_autocmd({ "BufLeave", "TabLeave", "WinLeave" }, {
