@@ -195,8 +195,16 @@ local function jump_workspace(delta)
 	local workspace = hl.get_active_workspace()
 	if not workspace then return end
 	local next = tonumber(workspace.name) % 9 + delta
+	if next < 1 then next = 9 end
 	hl.dispatch(hl.dsp.focus({ workspace = tostring(next) }))
 end
 
 hl.bind("SUPER + mouse_down", function() jump_workspace(1) end)
 hl.bind("SUPER + mouse_up", function() jump_workspace(-1) end)
+hl.bind("ALT + mouse_right", function() jump_workspace(1) end)
+hl.bind("ALT + mouse_left", function() jump_workspace(-1) end)
+
+hl.bind("SUPER + b", function()
+	local date = tostring(os.date("%Y-%m-%d %I:%M:%S%p"))
+	hl.notification.create({ text = date, timeout = 2500 })
+end)
