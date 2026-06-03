@@ -83,7 +83,7 @@ local function rectanges(pos, ratio)
 		local screen = hl.get_active_monitor()
 		if not screen then return end
 
-		local delta = 5
+		local delta = 5 / screen.scale
 
 		local width = screen.width * ratio - (delta + 2)
 		local height = screen.height - 6
@@ -92,8 +92,8 @@ local function rectanges(pos, ratio)
 		local offset = delta * 2 * (0.5 - pos)
 		local x = (available * pos) + offset
 
-		hl.dispatch(hl.dsp.window.resize({ x = width, y = height, window = window }))
-		hl.dispatch(hl.dsp.window.move({ x = x, y = 3, window = window }))
+		hl.dispatch(hl.dsp.window.resize({ x = width / screen.scale, y = height / screen.scale, window = window }))
+		hl.dispatch(hl.dsp.window.move({ x = x / screen.scale, y = 3 / screen.scale, window = window }))
 	end
 end
 
@@ -103,14 +103,10 @@ hl.bind("SUPER + e", hl.dsp.exec_cmd(file_manager))
 hl.bind("SUPER + c", spawn_or_focus(programs.signal))
 hl.bind("SUPER + g", spawn_or_focus(programs.steam))
 hl.bind("SUPER + t", spawn_or_focus(programs.mail))
-hl.bind("SUPER + z", function()
-	hl.dispatch(hl.dsp.window.float())
-end)
+hl.bind("SUPER + z", function() hl.dispatch(hl.dsp.window.float()) end)
 hl.bind("SUPER + SHIFT + f", function()
 	local screen = hl.get_active_monitor()
-	if not screen then
-		return
-	end
+	if not screen then return end
 	hl.dispatch(hl.dsp.window.resize({ x = screen.width - 6, y = screen.height - 3 }))
 	hl.dispatch(hl.dsp.window.move({ x = 3, y = 3 }))
 end)
