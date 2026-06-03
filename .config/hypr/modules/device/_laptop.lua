@@ -22,3 +22,17 @@ hl.gesture({
 	direction = "horizontal",
 	action = "workspace",
 })
+
+hl.gesture({
+	fingers = 3,
+	direction = "pinch",
+	action = "cursorZoom",
+	mode = "live",
+})
+
+hl.gesture({
+	fingers = 4,
+	direction = "pinch",
+	action = "cursorZoom",
+	mode = "live",
+})
