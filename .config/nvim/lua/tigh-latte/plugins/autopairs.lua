@@ -1,5 +1,5 @@
 vim.pack.add {
-	gh "https://github.com/windwp/nvim-autopairs",
+	gh "windwp/nvim-autopairs",
 }
 
 vim.api.nvim_create_autocmd("InsertEnter", {
