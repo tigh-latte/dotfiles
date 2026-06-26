@@ -10,6 +10,19 @@ require("nvim-treesitter").install({
 vim.treesitter.language.register("bash", { "zsh" })
 vim.treesitter.language.register("ini", { "env" })
 
+-- install fork of golang parser
+vim.api.nvim_create_autocmd('User', {
+	pattern = 'TSUpdate',
+	callback = function()
+		require('nvim-treesitter.parsers').go = {
+			install_info = {
+				url = 'https://github.com/alienvspredator/tree-sitter-go',
+				revision = 'c42d459269cfd7c7723883ea06efd426217715a4',
+			},
+		}
+	end
+})
+
 -- auto init treesitter parsers if they exist.
 -- otherwise, try to install.
 vim.api.nvim_create_autocmd("FileType", {
