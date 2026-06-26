@@ -1,6 +1,5 @@
 local programs = require("programs")
 
-local file_manager = "nautilus"
 local menu = "rofi -show-icons -show combi -modes combi -combi-modes drun,run -display-drun '' -display-run $"
 local emoji_picker = [[
 	rofi -modi emoji -show emoji -emoji-format '{emoji}' -emoji-mode copy -theme-str 'listview {
@@ -99,7 +98,7 @@ end
 
 hl.bind("SUPER + f", spawn_or_focus(programs.browser))
 hl.bind("SUPER + d", spawn_or_focus(programs.terminal))
-hl.bind("SUPER + e", hl.dsp.exec_cmd(file_manager))
+hl.bind("SUPER + e", spawn_or_focus(programs.file_manager))
 hl.bind("SUPER + c", spawn_or_focus(programs.signal))
 hl.bind("SUPER + g", spawn_or_focus(programs.steam))
 hl.bind("SUPER + t", spawn_or_focus(programs.mail))

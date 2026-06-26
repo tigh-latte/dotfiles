@@ -54,6 +54,11 @@ M.orca = {
 	class = "OrcaSlicer",
 }
 
+M.file_manager = {
+	cmd = "nautilus",
+	class = "org.gnome.Nautilus",
+}
+
 M.terminal = M.wezterm
 M.browser = M.librewolf
 M.current_game = M.steam_app
