@@ -3,6 +3,6 @@
 return {
 	---@param config Config
 	setup = function(config)
-		config.font_size = 11.0
+		config.font_size = 12.0
 	end,
 }
