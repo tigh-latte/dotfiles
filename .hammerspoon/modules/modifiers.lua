@@ -123,6 +123,31 @@ function M._on_key(event)
 		event:setKeyCode(hs.keycodes.map["`"])
 	end
 
+	-- time for some fada remapping
+	local raw_event_data = event:rawFlags()
+	local ralts = {
+		a = "á",
+		e = "é",
+		i = "í",
+		o = "ó",
+		u = "ú",
+		g = "ġ",
+	}
+	if flags.alt and not flags.cmd and not flags.ctrl and (raw_event_data & hs.eventtap.event.rawFlagMasks.deviceRightAlternate ~= 0) and ralts[key] then
+		local letter = ralts[key]
+		if flags.shift then
+			letter = ({
+				["á"] = "Á",
+				["é"] = "É",
+				["í"] = "Í",
+				["ó"] = "Ó",
+				["ú"] = "Ú",
+				["ġ"] = "Ġ",
+			})[letter] or letter
+		end
+		event:setUnicodeString(letter)
+	end
+
 	return false
 end
 
