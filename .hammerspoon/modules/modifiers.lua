@@ -2,9 +2,6 @@
 --- Best attempt at having the _exact_ same keyboard layout between
 --- my linux machine and MacOS.
 
-local CTRL = "ctrl"
-local SUPER = "cmd"
-
 local M = {
 	bindings = {},
 	listeners = {},
@@ -22,16 +19,16 @@ function M._assign_keys(base)
 	M.bindings = {}
 
 	M._bind(hs.hotkey.bind({ base }, "D", function()
-		hs.application.launchOrFocus("WezTerm")
+		require("modules.sfc").sfc("WezTerm")
 	end))
 	M._bind(hs.hotkey.bind({ base }, "F", function()
-		hs.application.launchOrFocus("Firefox")
+		require("modules.sfc").sfc("Firefox")
 	end))
 	M._bind(hs.hotkey.bind({ base }, "W", function()
-		hs.application.launchOrFocus("Slack")
+		require("modules.sfc").sfc("Slack")
 	end))
 	M._bind(hs.hotkey.bind({ base }, "C", function()
-		hs.application.launchOrFocus("Signal")
+		require("modules.sfc").sfc("Signal")
 	end))
 	if base == SUPER then
 		M._bind(hs.hotkey.bind({ CTRL, "shift" }, "C", function()
