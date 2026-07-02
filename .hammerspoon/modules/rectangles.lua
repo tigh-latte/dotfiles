@@ -1,82 +1,36 @@
 hs.window.animationDuration = 0
+local grid = hs.grid.setGrid('6x1').getGrid()
+
+local function set(pos, w)
+	return function(cell)
+		local cells = grid.w * w
+		cell.x = (grid.w - cells) * pos
+		cell.y = 0
+		cell.w = cells
+		cell.h = grid.h
+	end
+end
+
 hs.hotkey.bind({ CTRL, SUPER }, "W", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-
-	window_frame.x = 3
-	window_frame.y = 3
-	window_frame.w = screen.w / 3 * 2 - 6
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(0, 2 / 3))
 end)
 
 hs.hotkey.bind({ CTRL, SUPER }, "E", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-	local remainder = screen.w / 3
-
-	window_frame.x = remainder / 2 - 3
-	window_frame.y = 3
-	window_frame.w = screen.w / 3 * 2
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(0.5, 2 / 3))
 end)
 
 hs.hotkey.bind({ CTRL, SUPER }, "R", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-	local remainder = screen.w / 3
-
-	window_frame.x = remainder - 3
-	window_frame.y = 3
-	window_frame.w = screen.w / 3 * 2
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(1, 2 / 3))
 end)
 
 hs.hotkey.bind({ CTRL, SUPER }, "S", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-
-	window_frame.x = 3
-	window_frame.y = 3
-	window_frame.w = screen.w / 3
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(0, 1 / 3))
 end)
 
 hs.hotkey.bind({ CTRL, SUPER }, "D", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-	local remainder = screen.w / 3
-
-	window_frame.x = remainder - 3
-	window_frame.y = 3
-	window_frame.w = screen.w / 3
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(0.5, 1 / 3))
 end)
 
 hs.hotkey.bind({ CTRL, SUPER }, "F", function()
-	local win = hs.window.focusedWindow()
-	local window_frame = win:frame()
-	local screen = win:screen():frame()
-	local remainder = screen.w / 3
-
-	window_frame.x = remainder * 2
-	window_frame.y = 3
-	window_frame.w = screen.w / 3
-	window_frame.h = screen.h - 6
-
-	win:setFrame(window_frame)
+	hs.grid.adjustWindow(set(1, 1 / 3))
 end)
