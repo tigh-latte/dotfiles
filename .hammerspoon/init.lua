@@ -14,8 +14,6 @@ hs.window.switcher.ui.showSelectedThumbnail = false
 hs.window.switcher.ui.selectedThumbnailSize = 180
 hs.window.switcher.ui.thumbnailSize = 80
 
-local switcher = hs.window.switcher.new()
-
 hs.hotkey.bind(ALT, "tab", hs.window.switcher.nextWindow)
 hs.hotkey.bind(ALT .. "-shift", "tab", hs.window.switcher.previousWindow)
 
@@ -64,5 +62,6 @@ require("modules.rectangles")
 require("modules.clickthrough")
 require("modules.modifiers")
 require("modules.sfc")
+require("modules.audio")
 
 hs.alert.show("Config loaded")
