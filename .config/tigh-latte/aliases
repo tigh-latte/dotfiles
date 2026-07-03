@@ -35,3 +35,8 @@ alias ....="cd ../../.."
 alias grep="grep --color=auto --exclude-dir=vendor --exclude-dir=node_modules"
 
 alias k=kubectl
+
+# Set wl-copy and wl-paste to whatever the OS's copy/paste commands have been
+# set to, for more consistency
+alias wl-copy=$__clipboard_copy
+alias wl-paste=$__clipboard_paste
