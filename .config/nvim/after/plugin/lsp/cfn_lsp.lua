@@ -1,7 +1,8 @@
 vim.lsp.config('cfn_lsp', {
 	cmd = {
 		"node",
-		"/home/tigh/Dev/github.com/aws-cloudformation/cloudformation-languageserver/bundle/production/cfn-lsp-server-standalone.js",
+		os.getenv("HOME") ..
+		"/Dev/github.com/aws-cloudformation/cloudformation-languageserver/bundle/production/cfn-lsp-server-standalone.js",
 		"--stdio" },
 	filetypes = { "yaml.cf" },
 	init_options = {
