@@ -48,12 +48,13 @@ local M = {
 }
 
 function M.setup(config)
+	local proc = wezterm.target_triple == "aarch64-apple-darwin" and "/opt/homebrew/bin/tmux" or "tmux"
 	-- On update status, I want to check for the currently running command, along with
 	-- its arugments. The idea is to modify wezterm in a way that makes sense for the context,
 	-- so if I am ssh'd into a server which I don't want to be running destructive commands on,
 	-- or if i am connected to an important database.
 	wezterm.on("update-status", function(window, _)
-		local success, tty_stdout, _ = wezterm.run_child_process { "tmux", "display", "-p", "#{pane_tty}" }
+		local success, tty_stdout, _ = wezterm.run_child_process { proc, "display", "-p", "#{pane_tty}" }
 		if not success then return end
 		tty_stdout = tty_stdout:sub(1, #tty_stdout - 1)
 
