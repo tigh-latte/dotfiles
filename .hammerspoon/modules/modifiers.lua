@@ -3,40 +3,55 @@
 --- my linux machine and MacOS.
 
 local M = {
+	cur_base = nil,
 	bindings = {},
 	listeners = {},
 	flip_cmd_ctrl = false,
 }
 
-function M._bind(binding)
+local function bind(binding)
 	table.insert(M.bindings, binding)
 end
 
-function M._assign_keys(base)
-	for _, binding in ipairs(M.bindings) do
-		binding:delete()
-	end
+local function assign_keys(base)
+	if M.cur_base == base then return end
+	M.cur_base = base
+
+	for _, binding in ipairs(M.bindings) do binding:delete() end
 	M.bindings = {}
 
-	M._bind(hs.hotkey.bind({ base }, "D", function()
+	bind(hs.hotkey.bind({ base }, "/", function()
+		require("modules.sfc").dump()
+	end))
+	bind(hs.hotkey.bind({ base }, "D", function()
 		require("modules.sfc").sfc("WezTerm")
 	end))
-	M._bind(hs.hotkey.bind({ base }, "F", function()
-		require("modules.sfc").sfc("Firefox")
+	bind(hs.hotkey.bind({ base }, "F", function()
+		require("modules.sfc").sfc("Zen")
 	end))
-	M._bind(hs.hotkey.bind({ base }, "W", function()
+	bind(hs.hotkey.bind({ base }, "W", function()
 		require("modules.sfc").sfc("Slack")
 	end))
-	M._bind(hs.hotkey.bind({ base }, "C", function()
+	bind(hs.hotkey.bind({ base }, "C", function()
 		require("modules.sfc").sfc("Signal")
 	end))
+	bind(hs.hotkey.bind({ base }, "B", function()
+		local date = os.date("%Y-%m-%d")
+		local hour = os.date("%I")
+		local rest = os.date("%M:%S%p")
+		local str = string.format("%s %d:%s", date, hour, rest):lower()
+		hs.alert.show(str)
+	end))
+	bind(hs.hotkey.bind({ base, "shift" }, "L", function()
+		hs.toggleConsole()
+	end))
 	if base == SUPER then
-		M._bind(hs.hotkey.bind({ CTRL, "shift" }, "C", function()
+		bind(hs.hotkey.bind({ CTRL, "shift" }, "C", function()
 			local app = hs.application.frontmostApplication()
 			if not app then return end
 			app:selectMenuItem({ "Edit", "Copy to clipboard" })
 		end))
-		M._bind(hs.hotkey.bind({ CTRL, "shift" }, "V", function()
+		bind(hs.hotkey.bind({ CTRL, "shift" }, "V", function()
 			local app = hs.application.frontmostApplication()
 			if not app then return end
 			app:selectMenuItem({ "Edit", "Paste from clipboard" })
@@ -54,11 +69,10 @@ function M.smart_assign_keys()
 		if not title then return CTRL end
 		return title == "WezTerm" and SUPER or CTRL
 	end)()
-	M._assign_keys(key)
+	assign_keys(key)
 end
 
 function M.set_modifier_swap()
-	M.flip_cmd_ctrl = false
 	local win = hs.window.focusedWindow()
 	if not win then
 		M.flip_cmd_ctrl = true
@@ -74,10 +88,7 @@ function M.set_modifier_swap()
 		M.flip_cmd_ctrl = true
 		return
 	end
-	if title ~= "WezTerm" then
-		M.flip_cmd_ctrl = true
-		return
-	end
+	M.flip_cmd_ctrl = title ~= "WezTerm"
 end
 
 function M._on_application_change(_, event, _)
@@ -100,7 +111,11 @@ function M._on_key(event)
 	local key = hs.keycodes.map[event:getKeyCode()]
 	if key == "tab" and flags.cmd and (not flags.alt and not flags.ctrl) then
 		local current_app = hs.application.frontmostApplication()
-		if current_app and current_app:name() == "Firefox" then
+		local browser = {
+			Firefox = true,
+			Zen = true,
+		}
+		if current_app and browser[current_app:name()] then
 			flags.ctrl = true
 			flags.cmd = false
 			event:setFlags(flags)
