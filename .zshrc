@@ -59,11 +59,8 @@ bindkey '\e[A' history-beginning-search-backward-end
 bindkey '\e[B' history-beginning-search-forward-end
 
 # word recognition
-WORDCHARS="$WORDCHARS :"
-WORDCHARS="*?-.[]~=/&;!#$%^(){}<> :"
 autoload -Uz select-word-style
-select-word-style normal
-zstyle ':zle:*' word-style specified
+select-word-style bash
 
 # word jumping
 bindkey '^[[1;5D' backward-word
