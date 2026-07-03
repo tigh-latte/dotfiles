@@ -1,4 +1,4 @@
-local wezterm = require("wezterm") --[[@as Wezterm]]
+_G.wezterm = require("wezterm") --[[@as Wezterm]]
 local config = wezterm.config_builder()
 
 ---@param prefix string?

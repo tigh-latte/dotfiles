@@ -1,7 +1,7 @@
 return {
 	---@param config Config
 	setup = function(config)
-		local act = require("wezterm") --[[@as Wezterm]].action
+		local act = wezterm.action
 
 		-- Allow vim to handle CTRL+^
 		local keys = {}

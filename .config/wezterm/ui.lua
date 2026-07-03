@@ -1,8 +1,6 @@
 return {
 	---@param config Config
 	setup = function(config)
-		local wezterm = require("wezterm") --[[@as Wezterm]]
-
 		config.enable_tab_bar = false
 		config.enable_scroll_bar = false
 		config.window_decorations = "NONE"

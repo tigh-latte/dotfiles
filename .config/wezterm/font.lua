@@ -2,7 +2,7 @@ return {
 	---@param config Config
 	setup = function(config)
 		config.font_size = 9.0
-		if require("wezterm") --[[@as Wezterm]]:hostname() == "laptop" then
+		if wezterm:hostname() == "laptop" then
 			config.font_size = 9.5
 		end
 

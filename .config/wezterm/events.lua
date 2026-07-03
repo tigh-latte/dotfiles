@@ -1,5 +1,3 @@
-local wezterm = require("wezterm") --[[@as Wezterm]]
-
 ---@param overrides Config
 ---@param prog string|nil
 ---@param target string|nil
