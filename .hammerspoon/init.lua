@@ -1,7 +1,7 @@
 CTRL = "ctrl"
 ALT = "alt"
 SUPER = "cmd"
-
+hs = hs
 
 hs.hotkey.bind({ SUPER, "alt", "ctrl" }, "R", hs.reload)
 
