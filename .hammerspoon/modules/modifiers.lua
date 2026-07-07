@@ -36,7 +36,7 @@ local function assign_keys(base)
 		require("modules.sfc").sfc("Signal")
 	end))
 	bind(hs.hotkey.bind({ base }, "B", function()
-		local date = os.date("%Y-%m-%d")
+		local date = os.date("%d-%m-%Y")
 		local hour = os.date("%I")
 		local rest = os.date("%M:%S%p")
 		local str = string.format("%s %d:%s", date, hour, rest):lower()
@@ -92,7 +92,7 @@ function M.set_modifier_swap()
 end
 
 function M._on_application_change(_, event, _)
-	if event == hs.application.watcher.activated then
+	if event == hs.application.watcher.activated or event == hs.application.watcher.launched then
 		M.smart_assign_keys()
 		M.set_modifier_swap()
 	end
