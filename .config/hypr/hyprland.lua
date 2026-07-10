@@ -17,7 +17,6 @@ hl.config({
 	},
 })
 
-
 -- animations are bad
 hl.animation({ leaf = "global", enabled = false })
 hl.on("hyprland.start", function() hl.exec_cmd("swayosd-server") end)
@@ -25,3 +24,5 @@ hl.on("hyprland.start", function() hl.exec_cmd("swayosd-server") end)
 require("modules.device")
 require("modules.bindings")
 require("modules.rules")
+
+hl.notification.create({ text = "config loaded", timeout = 1500 })
