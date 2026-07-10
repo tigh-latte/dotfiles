@@ -52,6 +52,12 @@ return {
 			action = act.ShowDebugOverlay,
 		})
 
+		table.insert(keys, { -- Send ctrl+backspace as shift+delete as for it to be handled.
+			key = "Backspace",
+			mods = "CTRL",
+			action = act.SendString "\x1b[3;6~"
+		})
+
 		config.keys = keys
 	end,
 }
