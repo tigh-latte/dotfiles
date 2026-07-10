@@ -106,7 +106,7 @@ hl.bind("SUPER + z", function() hl.dispatch(hl.dsp.window.float()) end)
 hl.bind("SUPER + SHIFT + f", function()
 	local screen = hl.get_active_monitor()
 	if not screen then return end
-	hl.dispatch(hl.dsp.window.resize({ x = screen.width / screen.scale - 6, y = screen.height / screen.scale - 3 }))
+	hl.dispatch(hl.dsp.window.resize({ x = screen.width / screen.scale - 6, y = screen.height / screen.scale - 6 }))
 	hl.dispatch(hl.dsp.window.move({ x = 3, y = 3 }))
 end)
 
