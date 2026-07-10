@@ -111,35 +111,6 @@ hl.bind("SUPER + SHIFT + f", function()
 end)
 
 
-local open = {
-	slack = {
-		can = false,
-		---@type HL.Notification
-		notif = nil,
-	}
-}
-
-hl.bind("SUPER + SHIFT + w", function()
-	open.slack.can = not open.slack.can
-	local text = "can open: " .. tostring(open.slack.can)
-	if open.slack.notif and open.slack.notif:is_alive() then
-		open.slack.notif:dismiss()
-	end
-	open.slack.notif = hl.notification.create({ text = text, timeout = 1000 })
-end)
-
-hl.bind(
-	"SUPER + w",
-	spawn_or_focus(programs.slack, {
-		should_spawn = function()
-			if not open.slack.can then return false end
-			local day = tonumber(os.date("%w"))
-			local hour = tonumber(os.date("%H"))
-			return day <= 5 and (7 <= hour and hour < 17)
-		end,
-	})
-)
-
 hl.bind("SUPER + o", spawn_or_focus(programs.orca))
 
 for i = 1, 9 do
