@@ -34,3 +34,5 @@
   (#any-of? @function.builtin
     "append" "cap" "clear" "close" "complex" "copy" "delete" "imag" "len" "make" "max" "min" "new"
     "panic" "print" "println" "real" "recover"))
+
+(struct_tag) @string
