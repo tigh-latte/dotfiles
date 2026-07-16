@@ -87,5 +87,6 @@ hl.on("window.open", function(win)
 	if launched_by_steam(win.pid) then
 		hl.dispatch(hl.dsp.window.tag({ tag = "steam_game", window = win }))
 		hl.dispatch(hl.dsp.window.move({ workspace = "4", follow = true, window = win }))
+		hl.dispatch(hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 70%"))
 	end
 end)
